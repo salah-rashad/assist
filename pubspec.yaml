@@ -1,0 +1,15 @@
+name: pub_assist
+description: "A pub.dev assistant."
+version: 0.0.1
+homepage: https://github.com/salah-rashad/pub_assist
+repository: https://github.com/salah-rashad/pub_assist
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  chalkdart: ^3.0.4
+
+dev_dependencies:
+  lints: ^5.1.1
+  test: ^1.25.15
