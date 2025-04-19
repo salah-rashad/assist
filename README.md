@@ -1,8 +1,13 @@
 # Assist
 
-Assist is a CLI tool designed to help you manage your Dart/Flutter packages 
-on pub.dev with ease. It automates repetitive tasks, improves developer 
+Assist is a CLI tool designed to help you manage your Dart/Flutter packages
+on pub.dev with ease. It automates repetitive tasks, improves developer
 experience, and ensures your projects stay up-to-date.
+
+#### 🚧 Under Development 🚧
+> [!WARNING]
+> This project is still in development and is not yet ready for production use.  
+> Please use with caution and expect major changes in the future.
 
 ## Features
 
@@ -30,7 +35,7 @@ assist <project_directory>
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests 
+Contributions are welcome! Feel free to open issues or submit pull requests
 on the [GitHub repository](https://github.com/salah-rashad/assist).
 
 ## License
