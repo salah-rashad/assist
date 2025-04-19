@@ -1,6 +1,6 @@
 name: assist
 description: "A tool that helps you manage your dart packages on pub.dev easily with automated tasks."
-version: 0.1.0
+version: 0.1.0+1
 homepage: https://github.com/salah-rashad/assist
 repository: https://github.com/salah-rashad/assist
 issue_tracker: https://github.com/salah-rashad/assist/issues

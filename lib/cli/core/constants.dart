@@ -1,5 +1,5 @@
 abstract class Strings {
-  static const String version = '0.1.0';
+  static const String version = '0.1.0+1';
 
   static const String executableName = 'assist';
 
