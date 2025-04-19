@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="gui" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="envs">
+      <entry key="pub_assist_pwd" value="$PROJECT_DIR$/../../PRJ_TESTING/t_calc/" />
+    </option>
+    <option name="filePath" value="$PROJECT_DIR$/gui/lib/main.dart" />
+    <method v="2" />
+  </configuration>
+</component>

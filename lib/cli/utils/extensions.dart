@@ -1,0 +1,108 @@
+/*extension StringExtension on String {
+  String toColorizedUsage(ArgParser argParser) {
+    final executableName = Strings.executableName;
+
+    const point = '◆';
+    const header = '##';
+
+    // Regex for commands
+    final commandRegex = RegExp(
+      r'(?:\s{2,}|' +
+          RegExp.escape(executableName) +
+          r'\s+)(?<c>run|install|help)(?:\s{2,}|\b)',
+    );
+    final optionsRegex = RegExp(
+      argParser.options.entries
+          .map(
+            (e) =>
+                '--${e.value.name}${e.value.abbr != null ? '|-${e.value.abbr}' : ''}',
+          )
+          .join('|'),
+    );
+
+    final sectionHeaders = RegExp(
+      'Usage:|Recommended Usage:|Global options:|Available commands:',
+    );
+
+    String result = replaceAllMapped(commandRegex, (match) {
+          final m = match as RegExpMatch;
+          final command = m.namedGroup('c');
+          final matchedText = m.group(0)!;
+
+          if (command == null) {
+            return match.group(0)!;
+          }
+          return matchedText.replaceAll(command, command.greenBright);
+        })
+        .replaceAllMapped(
+          RegExp(
+            executableName +
+                r'|(https?:\/\/\S*' +
+                RegExp.escape(executableName) +
+                r'\S*)',
+          ),
+          (match) {
+            final g0 = match.group(0)!;
+            final g1 = match.group(1);
+
+            // match is in a link
+            if (g0 == g1) {
+              return g0;
+            }
+
+            return g0.darkOrange;
+          },
+        )
+        // // Replace all commands after the "AVAILABLE COMMANDS" header
+        // .replaceAllMapped(RegExp(argParser.commands.keys.join('|')), (match) {
+        //   final command = match.group(0)!;
+        //   final int indexOfCommandsStart = match.input.indexOf(
+        //     RegExp('AVAILABLE COMMANDS', caseSensitive: false),
+        //   );
+        //
+        //   return match.start >= indexOfCommandsStart
+        //       ? chalk.greenBright(command)
+        //       : command;
+        // })
+        // Replace section headers
+        .replaceAllMapped(
+          sectionHeaders,
+          (match) => '$header${match.group(0)!.replaceAll(':', '')}$header',
+        )
+        // Replace section content
+        .replaceAllMapped(
+          RegExp('$header(.*?)$header'),
+          (match) =>
+              '$point${chalk.black.onAntiqueWhite(' ${match.group(0)!.replaceAll(RegExp(r'##'), '').toUpperCase()} ')}\n\b',
+        )
+        // Replace angle-bracket arguments
+        .replaceAllMapped(
+          RegExp('<[^>]+>'),
+          (match) => chalk.gray.italic(match.group(0)!),
+        )
+        // Replace [arguments] block
+        .replaceAll('[arguments]', chalk.yellow('[arguments]'))
+        // Replace all options (with -- or -)
+        .replaceAllMapped(
+          optionsRegex,
+          (match) => chalk.yellow(match.group(0)!),
+        )
+        // Replace URLs
+        .replaceAllMapped(
+          RegExp(r'\b((https?|ftp)://|www\.)[^\s/$.?#].\S*\b'),
+          (match) => chalk.reset.blueBright.underline(match.group(0)!),
+        )
+        // Add decorations
+        .replaceFirst('', '╭\n')
+        .replaceAll('\n', '\n│ ')
+        .replaceAll('│ $point', '\r$point–');
+    // .replaceFirst(RegExp(r'│(?!.*│)'), '╰');
+
+    final lastIndex = result.lastIndexOf(RegExp(r'│'));
+    if (lastIndex != -1) {
+      result = result.replaceRange(lastIndex, lastIndex + 1, '╰');
+    }
+
+    return result;
+  }
+}*/

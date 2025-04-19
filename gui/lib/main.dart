@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:gui/src/pages/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(List<String> args) {
+  WidgetsFlutterBinding.ensureInitialized();
+  final projectPath = args.isNotEmpty ? args.first : 'No path provided';
+  runApp(MyApp(projectPath: projectPath));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.projectPath});
 
-  // This widget is the root of your application.
+  final String projectPath;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pub Assist',
+      title: 'Assist',
       theme: ThemeData(primarySwatch: Colors.indigo),
-      home: const HomePage(),
+      home: HomePage(projectPath: projectPath),
     );
   }
 }

@@ -1,15 +1,36 @@
-name: pub_assist
-description: "A pub.dev assistant."
-version: 0.0.1
-homepage: https://github.com/salah-rashad/pub_assist
-repository: https://github.com/salah-rashad/pub_assist
+name: assist
+description: "A tool that helps you manage your dart packages on pub.dev easily with automated tasks."
+version: 1.0.0-alpha.1
+homepage: https://github.com/salah-rashad/assist
+repository: https://github.com/salah-rashad/assist
+issue_tracker: https://github.com/salah-rashad/assist/issues
+
+topics:
+  - pub
+  - automation
+  - deploy
+  - publish
+  - tools
 
 environment:
   sdk: ^3.7.2
 
 dependencies:
-  chalkdart: ^3.0.4
+  args: ^2.7.0
+  path: ^1.9.1
+  chalkdart: ^2.0.9
+  promptly: ^1.0.0-alpha.8
 
 dev_dependencies:
   lints: ^5.1.1
   test: ^1.25.15
+
+executables:
+  assist: assist
+
+platforms:
+  windows:
+  linux:
+  macos:
+
+

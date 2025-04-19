@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.projectPath});
+
+  final String projectPath;
 
   @override
   Widget build(BuildContext context) {
     // Get the PROJECT_DIR value passed from the command line
     String projectDir = const String.fromEnvironment(
-      'PROJECT_DIR',
+      'assist_pwd',
       defaultValue: 'Unknown',
     );
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Pub Assist')),
+      appBar: AppBar(title: const Text('Assist')),
       body: Center(child: Text('Project Directory: $projectDir')),
     );
   }
