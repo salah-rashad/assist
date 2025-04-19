@@ -7,7 +7,7 @@ experience, and ensures your projects stay up-to-date.
 #### 🚧 Under Development 🚧
 > [!WARNING]
 > This project is still in development and is not yet ready for production use.  
-> Please use with caution and expect major changes in the future.
+> Please use with caution and file any potential issues on [GitHub](https://github.com/salah-rashad/assist/issues).
 
 ## Features
 
