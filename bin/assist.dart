@@ -1,4 +1,4 @@
-import 'package:assist/cli/main.dart';
+import 'package:assist/main.dart';
 
 void main(List<String> args) {
   runApp(args);

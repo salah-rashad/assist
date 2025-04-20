@@ -1,21 +1,31 @@
 # Assist
 
-Assist is a CLI tool designed to help you manage your Dart/Flutter packages
-on pub.dev with ease. It automates repetitive tasks, improves developer
-experience, and ensures your projects stay up-to-date.
+A tool designed to simplify the management of
+Dart and Flutter projects. It automates repetitive tasks, improves
+developer experience, and ensures projects remain up-to-date.
+
+This package is ideal for developers looking to save time, reduce errors,
+and improve their overall development workflow.
+
+The tool is particularly useful for developers who want to streamline
+their workflows when working with Dart packages on `pub.dev`.
 
 #### 🚧 Under Development 🚧
 > [!WARNING]
 > This project is still in development and is not yet ready for production use.  
 > Please use with caution and file any potential issues on [GitHub](https://github.com/salah-rashad/assist/issues).
 
-## Features
+## Key Features
 
-- **Publishing**: Automate `dart pub publish` with pre-publish checks.
-- **Documentation**: Build and edit `README.md` and `CHANGELOG.md`.
-- **Pubspec Management**: Update versions, dependencies, and package info.
-- **Git Integration**: Verify tags and manage workflows.
-- **Code Quality**: Analyze, format, and test your code.
+- **Project Creation**: Interactive CLI for creating new Dart/Flutter projects.
+- **Publishing Automation**: Automates `dart pub publish` with pre-publish checks.
+- **Documentation Management**: Tools for building and editing `README.md` and `CHANGELOG.md`.
+- **Pubspec Management**: Updates versions, dependencies, and package metadata.
+- **Git Integration**: Verifies tags and manages workflows.
+- **Code Quality**: Analyzes, formats, and tests code.
+
+You can find the full list of goals and features in
+the [GOALS.md](https://github.com/salah-rashad/assist/blob/main/GOALS.md) file.
 
 ## Installation
 

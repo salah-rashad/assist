@@ -1,20 +1,15 @@
 import 'dart:io';
 
-import 'package:assist/cli/main.dart';
-import 'package:assist/cli/utils/temp_link.dart';
+import 'package:assist/main.dart';
 import 'package:chalkdart/chalkstrings.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
-import 'core/constants.dart';
+import '../core/constants.dart';
+import '../utils/temp_link.dart';
 
 abstract class Printer {
   static newline() => print('\n');
   static printLogo() => print(Strings.logoArt.bold.indianRed);
-
-  static printWelcome() => print('''
-${'Welcome to ${Strings.appName} 🚀'.bold}
-${Strings.description.gray}
-''');
 
   static printUsageError(String message) {
     writeln(app.errorAppDescription);
@@ -41,10 +36,9 @@ ${Strings.description.gray}
         '${Strings.executableName.darkOrange} run ${'<project_directory>'.gray.italic}';
     final moreInfo =
         'For more information, visit: '
-                '${tempLink('https://github.com/salah-rashad/assist', 'GitHub')}'
-                ' | '
-                '${tempLink('https://pub.dev/packages/assist', 'Pub')}'
-            .lightSlateGray;
+        '${tempLink('https://github.com/salah-rashad/assist', 'GitHub')}'
+        ' | '
+        '${tempLink('https://pub.dev/packages/assist', 'Pub')}';
 
     return '\r$recommendedUsage'
         '\x1B[3A\x1B[2K'

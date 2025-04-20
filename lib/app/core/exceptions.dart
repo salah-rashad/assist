@@ -39,3 +39,13 @@ class DirectoryNotFoundException extends CliException {
   @override
   String get message => 'Directory not found: $projectDir';
 }
+
+class PubspecParseException extends CliException {
+  PubspecParseException({super.command});
+
+  @override
+  int get exitCode => ExitCode.osFile.code;
+
+  @override
+  String get message => 'Unable to parse `pubspec.yaml` file';
+}

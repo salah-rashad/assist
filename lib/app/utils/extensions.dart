@@ -1,3 +1,13 @@
+import 'dart:convert';
+
+extension StreamExtension on Stream<List<int>> {
+  Future<void> asLines(void Function(String data) onData) {
+    return transform(
+      utf8.decoder,
+    ).transform(const LineSplitter()).listen(onData).asFuture();
+  }
+}
+
 /*extension StringExtension on String {
   String toColorizedUsage(ArgParser argParser) {
     final executableName = Strings.executableName;

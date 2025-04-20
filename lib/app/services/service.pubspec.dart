@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path/path.dart' as path;
+import 'package:pubspec_parse/pubspec_parse.dart';
 
 import '../core/exceptions.dart';
 
@@ -12,6 +13,17 @@ class PubspecService {
 
     if (!await pubspecFile.exists()) {
       throw PubspecNotFoundException(dir);
+    }
+  }
+
+  /// Parse the `pubspec.yaml` file
+  Pubspec parse(String path) {
+    try {
+      final pubspecFile = File(path);
+      final pubspecContent = pubspecFile.readAsStringSync();
+      return Pubspec.parse(pubspecContent);
+    } on Exception catch (_) {
+      throw PubspecParseException();
     }
   }
 }

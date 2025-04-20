@@ -1,0 +1,30 @@
+import 'dart:io';
+
+import 'package:path/path.dart' as p;
+
+import 'app/cli/cli.parser.dart';
+import 'app/cli/cli.runner.dart';
+
+late final AssistCliRunner app;
+
+void runApp(List<String> args) {
+  app = CliParser.parse();
+  args = detectDirectory(args);
+  app.safeRun(args);
+}
+
+/// Detects if the first argument is a directory and if so, adds 'run' before it.
+/// This should run the app at that location
+List<String> detectDirectory(List<String> args) {
+  final isCommand = app.commands.containsKey(args.firstOrNull);
+  final isFlag = app.argParser.options.containsKey(args.firstOrNull);
+  bool isDirectory(dir) {
+    dir = p.absolute(p.normalize(dir));
+    return Directory(dir).existsSync();
+  }
+
+  if (args.isNotEmpty && !isCommand && !isFlag && isDirectory(args.first)) {
+    args = ['run', ...args];
+  }
+  return args;
+}

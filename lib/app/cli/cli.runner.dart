@@ -1,7 +1,8 @@
-import 'package:assist/cli/cli.printer.dart';
+import 'package:chalkdart/chalkstrings.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
-import 'core/constants.dart';
+import '../core/constants.dart';
+import 'cli.printer.dart';
 
 part 'cli.theme.dart';
 
@@ -11,8 +12,9 @@ class AssistCliRunner extends CommandRunner {
         Strings.executableName,
         Strings.description,
         version: Strings.version,
-        theme: _cliTheme,
+        theme: _customTheme,
       ) {
+    // Cleans the screen before every command
     console.cleanScreen();
   }
 

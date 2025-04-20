@@ -1,16 +1,23 @@
 # 🎯 Project Goal
 
-Create a tool to help you manage your dart packages on pub.dev easily with automated tasks.
+Create a tool to help you manage your Dart/Flutter projects easily
+with automated tasks and tools to improve developer experience.
 
 ## Why This Matters?
-- Benefits the community / internal project
-- Saves time on repetitive tasks
-- Scalable and usable for general purposes
-- Helps to keep project up-to-date
-- Helps to reduce errors
-- Improves developer experience
+
+- Saves time by automating repetitive tasks.
+- Reduces errors in project management.
+- Simplifies publishing and dependency updates.
+- Improves code quality with analysis and formatting tools.
+- Streamlines workflows for Dart and Flutter projects.
+- Ensures consistency in documentation and versioning.
+- Tailored for the Dart ecosystem on `pub.dev`.
+- Works across Windows, Linux, and macOS.
 
 ## Features
+
+- ### Create
+  - [ ] Create Dart/Flutter project easily with interactive prompts
 
 - ### Publishing
   - [ ] Pre-publish checklist and confirmation

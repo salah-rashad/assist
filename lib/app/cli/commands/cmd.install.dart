@@ -1,16 +1,12 @@
 import 'package:chalkdart/chalkstrings.dart';
 import 'package:promptly/promptly.dart';
 
-import '../core/constants.dart';
-import '../services/service.install.dart';
+import '../../core/constants.dart';
+import '../../services/service.install.dart';
 
 class InstallCommand extends Command<int> {
   InstallCommand()
-    : super(
-        'install',
-        "Install the GUI and initialize the tool.",
-        aliases: ['a', 'b'],
-      );
+    : super('install', "Install the GUI and initialize the tool.");
 
   @override
   Future<int> run() async {
