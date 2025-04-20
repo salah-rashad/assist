@@ -19,7 +19,7 @@ List<String> detectDirectory(List<String> args) {
   final isCommand = app.commands.containsKey(args.firstOrNull);
   final isFlag = app.argParser.options.containsKey(args.firstOrNull);
   bool isDirectory(dir) {
-    dir = p.absolute(p.normalize(dir));
+    dir = p.normalize(p.absolute(dir));
     return Directory(dir).existsSync();
   }
 

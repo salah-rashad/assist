@@ -1,11 +1,38 @@
 import 'dart:convert';
 
+import 'package:promptly/promptly.dart';
+
 extension StreamExtension on Stream<List<int>> {
   Future<void> asLines(void Function(String data) onData) {
     return transform(
       utf8.decoder,
     ).transform(const LineSplitter()).listen(onData).asFuture();
   }
+
+  Future<void> listenVerbose() =>
+      asLines((data) => message(data, style: MessageStyle.verbose));
+
+  Future<void> listenErrors() =>
+      asLines((data) => message(data, style: MessageStyle.error));
+}
+
+extension StringExtension on String {
+  /// Truncates a line to fit within the console window width
+  String truncateLine([int? spacing]) {
+    spacing ??= console.spacing;
+    final windowWidth = console.windowWidth;
+
+    // Join all lines into a single string
+    final line = split('\n').join(' ');
+
+    // If the line is longer than the window width, truncate it
+    if (line.strip().length > windowWidth - spacing) {
+      return '${line.substring(0, windowWidth - spacing)}…';
+    }
+    return line;
+  }
+
+  String truncateChoice() => truncateLine(6);
 }
 
 /*extension StringExtension on String {

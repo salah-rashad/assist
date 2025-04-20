@@ -14,7 +14,7 @@ class RunCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    return handleRunErrors(() async {
+    return handleRuntimeErrors(() async {
       final args = argResults?.rest;
       final arg0 = args?.firstOrNull;
       final platform = getPlatformExecutable().platform;
@@ -36,19 +36,13 @@ class RunCommand extends Command<int> {
       line();
       final process = await LaunchAppTask(projectDir, platform).run();
 
-      finishSuccesfuly('Success', message: 'GUI Launched on [$platform]');
-
       if (process != null) {
         line();
-        await process.stdout.asLines(
-          (data) => message(data, style: MessageStyle.verbose),
-        );
-        await process.stderr.asLines(
-          (data) => message(data, style: MessageStyle.error),
-        );
+        await process.stdout.listenVerbose();
+        await process.stderr.listenErrors();
       }
 
-      final exitCode = await process?.exitCode ?? 0;
+      final exitCode = await process?.exitCode ?? ExitCode.success.code;
 
       if (exitCode != 0) {
         return finishWithError(
@@ -59,7 +53,10 @@ class RunCommand extends Command<int> {
         );
       }
 
-      return exitCode;
+      return finishSuccesfuly(
+        'Success',
+        message: 'GUI Launched on [$platform]',
+      );
     });
   }
 
