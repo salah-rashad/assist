@@ -4,6 +4,8 @@ import 'package:chalkdart/chalkstrings.dart';
 import 'package:meta/meta.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
+String _style(String s, StyleFunction? style) => style?.call(s) ?? s;
+
 /// Abstract class representing a command task.
 abstract class CommandTask<T> {
   // Success and failure tags
@@ -37,25 +39,19 @@ abstract class CommandTask<T> {
     StyleFunction? successTag,
     StyleFunction? failedTag,
   }) async {
-    // Default styles
-    final sHint = this.successHint?.gray;
-    final fHint = this.failedHint?.gray;
-    final sTag = this.successTag.dim;
-    final fTag = this.failedTag.dim;
-
     // Apply custom styles
-    final prompt_ = prompt?.call(this.prompt) ?? this.prompt;
-    final successHint_ = successHint?.call(sHint ?? '') ?? sHint;
-    final successTag_ = successTag?.call(sTag) ?? sTag;
-    final failedHint_ = failedHint?.call(fHint ?? '') ?? fHint;
-    final failedTag_ = failedTag?.call(fTag) ?? fTag;
+    final sPrompt = _style(this.prompt, prompt);
+    final sSuccessHint = _style(this.successHint?.gray ?? '', successHint);
+    final sFailedHint = _style(this.failedHint?.gray ?? '', failedHint);
+    final sSuccessTag = _style(this.successTag.dim, successTag);
+    final sFailedTag = _style(this.failedTag.dim, failedTag);
 
     T? result;
 
     await task(
-      prompt?.call(this.prompt) ?? this.prompt,
-      successMessage: _buildSuccessMsg(prompt_, successHint_, successTag_),
-      failedMessage: _buildFailedMsg(prompt_, failedHint_, failedTag_),
+      sPrompt,
+      successMessage: _buildSuccessMsg(sPrompt, sSuccessHint, sSuccessTag),
+      failedMessage: _buildFailedMsg(sPrompt, sFailedHint, sFailedTag),
       clear: clear ?? this.clear,
       throwOnError: throwOnError ?? false,
       onError: onError,

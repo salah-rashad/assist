@@ -5,6 +5,7 @@ import 'package:chalkdart/chalkstrings.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
 import '../core/constants.dart';
+import '../utils/helpers.dart';
 import '../utils/temp_link.dart';
 
 abstract class Printer {
@@ -27,7 +28,6 @@ abstract class Printer {
     final theme = app.theme;
     String l(String s) => theme.prefixLine(s);
     // String w(String s) => theme.prefixWarning(s);
-    String r(String s) => theme.prefixRun(s);
 
     final recommendedUsage = console.sectionLine('Usage');
     final command1 =

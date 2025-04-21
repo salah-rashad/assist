@@ -17,7 +17,8 @@ with automated tasks and tools to improve developer experience.
 ## Features
 
 - ### Create
-  - [ ] Create Dart/Flutter project easily with interactive prompts
+  - [x] Create Dart project
+  - [ ] Create Flutter project
 
 - ### Publishing
   - [ ] Pre-publish checklist and confirmation

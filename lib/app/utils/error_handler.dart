@@ -2,7 +2,7 @@ import 'package:promptly/promptly.dart';
 
 import '../core/exceptions.dart';
 
-Future<int> handleRunErrors(Future<int> Function() runLogic) async {
+Future<int> handleRuntimeErrors(Future<int> Function() runLogic) async {
   try {
     return await runLogic();
   } on CliException catch (error, stackTrace) {
@@ -14,7 +14,11 @@ Future<int> handleRunErrors(Future<int> Function() runLogic) async {
     );
     return error.exitCode;
   } catch (e, stackTrace) {
-    finishWithError('Error', message: error.toString(), stackTrace: stackTrace);
-    return ExitCode.software.code;
+    return finishWithError(
+      'Error',
+      message: e.toString(),
+      stackTrace: stackTrace,
+      exitCode: ExitCode.software.code,
+    );
   }
 }
