@@ -1,3 +1,5 @@
+<img src="https://github.com/user-attachments/assets/61ea041a-67c6-4276-bcf2-2033e600686a" alt="Logo" width="80" height="80"/>
+
 # Assist
 
 A tool designed to simplify the management of Dart and Flutter projects. It automates repetitive
