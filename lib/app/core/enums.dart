@@ -1,6 +1,5 @@
 import 'package:promptly/promptly.dart';
 
-import '../services/service.version.dart';
 import '../utils/helpers.dart';
 
 // ignore: constant_identifier_names
@@ -21,10 +20,10 @@ enum ProjectType {
   flutter,
   dart;
 
-  String toChoice(String flutterVersion) {
+  String toChoice(String flutterVersion, String dartVersion) {
     final version = switch (this) {
       ProjectType.flutter => flutterVersion,
-      ProjectType.dart => VersionService().getDartVersion(),
+      ProjectType.dart => dartVersion,
     };
 
     return generateChoice(name.titleCase, version);

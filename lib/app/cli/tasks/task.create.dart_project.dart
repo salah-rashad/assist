@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:promptly/promptly.dart';
 
 import '../../models/config.dart_project.dart';
-import '../../services/service.create.dart';
+import '../../services/service.dart.dart';
 import '../components/command_task.dart';
 
 class CreateDartProjectTask extends CommandTask<Process> {
@@ -22,6 +22,6 @@ class CreateDartProjectTask extends CommandTask<Process> {
 
   @override
   Future<Process> execute(LoaderState state) async {
-    return await DartCreateProjectService(config).create();
+    return await DartService.create(config);
   }
 }

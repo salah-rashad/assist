@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:assist/app/cli/tasks/task.create.dart_project.dart';
+import 'package:assist/app/services/service.flutter.dart';
 import 'package:assist/app/utils/extensions.dart';
 import 'package:chalkdart/chalkstrings.dart';
 import 'package:path/path.dart' as p;
@@ -12,7 +13,7 @@ import '../../core/exceptions.dart';
 import '../../models/config.base.dart';
 import '../../models/config.dart_project.dart';
 import '../../models/config.flutter_project.dart';
-import '../../services/service.version.dart';
+import '../../services/service.dart.dart';
 import '../../utils/error_handler.dart';
 import '../../utils/helpers.dart';
 import '../components/command_task.dart';
@@ -28,13 +29,14 @@ class CreateCommand extends Command<int> {
   @override
   Future<int> run() async {
     return handleRuntimeErrors(() async {
-      final flutterVersion = await VersionService().getFlutterVersion();
+      final flutterVersion = await FlutterService.version();
+      final dartVersion = DartService.version();
 
       header('Create', message: description);
       info('Default values are indicated by '.gray + theme.colors.success('*'));
       line();
       line();
-      ProjectType projectType = selectProjectType(flutterVersion);
+      ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
       final isFlutter = projectType == ProjectType.flutter;
       final isDart = projectType == ProjectType.dart;
 
@@ -120,11 +122,12 @@ class CreateCommand extends Command<int> {
   }
 
   /// Prompt user to select project type
-  ProjectType selectProjectType(String flutterVersion) {
+  ProjectType selectProjectType(String flutterVersion, String dartVersion) {
     final projectType = selectOne<ProjectType>(
       'Select project type:',
       choices: ProjectType.values,
-      display: (projectType) => projectType.toChoice(flutterVersion),
+      display:
+          (projectType) => projectType.toChoice(flutterVersion, dartVersion),
     );
     return projectType;
   }
