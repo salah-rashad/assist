@@ -1,14 +1,13 @@
 # Assist
 
-A tool designed to simplify the management of
-Dart and Flutter projects. It automates repetitive tasks, improves
-developer experience, and ensures projects remain up-to-date.
+A tool designed to simplify the management of Dart and Flutter projects. It automates repetitive
+tasks, improves developer experience, and ensures projects remain up-to-date.
 
-This package is ideal for developers looking to save time, reduce errors,
-and improve their overall development workflow.
+This package is ideal for developers looking to save time, reduce errors, and improve their overall
+development workflow.
 
-The tool is particularly useful for developers who want to streamline
-their workflows when working with Dart packages on `pub.dev`.
+The tool is particularly useful for developers who want to streamline their workflows when working
+with Dart packages on `pub.dev`.
 
 #### 🚧 Under Development 🚧
 > [!WARNING]

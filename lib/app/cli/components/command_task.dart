@@ -4,6 +4,8 @@ import 'package:chalkdart/chalkstrings.dart';
 import 'package:meta/meta.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
+import '../../utils/helpers.dart';
+
 String _style(String s, StyleFunction? style) => style?.call(s) ?? s;
 
 /// Abstract class representing a command task.
@@ -64,7 +66,7 @@ abstract class CommandTask<T> {
   }
 
   /// Formats a string with the console's prefix line style.
-  String _m(String s) => console.theme.prefixLine(s);
+  String _m(String s) => theme.prefixLine(s);
 
   /// Constructs the success message.
   String _buildSuccessMsg(String prompt, String? hint, String tag) {

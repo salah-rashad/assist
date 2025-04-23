@@ -1,5 +1,5 @@
 name: assist
-description: "A tool that helps you manage your dart packages on pub.dev easily with automated tasks."
+description: "A tool that helps Dart and Flutter developers save time by automating tasks and making project management easier."
 version: 0.1.0+1
 homepage: https://github.com/salah-rashad/assist
 repository: https://github.com/salah-rashad/assist
@@ -7,11 +7,12 @@ issue_tracker: https://github.com/salah-rashad/assist/issues
 documentation: https://github.com/salah-rashad/assist
 
 topics:
-  - pub
+  - management
+  - package
   - automation
-  - deploy
   - publish
   - tools
+
 
 environment:
   sdk: ^3.7.2

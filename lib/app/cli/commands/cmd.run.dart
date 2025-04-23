@@ -9,6 +9,7 @@ import '../tasks/task.run.check_pubspec.dart';
 import '../tasks/task.run.launch_app.dart';
 import '../tasks/task.run.path_validation.dart';
 
+/// Command to run the GUI
 class RunCommand extends Command<int> {
   RunCommand() : super('run', 'Run the GUI.');
 

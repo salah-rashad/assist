@@ -6,6 +6,7 @@ import 'package:promptly/promptly.dart';
 
 import '../utils/helpers.dart';
 
+/// Service to install the GUI
 class InstallService {
   String promptInstallDirectory() {
     final storageDir = getDartStorageDirectory();

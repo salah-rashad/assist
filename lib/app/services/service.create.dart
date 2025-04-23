@@ -1,28 +1,37 @@
 import 'dart:io';
 
-import '../models/create_dart_project_model.dart';
+import 'package:assist/app/models/config.flutter_project.dart';
 
+import '../models/config.dart_project.dart';
+
+/// Service to create a new Dart project
 class DartCreateProjectService {
-  DartCreateProjectService({required this.model});
+  DartCreateProjectService(this.config);
 
-  final CreateDartProjectModel model;
+  final DartProjectConfig config;
 
   Future<Process> create() {
     return Process.start(
-      'dart',
-      model.args,
-      workingDirectory: model.projectDir,
+      config.executableName,
+      config.fullArgs,
+      workingDirectory: config.projectParentDir,
       runInShell: true,
     );
   }
 }
 
+/// Service to create a new Flutter project
 class FlutterCreateProjectService {
-  FlutterCreateProjectService();
+  FlutterCreateProjectService(this.config);
 
-  Future<int> create() async {
-    throw UnimplementedError(
-      "Flutter project creation is not implemented yet.",
+  final FlutterProjectConfig config;
+
+  Future<Process> create() async {
+    return Process.start(
+      config.executableName,
+      config.fullArgs,
+      workingDirectory: config.projectDir,
+      runInShell: true,
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:path/path.dart' as p;
 
 import '../core/constants.dart';
 
-/// Returns the platform-specific build target folder for Flutter
+/// Returns the platform-specific executable to launch
 ({String platform, String exec}) getPlatformExecutable() {
   if (Platform.isWindows) return (platform: 'windows', exec: 'gui.exe');
   if (Platform.isMacOS) return (platform: 'macos', exec: 'gui');
@@ -31,4 +31,13 @@ String getBuiltExecutablePath(String guiProjectPath, String baseName) {
 String getGlobalPackagePath() {
   final home = Platform.environment['HOME'] ?? '';
   return p.join(home, '.pub-cache', 'global_packages', Strings.executableName);
+}
+
+/// Get the user's home directory path on the system
+String getUserHomePath() {
+  if (Platform.isWindows) {
+    return Platform.environment['USERPROFILE'] ?? '';
+  } else {
+    return Platform.environment['HOME'] ?? '';
+  }
 }
