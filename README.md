@@ -1,17 +1,38 @@
-<img src="https://github.com/user-attachments/assets/61ea041a-67c6-4276-bcf2-2033e600686a" alt="Logo" width="80" height="80"/>
+<div align="center">
+  <a href="#">
+    <img src="https://github.com/user-attachments/assets/61ea041a-67c6-4276-bcf2-2033e600686a" alt="Logo" width="80" height="80"/>
+  </a>
+  <h1>Assist</h1>
+  <p>
+    A tool designed to simplify the management of Dart and Flutter projects. It automates repetitive tasks, improves developer experience, and ensures projects remain up-to-date.
+  </p>
+  <a href="https://github.com/salah-rashad/assist/issues/new?labels=bug&assignees=salah-rashad" target="_blank">
+    Report Bug
+  </a>
+   · 
+  <a href="https://github.com/salah-rashad/assist/issues/new?labels=enhancement&assignees=salah-rashad" target="_blank">
+    Request Feature
+  </a>
+  <br/><br/>
+  <a href="https://pub.dev/packages/assist/score" target="_blank">
+    <img src="https://img.shields.io/pub/likes/assist.svg?style=for-the-badge&label=likes&labelColor=black"/>
+    <img src="https://img.shields.io/pub/points/assist?style=for-the-badge&label=Points&labelColor=black&color=229954"/>
+    <img src="https://img.shields.io/pub/dm/assist.svg?style=for-the-badge&label=Downloads&labelColor=black&color=34495e"/>
+  </a>
+  <br/>
+  <a href="https://thebsd.github.io/StandWithPalestine/" target="_blank">
+    <img  src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg" alt="StandWithPalestine"/>
+  </a>
+  <br/><br/>
+</div>
 
-# Assist
+<img src="assets/images/flutter_create.gif" alt="Flutter Create Gif"/>
 
-A tool designed to simplify the management of Dart and Flutter projects. It automates repetitive
-tasks, improves developer experience, and ensures projects remain up-to-date.
-
-This package is ideal for developers looking to save time, reduce errors, and improve their overall
+Assist is ideal for developers looking to save time, reduce errors, and improve their overall
 development workflow.
 
 The tool is particularly useful for developers who want to streamline their workflows when working
 with Dart packages on `pub.dev`.
-
-<img src="assets/images/flutter_create.gif" alt="Flutter Create Gif"/>
 
 #### 🚧 Under Development 🚧
 > [!WARNING]
@@ -58,3 +79,11 @@ on the [GitHub repository](https://github.com/salah-rashad/assist).
 ## License
 
 This project is licensed under the BSD 3-Clause License.
+
+<br/><br/>
+
+<div align="center"> 
+  Made with ❤️ in Egypt 🇪🇬
+  <br/>
+  <h3 align="center"> 🇵🇸 Free Palestine 🇵🇸 </h3>
+</div>
