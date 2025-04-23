@@ -6,14 +6,6 @@ repository: https://github.com/salah-rashad/assist
 issue_tracker: https://github.com/salah-rashad/assist/issues
 documentation: https://github.com/salah-rashad/assist
 
-topics:
-  - management
-  - package
-  - automation
-  - publish
-  - tools
-
-
 environment:
   sdk: ^3.7.2
 
@@ -37,4 +29,13 @@ platforms:
   linux:
   macos:
 
+topics:
+  - management
+  - package
+  - automation
+  - publish
+  - tools
 
+screenshots:
+  - description: 'Flutter Create'
+    path: 'assets/images/flutter_create.gif'

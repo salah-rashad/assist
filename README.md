@@ -9,10 +9,13 @@ development workflow.
 The tool is particularly useful for developers who want to streamline their workflows when working
 with Dart packages on `pub.dev`.
 
+<img src="assets/images/flutter_create.gif" alt="Flutter Create Gif"/>
+
 #### 🚧 Under Development 🚧
 > [!WARNING]
 > This project is still in development and is not yet ready for production use.  
 > Please use with caution and file any potential issues on [GitHub](https://github.com/salah-rashad/assist/issues).
+
 
 ## Key Features
 
@@ -36,10 +39,13 @@ dart pub global activate assist
 
 ## Usage
 
-To start using Assist, run:
+To start using Assist, run any of the following commands:
 
 ```bash
-assist <project_directory>
+# Show the help menu
+assist
+# Create a new Dart/Flutter project
+assist create
 ```
 
 ## Contributing
