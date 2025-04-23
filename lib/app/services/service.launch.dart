@@ -4,11 +4,13 @@ import 'package:path/path.dart' as p;
 
 import '../utils/platform_utils.dart';
 
+/// Service for launching the GUI
 class LaunchService {
   const LaunchService(this.projectDir);
 
   final String projectDir;
 
+  /// Launches the GUI
   Future<int> launch() async {
     final data = getPlatformExecutable();
     final platform = data.platform;

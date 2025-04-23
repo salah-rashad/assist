@@ -1,7 +1,7 @@
 import 'package:promptly/promptly.dart';
 
 import '../../services/service.pubspec.dart';
-import 'command_task.dart';
+import '../components/command_task.dart';
 
 class CheckPubspecTask extends CommandTask {
   CheckPubspecTask(this.projectDir);

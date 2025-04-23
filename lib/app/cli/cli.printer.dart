@@ -1,20 +1,20 @@
 import 'dart:io';
 
+import 'package:assist/app/utils/extensions.dart';
 import 'package:assist/main.dart';
 import 'package:chalkdart/chalkstrings.dart';
 import 'package:promptly/promptly.dart' hide Tint;
 
 import '../core/constants.dart';
 import '../utils/helpers.dart';
-import '../utils/temp_link.dart';
 
+/// CLI printer
 abstract class Printer {
   static newline() => print('\n');
   static printLogo() => print(Strings.logoArt.bold.indianRed);
 
   static printUsageError(String message) {
-    writeln(app.errorAppDescription);
-    write('\x1B[1A');
+    write(app.errorAppDescription);
     finishWithError(
       'Usage Error',
       message: message,
@@ -25,27 +25,29 @@ abstract class Printer {
   }
 
   static String mainUsageFooter() {
-    final theme = app.theme;
-    String l(String s) => theme.prefixLine(s);
-    // String w(String s) => theme.prefixWarning(s);
+    // String l(String s) => theme.prefixLine(s);
+    // String r(String s) => theme.prefixRun(s);
 
     final recommendedUsage = console.sectionLine('Usage');
     final command1 =
-        '${Strings.executableName.darkOrange} ${'<project_directory>'.gray.italic}';
+        '${Strings.executableName} ${'<project_directory>'.gray.italic}';
     final command2 =
-        '${Strings.executableName.darkOrange} run ${'<project_directory>'.gray.italic}';
+        '${Strings.executableName} ${'run'.dim} ${'<project_directory>'.gray.italic}';
     final moreInfo =
         'For more information, visit: '
-        '${tempLink('https://github.com/salah-rashad/assist', 'GitHub')}'
+        '${linkLine('https://github.com/salah-rashad/assist', 'GitHub')}'
         ' | '
-        '${tempLink('https://pub.dev/packages/assist', 'Pub')}';
+        '${linkLine('https://pub.dev/packages/assist', 'Pub')}';
 
-    return '\r$recommendedUsage'
-        '\x1B[3A\x1B[2K'
-        '${l('')}'
-        '\n${r(command1)}'
-        '\n${r(command2)}'
-        '\n${l('')}'
-        '\n${l(moreInfo)}';
+    final sb = StringBuffer();
+    sb.write('\r$recommendedUsage');
+    sb.write('\x1B[3A\x1B[2K');
+    sb.writeln(''.prefixLine());
+    sb.writeln(command1.prefixRun());
+    sb.writeln(command2.prefixRun());
+    sb.writeln(''.prefixLine());
+    sb.write(moreInfo.prefixLine());
+
+    return sb.toString();
   }
 }

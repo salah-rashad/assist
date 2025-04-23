@@ -1,12 +1,15 @@
 import 'dart:io';
 
+/// Service for all version related tasks
 class VersionService {
+  /// Get the current installed Dart version
   String getDartVersion() {
     final version = Platform.version;
     final match = RegExp(r'^([\w\.-]+ \(\w+\))').firstMatch(version);
     return match?.group(1) ?? version.split(' ')[0];
   }
 
+  /// Get the current installed Flutter version
   Future<String> getFlutterVersion() async {
     try {
       final version = await Process.run('flutter', ['--version']);

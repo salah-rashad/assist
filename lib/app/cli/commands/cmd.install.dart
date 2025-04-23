@@ -4,6 +4,7 @@ import 'package:promptly/promptly.dart';
 import '../../core/constants.dart';
 import '../../services/service.install.dart';
 
+/// Command to install the GUI
 class InstallCommand extends Command<int> {
   InstallCommand()
     : super('install', "Install the GUI and initialize the tool.");

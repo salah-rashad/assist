@@ -1,6 +1,9 @@
 import 'dart:convert';
 
-import 'package:promptly/promptly.dart';
+import 'package:chalkdart/chalkstrings.dart';
+import 'package:promptly/promptly.dart' hide Tint;
+
+import 'helpers.dart';
 
 extension StreamExtension on Stream<List<int>> {
   Future<void> asLines(void Function(String data) onData) {
@@ -9,16 +12,18 @@ extension StreamExtension on Stream<List<int>> {
     ).transform(const LineSplitter()).listen(onData).asFuture();
   }
 
-  Future<void> listenVerbose() =>
-      asLines((data) => message(data, style: MessageStyle.verbose));
+  Future<void> listenVerbose() => asLines((data) {
+    writeln(data.gray.prefixLine());
+  });
 
-  Future<void> listenErrors() =>
-      asLines((data) => message(data, style: MessageStyle.error));
+  Future<void> listenErrors() => asLines((data) {
+    writeln(data.error());
+  });
 }
 
 extension StringExtension on String {
   /// Truncates a line to fit within the console window width
-  String truncateLine([int? spacing]) {
+  String truncateLine([int? spacing, String suffix = '…']) {
     spacing ??= console.spacing;
     final windowWidth = console.windowWidth;
 
@@ -26,13 +31,41 @@ extension StringExtension on String {
     final line = split('\n').join(' ');
 
     // If the line is longer than the window width, truncate it
-    if (line.strip().length > windowWidth - spacing) {
-      return '${line.substring(0, windowWidth - spacing)}…';
+    if (line.strip.length > windowWidth - spacing) {
+      return '${line.substring(0, windowWidth - spacing)}$suffix';
     }
     return line;
   }
 
   String truncateChoice() => truncateLine(6);
+
+  String truncateChoiceDescription(int prefixLength) {
+    final suffixLink = '… ${linkLine(this, '→'.darkGrey)}';
+    return truncateLine(prefixLength + 8, suffixLink);
+  }
+
+  String prefix(String prefix) {
+    final sb = StringBuffer();
+    sb.write(prefix.padRight(theme.spacing));
+    sb.write(this);
+    return sb.toString();
+  }
+
+  String prefixArrow() => prefix('→');
+
+  String prefixLine() => theme.prefixLine(this);
+
+  String error() => theme.prefixError(theme.colors.error(this));
+
+  String prefixWarning() => theme.prefixWarning(theme.colors.warning(this));
+
+  String prefixInfo() => theme.prefixInfo(theme.colors.info(this));
+
+  String prefixRun() => theme.prefixRun(theme.colors.success(dim));
+
+  String prefixHeader() => theme.prefixHeaderLine(this);
+
+  String prefixSection() => theme.prefixSectionLine(this);
 }
 
 /*extension StringExtension on String {
