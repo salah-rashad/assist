@@ -30,7 +30,7 @@ class FlutterCreateProjectService {
     return Process.start(
       config.executableName,
       config.fullArgs,
-      workingDirectory: config.projectDir,
+      workingDirectory: config.projectParentDir,
       runInShell: true,
     );
   }
