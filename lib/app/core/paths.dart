@@ -1,1 +1,2 @@
-const String kGuiProjectPath = 'gui';
+const String kTempDir = 'assist_dart';
+const String kGuiDir = 'gui';

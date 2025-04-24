@@ -1,5 +1,5 @@
-import 'package:chalkdart/chalkstrings.dart';
-import 'package:promptly/promptly.dart' hide StringColor, Tint;
+import 'package:assist/app/utils/string_colors.dart';
+import 'package:promptly/promptly.dart';
 
 import '../core/constants.dart';
 import 'cli.printer.dart';

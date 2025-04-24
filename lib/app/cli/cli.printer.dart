@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:assist/app/utils/extensions.dart';
+import 'package:assist/app/utils/string_colors.dart';
 import 'package:assist/main.dart';
-import 'package:chalkdart/chalkstrings.dart';
-import 'package:promptly/promptly.dart' hide Tint;
+import 'package:promptly/promptly.dart';
 
 import '../core/constants.dart';
 import '../utils/helpers.dart';
@@ -11,7 +11,8 @@ import '../utils/helpers.dart';
 /// CLI printer
 abstract class Printer {
   static newline() => print('\n');
-  static printLogo() => print(Strings.logoArt.bold.indianRed);
+
+  static printLogo() => print(Strings.logoArt.cIndianRed.bold());
 
   static printUsageError(String message) {
     write(app.errorAppDescription);
@@ -28,11 +29,11 @@ abstract class Printer {
     // String l(String s) => theme.prefixLine(s);
     // String r(String s) => theme.prefixRun(s);
 
-    final recommendedUsage = console.sectionLine('Usage');
+    final usage = console.sectionLine('Usage');
     final command1 =
-        '${Strings.executableName} ${'<project_directory>'.gray.italic}';
+        '${Strings.executableName} ${'<project_directory>'.cGray.italic()}';
     final command2 =
-        '${Strings.executableName} ${'run'.dim} ${'<project_directory>'.gray.italic}';
+        '${Strings.executableName} ${'run'.dim} ${'<project_directory>'.cGray.italic()}';
     final moreInfo =
         'For more information, visit: '
         '${linkLine('https://github.com/salah-rashad/assist', 'GitHub')}'
@@ -40,9 +41,9 @@ abstract class Printer {
         '${linkLine('https://pub.dev/packages/assist', 'Pub')}';
 
     final sb = StringBuffer();
-    sb.write('\r$recommendedUsage');
-    sb.write('\x1B[3A\x1B[2K');
-    sb.writeln(''.prefixLine());
+    sb.write('\r$usage');
+    // sb.write('\x1B[3A\x1B[2K');
+    // sb.writeln(''.prefixLine());
     sb.writeln(command1.prefixRun());
     sb.writeln(command2.prefixRun());
     sb.writeln(''.prefixLine());

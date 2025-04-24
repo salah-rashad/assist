@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:assist/app/cli/tasks/task.create.dart_project.dart';
 import 'package:assist/app/services/service.flutter.dart';
 import 'package:assist/app/utils/extensions.dart';
-import 'package:chalkdart/chalkstrings.dart';
+import 'package:assist/app/utils/string_colors.dart';
 import 'package:path/path.dart' as p;
-import 'package:promptly/promptly.dart' hide StringColor, Tint;
+import 'package:promptly/promptly.dart';
 
 import '../../core/constants.dart';
 import '../../core/enums.dart';
@@ -33,7 +33,9 @@ class CreateCommand extends Command<int> {
       final dartVersion = DartService.version();
 
       header('Create', message: description);
-      info('Default values are indicated by '.gray + theme.colors.success('*'));
+      info(
+        'Default values are indicated by '.cGray + theme.colors.success('*'),
+      );
       line();
       line();
       ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
@@ -157,7 +159,7 @@ class CreateCommand extends Command<int> {
     final directoryExists = Directory(fullPath).existsSync();
 
     final text =
-        'Directory `$projectName` already exists. Overwrite?'.darkOrange;
+        'Directory `$projectName` already exists. Overwrite?'.cDarkOrange;
 
     final formattedPrompt = '\r${text.prefix('⚠️  ')}'.replaceAll('\n', '');
 
@@ -192,7 +194,7 @@ class CreateCommand extends Command<int> {
 
     final text = 'Type `$projectName` to confirm overwrite:';
 
-    line(message: '\b[$attempts/3]'.italic.hex('#2e2e2e'));
+    line(message: '\b[$attempts/3]'.italic().darkGray());
     final confirmation = prompt(text);
 
     final isMaxAttempts = attempts >= 3;
@@ -216,7 +218,7 @@ class CreateCommand extends Command<int> {
     // void l(x) => line(message: '\b$x'.lightGray, prefix: '');
     final commandLineList = config.toCommandLineList();
     for (final l in commandLineList) {
-      writeln("\t${l.strip.blueBright.italic}".prefixLine());
+      writeln("\t${l.strip().cLightBlue.italic()}".prefixLine());
     }
 
     line();
@@ -245,7 +247,7 @@ class CreateCommand extends Command<int> {
     sb.writeln(
       linkLine(
         'file:///$projectDir',
-        'Open Project Directory →'.gray,
+        'Open Project Directory →'.cGray,
       ).prefix('📂 '),
     );
     return sb.toString();

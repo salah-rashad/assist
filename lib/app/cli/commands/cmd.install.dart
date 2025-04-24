@@ -1,4 +1,4 @@
-import 'package:chalkdart/chalkstrings.dart';
+import 'package:assist/app/utils/string_colors.dart';
 import 'package:promptly/promptly.dart';
 
 import '../../core/constants.dart';
@@ -13,17 +13,18 @@ class InstallCommand extends Command<int> {
   Future<int> run() async {
     final service = InstallService();
 
-    ln(s) => writeln(theme.prefixLine(s));
+    ln(String s) => writeln(theme.prefixLine(s.cIndianRed));
 
     header('Install', message: description);
-    wrapTextAsLines(Strings.logoArtWithVersion().indianRed).forEach(ln);
+    wrapTextAsLines(Strings.logoArtWithVersion()).forEach(ln);
     line();
-    final installDir = service.promptInstallDirectory();
+    // final installDir = await service.promptInstallDirectory();
+    final installDir = service.getGuiInstallDir();
     line();
     await service.downloadGUIApp();
     line();
-    await service.install(installDir);
-
+    await service.install(installDir.path);
+    message('Install directory: ${installDir.path}');
     finishSuccesfuly(
       'Install',
       message: 'Installed Successfully',

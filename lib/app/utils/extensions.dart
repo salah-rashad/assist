@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:chalkdart/chalkstrings.dart';
-import 'package:promptly/promptly.dart' hide Tint;
+import 'package:promptly/promptly.dart';
 
 import 'helpers.dart';
 
@@ -13,7 +12,7 @@ extension StreamExtension on Stream<List<int>> {
   }
 
   Future<void> listenVerbose() => asLines((data) {
-    writeln(data.gray.prefixLine());
+    writeln(data.gray().prefixLine());
   });
 
   Future<void> listenErrors() => asLines((data) {
@@ -21,7 +20,7 @@ extension StreamExtension on Stream<List<int>> {
   });
 }
 
-extension StringExtension on String {
+extension StringTruncateExtension on String {
   /// Truncates a line to fit within the console window width
   String truncateLine([int? spacing, String suffix = '…']) {
     spacing ??= console.spacing;
@@ -31,7 +30,7 @@ extension StringExtension on String {
     final line = split('\n').join(' ');
 
     // If the line is longer than the window width, truncate it
-    if (line.strip.length > windowWidth - spacing) {
+    if (line.strip().length > windowWidth - spacing) {
       return '${line.substring(0, windowWidth - spacing)}$suffix';
     }
     return line;
@@ -40,10 +39,12 @@ extension StringExtension on String {
   String truncateChoice() => truncateLine(6);
 
   String truncateChoiceDescription(int prefixLength) {
-    final suffixLink = '… ${linkLine(this, '→'.darkGrey)}';
+    final suffixLink = '… ${linkLine(this, '→'.darkGray())}';
     return truncateLine(prefixLength + 8, suffixLink);
   }
+}
 
+extension StringPrefixExtension on String {
   String prefix(String prefix) {
     final sb = StringBuffer();
     sb.write(prefix.padRight(theme.spacing));
@@ -61,7 +62,7 @@ extension StringExtension on String {
 
   String prefixInfo() => theme.prefixInfo(theme.colors.info(this));
 
-  String prefixRun() => theme.prefixRun(theme.colors.success(dim));
+  String prefixRun() => theme.prefixRun(theme.colors.success(dim()));
 
   String prefixHeader() => theme.prefixHeaderLine(this);
 

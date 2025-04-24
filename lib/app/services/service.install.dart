@@ -1,26 +1,39 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:vmservice_io';
 
+import 'package:assist/app/core/paths.dart';
+import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 
 import '../utils/helpers.dart';
 
 /// Service to install the GUI
 class InstallService {
-  String promptInstallDirectory() {
-    final storageDir = getDartStorageDirectory();
-    return prompt(
-      'Install directory path:',
-      defaultValue: storageDir?.path,
-      validator: GenericValidator("Directory does not exist.", (value) {
-        if (Directory(value).existsSync()) {
-          return true;
-        }
-        return false;
-      }),
-    );
+  Directory _getTempDirectory() {
+    final systemTempDir = Directory.systemTemp;
+    final directory = Directory(p.join(systemTempDir.path, kTempDir));
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    return directory;
   }
+
+  Directory getGuiInstallDir() =>
+      Directory(p.join(_getTempDirectory().path, kGuiDir))
+        ..createSync(recursive: true);
+
+  // Future<String> promptInstallDirectory() async {
+  //   return prompt(
+  //     'Install directory path:',
+  //     defaultValue: Directory.current.path,
+  //     validator: GenericValidator("Directory does not exist.", (value) {
+  //       if (Directory(value).existsSync()) {
+  //         return true;
+  //       }
+  //       return false;
+  //     }),
+  //   );
+  // }
 
   Future downloadGUIApp() async {
     const totalSize = 25 * 1024 * 1024; // 25 MB

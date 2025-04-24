@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:chalkdart/chalkstrings.dart';
+import 'package:assist/app/utils/string_colors.dart';
 import 'package:meta/meta.dart';
-import 'package:promptly/promptly.dart' hide Tint;
+import 'package:promptly/promptly.dart';
 
 import '../../utils/helpers.dart';
 
@@ -43,10 +43,10 @@ abstract class CommandTask<T> {
   }) async {
     // Apply custom styles
     final sPrompt = _style(this.prompt, prompt);
-    final sSuccessHint = _style(this.successHint?.gray ?? '', successHint);
-    final sFailedHint = _style(this.failedHint?.gray ?? '', failedHint);
-    final sSuccessTag = _style(this.successTag.dim, successTag);
-    final sFailedTag = _style(this.failedTag.dim, failedTag);
+    final sSuccessHint = _style(this.successHint?.cGray ?? '', successHint);
+    final sFailedHint = _style(this.failedHint?.cGray ?? '', failedHint);
+    final sSuccessTag = _style(this.successTag.dim(), successTag);
+    final sFailedTag = _style(this.failedTag.dim(), failedTag);
 
     T? result;
 
@@ -72,8 +72,8 @@ abstract class CommandTask<T> {
   String _buildSuccessMsg(String prompt, String? hint, String tag) {
     tag = '  $tag';
     final padWidth = math.min(
-      -console.spacing - tag.strip.length + 80,
-      -console.spacing - tag.strip.length + console.windowWidth,
+      -console.spacing - tag.strip().length + 80,
+      -console.spacing - tag.strip().length + console.windowWidth,
     );
 
     final sb = StringBuffer();
@@ -91,8 +91,8 @@ abstract class CommandTask<T> {
   String _buildFailedMsg(String prompt, String? hint, String tag) {
     tag = '  $tag';
     final padWidth = math.min(
-      -console.spacing - tag.strip.length + 80,
-      -console.spacing - tag.strip.length + console.windowWidth,
+      -console.spacing - tag.strip().length + 80,
+      -console.spacing - tag.strip().length + console.windowWidth,
     );
 
     final sb = StringBuffer();
