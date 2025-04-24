@@ -1,3 +1,10 @@
+## 0.2.2
+
+- Enhance color handling in CLI.
+- Update paths and imports.
+- Update `README.md`.
+- Add example `README.md`.
+
 ## 0.2.1
 
 - Fixed the working directory path in the Flutter create service.
