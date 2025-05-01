@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:assist_core/models/config/config.dart_project.dart';
+import 'package:assist_core/services/service.dart.dart';
 import 'package:promptly/promptly.dart';
 
-import '../../models/config.dart_project.dart';
-import '../../services/service.dart.dart';
 import '../components/command_task.dart';
 
 class CreateDartProjectTask extends CommandTask<Process> {

@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:assist_core/core/constants/enums.dart';
 import 'package:promptly/promptly.dart';
 
-import 'helpers.dart';
+import 'cli.helpers.dart';
 
 extension StreamExtension on Stream<List<int>> {
   Future<void> asLines(void Function(String data) onData) {
@@ -67,6 +68,34 @@ extension StringPrefixExtension on String {
   String prefixHeader() => theme.prefixHeaderLine(this);
 
   String prefixSection() => theme.prefixSectionLine(this);
+}
+
+extension ProjectTypeExtension on ProjectType {
+  String toChoice(String flutterVersion, String dartVersion) {
+    final version = switch (this) {
+      ProjectType.flutter => flutterVersion,
+      ProjectType.dart => dartVersion,
+    };
+    return generateChoice(name, version, false);
+  }
+}
+
+extension DartProjectTemplateExtension on DartProjectTemplate {
+  String toChoice() {
+    return generateChoice(name, description, isDefault);
+  }
+}
+
+extension FlutterProjectTemplateExtension on FlutterProjectTemplate {
+  String toChoice() {
+    return generateChoice(name, description, isDefault);
+  }
+}
+
+extension AndroidLanguageExtension on AndroidLanguage {
+  String toChoice() {
+    return generateChoice(name, null, isDefault);
+  }
 }
 
 /*extension StringExtension on String {

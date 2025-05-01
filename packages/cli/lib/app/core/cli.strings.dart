@@ -1,4 +1,4 @@
-abstract class Strings {
+abstract class CliStrings {
   static const String version = '0.2.2';
 
   static const String executableName = 'assist';

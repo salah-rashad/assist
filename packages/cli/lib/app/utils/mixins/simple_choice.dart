@@ -1,4 +1,4 @@
-// import 'package:assist/app/utils/extensions.dart';
+// import 'package:assist/app/utils/cli.extensions.dart';
 //
 // mixin SimpleChoice<T> on Enum {
 //   String get name => toString().split('.').last;

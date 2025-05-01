@@ -1,7 +1,7 @@
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:promptly/promptly.dart';
 
-import '../core/constants.dart';
+import '../core/cli.strings.dart';
 import 'cli.printer.dart';
 import 'commands/cmd.create.dart';
 import 'commands/cmd.install.dart';
@@ -13,9 +13,9 @@ part 'cli.theme.dart';
 class AssistCliRunner extends CommandRunner {
   AssistCliRunner()
     : super(
-        Strings.executableName,
-        Strings.description,
-        version: Strings.version,
+        CliStrings.executableName,
+        CliStrings.description,
+        version: CliStrings.version,
         theme: CliThemes.defaultTheme,
       ) {
     addCommand(InstallCommand());

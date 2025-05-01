@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:assist/app/utils/extensions.dart';
+import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:assist/main.dart';
 import 'package:promptly/promptly.dart';
 
-import '../core/constants.dart';
-import '../utils/helpers.dart';
+import '../core/cli.strings.dart';
+import '../utils/cli.helpers.dart';
 
 /// CLI printer
 abstract class Printer {
   static newline() => print('\n');
 
-  static printLogo() => print(Strings.logoArt.cIndianRed.bold());
+  static printLogo() => print(CliStrings.logoArt.cIndianRed.bold());
 
   static printUsageError(String message) {
     write(app.errorAppDescription);
@@ -31,9 +31,9 @@ abstract class Printer {
 
     final usage = console.sectionLine('Usage');
     final command1 =
-        '${Strings.executableName} ${'<project_directory>'.cGray.italic()}';
+        '${CliStrings.executableName} ${'<project_directory>'.cGray.italic()}';
     final command2 =
-        '${Strings.executableName} ${'run'.dim} ${'<project_directory>'.cGray.italic()}';
+        '${CliStrings.executableName} ${'run'.dim} ${'<project_directory>'.cGray.italic()}';
     final moreInfo =
         'For more information, visit: '
         '${linkLine('https://github.com/salah-rashad/assist', 'GitHub')}'

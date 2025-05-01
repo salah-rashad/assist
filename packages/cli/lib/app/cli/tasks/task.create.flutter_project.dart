@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:assist_core/models/config/config.flutter_project.dart';
+import 'package:assist_core/services/service.flutter.dart';
 import 'package:promptly/promptly.dart';
 
-import '../../models/config.flutter_project.dart';
-import '../../services/service.flutter.dart';
 import '../components/command_task.dart';
 
 class CreateFlutterProjectTask extends CommandTask<Process> {

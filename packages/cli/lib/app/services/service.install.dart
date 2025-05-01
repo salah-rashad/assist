@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:assist/app/core/paths.dart';
+import 'package:assist_core/core/constants/paths.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 
-import '../utils/helpers.dart';
+import '../utils/cli.helpers.dart';
 
 /// Service to install the GUI
 class InstallService {

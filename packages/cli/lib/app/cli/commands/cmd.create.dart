@@ -1,21 +1,21 @@
 import 'dart:io';
 
 import 'package:assist/app/cli/tasks/task.create.dart_project.dart';
-import 'package:assist/app/services/service.flutter.dart';
-import 'package:assist/app/utils/extensions.dart';
+import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist/app/utils/string_colors.dart';
+import 'package:assist_core/core/constants/enums.dart';
+import 'package:assist_core/core/constants/exceptions.dart';
+import 'package:assist_core/models/config/config.base.dart';
+import 'package:assist_core/models/config/config.dart_project.dart';
+import 'package:assist_core/models/config/config.flutter_project.dart';
+import 'package:assist_core/services/service.dart.dart';
+import 'package:assist_core/services/service.flutter.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 
-import '../../core/constants.dart';
-import '../../core/enums.dart';
-import '../../core/exceptions.dart';
-import '../../models/config.base.dart';
-import '../../models/config.dart_project.dart';
-import '../../models/config.flutter_project.dart';
-import '../../services/service.dart.dart';
+import '../../core/cli.strings.dart';
+import '../../utils/cli.helpers.dart';
 import '../../utils/error_handler.dart';
-import '../../utils/helpers.dart';
 import '../components/command_task.dart';
 import '../tasks/task.create.flutter_project.dart';
 
@@ -241,7 +241,7 @@ class CreateCommand extends Command<int> {
   String _suggestions(String projectDir) {
     final sb = StringBuffer();
     sb.writeln(
-      'Run `${Strings.executableName} help` to see available commands.',
+      'Run `${CliStrings.executableName} help` to see available commands.',
     );
     sb.writeln();
     sb.writeln(

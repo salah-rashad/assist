@@ -1,4 +1,4 @@
-import 'package:assist/app/utils/extensions.dart';
+import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as p;
 
-import '../core/constants.dart';
+import '../core/cli.strings.dart';
 
 /// Returns the platform-specific executable to launch
 ({String platform, String exec}) getPlatformExecutable() {
@@ -30,7 +30,12 @@ String getBuiltExecutablePath(String guiProjectPath, String baseName) {
 /// Get the absolute path to this Dart package in the pub cache
 String getGlobalPackagePath() {
   final home = Platform.environment['HOME'] ?? '';
-  return p.join(home, '.pub-cache', 'global_packages', Strings.executableName);
+  return p.join(
+    home,
+    '.pub-cache',
+    'global_packages',
+    CliStrings.executableName,
+  );
 }
 
 /// Get the user's home directory path on the system

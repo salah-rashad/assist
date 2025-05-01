@@ -1,7 +1,7 @@
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:promptly/promptly.dart';
 
-import '../../core/constants.dart';
+import '../../core/cli.strings.dart';
 import '../../services/service.install.dart';
 
 /// Command to install the GUI
@@ -16,7 +16,7 @@ class InstallCommand extends Command<int> {
     ln(String s) => writeln(theme.prefixLine(s.cIndianRed));
 
     header('Install', message: description);
-    wrapTextAsLines(Strings.logoArtWithVersion()).forEach(ln);
+    wrapTextAsLines(CliStrings.logoArtWithVersion()).forEach(ln);
     line();
     // final installDir = await service.promptInstallDirectory();
     final installDir = service.getGuiInstallDir();
@@ -29,7 +29,7 @@ class InstallCommand extends Command<int> {
       'Install',
       message: 'Installed Successfully',
       suggestion:
-          'Run `${Strings.executableName} <project_directory>` to start.',
+          'Run `${CliStrings.executableName} <project_directory>` to start.',
     );
     return 0;
   }

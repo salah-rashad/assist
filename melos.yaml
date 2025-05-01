@@ -2,3 +2,19 @@ name: assist_workspace
 
 packages:
   - packages/**
+
+scripts:
+  pre-commit:
+    description: pre-commit git hook script
+    steps:
+      - format --output none --set-exit-if-changed
+      - analyze --fatal-infos
+
+  get:
+    name: Pub Get
+    description: Run pub get on all packages
+    run: melos exec -- dart pub get
+  format:
+    name: Format Code
+    description: Run dart format on all packages
+    run: melos format

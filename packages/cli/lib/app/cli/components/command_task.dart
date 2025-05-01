@@ -4,7 +4,7 @@ import 'package:assist/app/utils/string_colors.dart';
 import 'package:meta/meta.dart';
 import 'package:promptly/promptly.dart';
 
-import '../../utils/helpers.dart';
+import '../../utils/cli.helpers.dart';
 
 String _style(String s, StyleFunction? style) => style?.call(s) ?? s;
 
