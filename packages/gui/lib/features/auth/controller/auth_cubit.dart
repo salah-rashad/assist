@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:assist_core/assist_core.dart';
-import 'package:assist_core/core/constants/strings.dart';
+import 'package:assist_core/constants/strings.dart';
 import 'package:assist_core/services/service.github_login.dart';
 import 'package:assist_core/services/service.secure_storage.dart';
 import 'package:bloc/bloc.dart';

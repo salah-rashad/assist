@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:assist_core/core/constants/enums.dart';
+import 'package:assist_core/constants/enums.dart';
 import 'package:promptly/promptly.dart';
 
 import 'cli.helpers.dart';

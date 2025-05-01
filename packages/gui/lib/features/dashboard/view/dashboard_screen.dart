@@ -1,4 +1,4 @@
-import 'package:assist_core/core/constants/strings.dart';
+import 'package:assist_core/constants/strings.dart';
 import 'package:assist_core/services/service.dart.dart';
 import 'package:assist_core/services/service.flutter.dart';
 import 'package:assist_gui/core/utils/extensions.dart';

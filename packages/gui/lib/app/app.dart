@@ -1,4 +1,4 @@
-import 'package:assist_core/core/constants/strings.dart';
+import 'package:assist_core/constants/strings.dart';
 import 'package:assist_gui/app/routing/app_router.dart';
 import 'package:assist_gui/app/themes/app_theme.dart';
 import 'package:assist_gui/features/auth/controller/auth_cubit.dart';

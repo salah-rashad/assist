@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as path;
 
-import '../core/utils/helpers.dart';
+import '../utils/helpers.dart';
 import 'service.encryption.dart';
 
 /// Provides high-level secure token storage APIs.

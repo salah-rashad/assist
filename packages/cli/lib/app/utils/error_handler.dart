@@ -1,4 +1,4 @@
-import 'package:assist_core/core/constants/exceptions.dart';
+import 'package:assist_core/constants/exceptions.dart';
 import 'package:promptly/promptly.dart';
 
 /// Handle runtime errors thrown by the app.
