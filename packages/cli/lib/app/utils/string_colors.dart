@@ -930,12 +930,9 @@ List<int> _hex2rgb(dynamic arg) {
   var colorString = match[0]!;
 
   if (colorString.length == 3) {
-    colorString = colorString
-        .split('')
-        .map((ch) {
-          return ch + ch;
-        })
-        .join('');
+    colorString = colorString.split('').map((ch) {
+      return ch + ch;
+    }).join('');
   }
   int intval = int.parse(colorString, radix: 16);
 

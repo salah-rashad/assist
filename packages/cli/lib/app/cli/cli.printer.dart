@@ -34,8 +34,7 @@ abstract class Printer {
         '${CliStrings.executableName} ${'<project_directory>'.cGray.italic()}';
     final command2 =
         '${CliStrings.executableName} ${'run'.dim()} ${'<project_directory>'.cGray.italic()}';
-    final moreInfo =
-        'For more information, visit: '
+    final moreInfo = 'For more information, visit: '
         '${linkLine('https://github.com/salah-rashad/assist', 'GitHub')}'
         ' | '
         '${linkLine('https://pub.dev/packages/assist', 'Pub')}';

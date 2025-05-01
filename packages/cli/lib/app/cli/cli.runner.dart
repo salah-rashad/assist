@@ -12,12 +12,12 @@ part 'cli.theme.dart';
 /// The main command runner for the app
 class AssistCliRunner extends CommandRunner {
   AssistCliRunner()
-    : super(
-        CliStrings.executableName,
-        CliStrings.description,
-        version: CliStrings.version,
-        theme: CliThemes.defaultTheme,
-      ) {
+      : super(
+          CliStrings.executableName,
+          CliStrings.description,
+          version: CliStrings.version,
+          theme: CliThemes.defaultTheme,
+        ) {
     addCommand(InstallCommand());
     addCommand(RunCommand());
     addCommand(CreateCommand());

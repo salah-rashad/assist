@@ -5,7 +5,7 @@ class Project {
   Pubspec pubspec;
 
   Project({required this.path, Pubspec? pubspec})
-    : pubspec = pubspec ?? Pubspec(' ');
+      : pubspec = pubspec ?? Pubspec(' ');
 
   Project copyWith({String? path, Pubspec? pubspec}) {
     return Project(path: path ?? this.path, pubspec: pubspec ?? this.pubspec);

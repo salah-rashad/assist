@@ -60,9 +60,8 @@ class GithubLoginVerificationDialog extends StatelessWidget {
                 color: context.colorScheme.primary,
                 decoration: TextDecoration.underline,
               ),
-              recognizer:
-                  TapGestureRecognizer()
-                    ..onTap = () => launchUrl(Uri.parse(verificationUri)),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () => launchUrl(Uri.parse(verificationUri)),
             ),
           ),
         ],

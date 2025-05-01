@@ -61,11 +61,9 @@ class InstallService {
     final progressState = progress(
       'Downloading...',
       length: totalSize,
-      endLabel:
-          (progress) =>
-              '${toMegaBytes(progress.filled)} MB'
-              ' / '
-              '${toMegaBytes(progress.length)} MB',
+      endLabel: (progress) => '${toMegaBytes(progress.filled)} MB'
+          ' / '
+          '${toMegaBytes(progress.length)} MB',
     );
 
     await for (final r in simulatedDownloadStream()) {

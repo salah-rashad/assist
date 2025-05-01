@@ -7,7 +7,7 @@ import '../../services/service.install.dart';
 /// Command to install the GUI
 class InstallCommand extends Command<int> {
   InstallCommand()
-    : super('install', "Install the GUI and initialize the tool.");
+      : super('install', "Install the GUI and initialize the tool.");
 
   @override
   Future<int> run() async {

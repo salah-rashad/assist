@@ -12,13 +12,13 @@ part 'project_state.dart';
 
 class ProjectCubit extends Cubit<ProjectState> {
   ProjectCubit({required String projectPath})
-    : assert(projectPath.isNotEmpty, 'Project path must not be empty'),
-      assert(
-        Directory(projectPath).existsSync(),
-        'Project path does not exist',
-      ),
-      project = Project(path: projectPath),
-      super(ProjectInitial());
+      : assert(projectPath.isNotEmpty, 'Project path must not be empty'),
+        assert(
+          Directory(projectPath).existsSync(),
+          'Project path does not exist',
+        ),
+        project = Project(path: projectPath),
+        super(ProjectInitial());
 
   final Project project;
   final _watcher = ProjectFileWatcherService();

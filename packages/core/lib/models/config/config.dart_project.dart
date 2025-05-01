@@ -38,11 +38,11 @@ class DartProjectConfig extends CommandConfigBase {
 
   @override
   List<String> get args => [
-    projectName,
-    '--template=$template',
-    if (shouldForce) '--force',
-    shouldRunPubGet ? '--pub' : '--no-pub',
-  ];
+        projectName,
+        '--template=$template',
+        if (shouldForce) '--force',
+        shouldRunPubGet ? '--pub' : '--no-pub',
+      ];
 
   String get projectDir => p.join(projectParentDir, projectName);
 }

@@ -132,10 +132,9 @@ class _LinkTextState extends State<LinkText> {
                   tween: Tween(begin: 0.0, end: 4.0),
                   duration: const Duration(milliseconds: 200),
                   builder: (context, value, child) {
-                    value =
-                        Directionality.of(context) == TextDirection.rtl
-                            ? -value
-                            : value;
+                    value = Directionality.of(context) == TextDirection.rtl
+                        ? -value
+                        : value;
                     return Transform.translate(
                       offset: Offset(value, 0.0),
                       child: child,
@@ -146,8 +145,7 @@ class _LinkTextState extends State<LinkText> {
                       size: 16.0,
                       color: _isHovered ? hoverColor : style?.color,
                     ),
-                    child:
-                        widget.icon ??
+                    child: widget.icon ??
                         theme.icon ??
                         const Icon(Icons.arrow_forward_rounded),
                   ),

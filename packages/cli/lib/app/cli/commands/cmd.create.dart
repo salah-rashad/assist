@@ -128,8 +128,8 @@ class CreateCommand extends Command<int> {
     final projectType = selectOne<ProjectType>(
       'Select project type:',
       choices: ProjectType.values,
-      display:
-          (projectType) => projectType.toChoice(flutterVersion, dartVersion),
+      display: (projectType) =>
+          projectType.toChoice(flutterVersion, dartVersion),
     );
     return projectType;
   }
@@ -141,7 +141,6 @@ class CreateCommand extends Command<int> {
     final parentDir = prompt(
       'Enter parent directory:',
       initialText: defaultPath,
-
       validator: GenericValidator("Directory does not exist.", (value) {
         return Directory(value).existsSync();
       }),

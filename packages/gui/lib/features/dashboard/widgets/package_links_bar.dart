@@ -15,14 +15,13 @@ class PackageLinksBar extends StatelessWidget {
     final documentation = Uri.tryParse(
       project.pubspec.documentation?.trim() ?? "",
     );
-    final pubDev =
-        name.trim().isEmpty
-            ? null
-            : Uri(
-              scheme: "https",
-              host: "pub.dev",
-              path: "/packages/${project.pubspec.name}",
-            );
+    final pubDev = name.trim().isEmpty
+        ? null
+        : Uri(
+            scheme: "https",
+            host: "pub.dev",
+            path: "/packages/${project.pubspec.name}",
+          );
 
     final repositoryData = switch (homepage?.host) {
       "github.com" => (LucideIcons.github, 'GitHub'),

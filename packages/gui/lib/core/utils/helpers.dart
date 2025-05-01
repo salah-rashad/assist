@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/controller/auth_cubit.dart';
 
-typedef AuthBuilder =
-    Widget Function(
-      BuildContext context,
-      AuthCubit authCubit,
-      AuthState state,
-      bool isAuthenticated,
-    );
+typedef AuthBuilder = Widget Function(
+  BuildContext context,
+  AuthCubit authCubit,
+  AuthState state,
+  bool isAuthenticated,
+);
 
 Widget authBuilder(BuildContext context, {required AuthBuilder builder}) {
   return BlocBuilder<AuthCubit, AuthState>(

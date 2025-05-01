@@ -13,12 +13,12 @@ extension StreamExtension on Stream<List<int>> {
   }
 
   Future<void> listenVerbose() => asLines((data) {
-    writeln(data.gray().prefixLine());
-  });
+        writeln(data.gray().prefixLine());
+      });
 
   Future<void> listenErrors() => asLines((data) {
-    writeln(data.error());
-  });
+        writeln(data.error());
+      });
 }
 
 extension StringTruncateExtension on String {

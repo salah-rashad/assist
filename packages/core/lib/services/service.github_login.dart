@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:assist_core/services/service.connection.dart';
 
-typedef OnAuthCodeReceived =
-    void Function(String userCode, String verificationUri);
+typedef OnAuthCodeReceived = void Function(
+    String userCode, String verificationUri);
 typedef OnSessionTimeout = void Function();
 typedef OnSessionCompleted = void Function(String accessToken);
 typedef OnSessionError = void Function(String error);

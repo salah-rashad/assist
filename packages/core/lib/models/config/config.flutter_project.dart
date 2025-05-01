@@ -67,17 +67,17 @@ class FlutterProjectConfig extends CommandConfigBase {
 
   @override
   List<String> get args => [
-    projectName,
-    if (organization.isNotEmpty) '--org=$organization',
-    '--template=$template',
-    if (platforms.isNotEmpty) '--platforms=${platforms.join(',')}',
-    if (androidLanguage != null) '--android-language=$androidLanguage',
-    if (description.isNotEmpty) '--description=$description',
-    shouldRunPubGet ? '--pub' : '--no-pub',
-    isOfflineMode ? '--offline' : '--no-offline',
-    if (shouldOverwrite) '--overwrite',
-    if (isEmptyApp) '-e',
-  ];
+        projectName,
+        if (organization.isNotEmpty) '--org=$organization',
+        '--template=$template',
+        if (platforms.isNotEmpty) '--platforms=${platforms.join(',')}',
+        if (androidLanguage != null) '--android-language=$androidLanguage',
+        if (description.isNotEmpty) '--description=$description',
+        shouldRunPubGet ? '--pub' : '--no-pub',
+        isOfflineMode ? '--offline' : '--no-offline',
+        if (shouldOverwrite) '--overwrite',
+        if (isEmptyApp) '-e',
+      ];
 
   String get projectDir => p.join(projectParentDir, projectName);
 }

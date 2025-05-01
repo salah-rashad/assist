@@ -13,7 +13,7 @@ abstract class CliException implements Exception {
   String get message => 'Command failed';
 
   CliException({required this.command, required int? exitCode})
-    : _exitCode = exitCode;
+      : _exitCode = exitCode;
 
   @override
   String toString() => 'Error: $message';

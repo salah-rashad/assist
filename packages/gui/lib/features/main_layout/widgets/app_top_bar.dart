@@ -5,10 +5,10 @@ import 'package:shadcn_ui/shadcn_ui.dart';
 
 class AppTopBar extends PreferredSize {
   const AppTopBar({super.key})
-    : super(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const SizedBox.shrink(),
-      );
+      : super(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: const SizedBox.shrink(),
+        );
 
   @override
   Widget build(BuildContext context) {

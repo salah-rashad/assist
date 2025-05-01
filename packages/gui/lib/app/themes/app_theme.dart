@@ -22,27 +22,28 @@ sealed class AppTheme {
       ShadTheme.of(context).brightness == Brightness.dark ? dark : light;
 
   ShadThemeData themeData() => ShadThemeData(
-    extensions: [extendedColors],
-    brightness: brightness,
-    colorScheme: colorScheme,
-    radius: BorderRadius.all(Radius.circular(12)),
-    inputTheme: ShadInputTheme(
-      decoration: ShadDecoration(
-        color: colorScheme.mutedForeground.withValues(alpha: 0.1),
-      ),
-    ),
-    ghostButtonTheme: ShadButtonTheme(
-      hoverBackgroundColor: colorScheme.mutedForeground.withValues(alpha: 0.1),
-    ),
-    // secondaryButtonTheme: ShadButtonTheme(
-    //   hoverBackgroundColor: colorScheme.secondaryForeground.withValues(
-    //     alpha: 0.1,
-    //   ),
-    // ),
-    // decoration: ShadDecoration(
-    //   color: colorScheme.mutedForeground.withValues(alpha: 0.3),
-    // ),
-  );
+        extensions: [extendedColors],
+        brightness: brightness,
+        colorScheme: colorScheme,
+        radius: BorderRadius.all(Radius.circular(12)),
+        inputTheme: ShadInputTheme(
+          decoration: ShadDecoration(
+            color: colorScheme.mutedForeground.withValues(alpha: 0.1),
+          ),
+        ),
+        ghostButtonTheme: ShadButtonTheme(
+          hoverBackgroundColor:
+              colorScheme.mutedForeground.withValues(alpha: 0.1),
+        ),
+        // secondaryButtonTheme: ShadButtonTheme(
+        //   hoverBackgroundColor: colorScheme.secondaryForeground.withValues(
+        //     alpha: 0.1,
+        //   ),
+        // ),
+        // decoration: ShadDecoration(
+        //   color: colorScheme.mutedForeground.withValues(alpha: 0.3),
+        // ),
+      );
 
   ThemeData materialThemeData() =>
       ThemeData(scaffoldBackgroundColor: Colors.transparent);
