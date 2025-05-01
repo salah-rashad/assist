@@ -1,15 +1,19 @@
-import 'package:assist_core/tasks/base/assist_task_result.dart';
+import 'dart:async';
 
 import '../base/assist_task.dart';
 
-class AnalyzeTask extends AssistTask {
+class AnalyzeTask extends CancellableTask {
   @override
   String get name => 'Code Analyzer';
 
   @override
-  Future<AssistTaskResult> run() async {
-    await Future.delayed(Duration(seconds: 5));
+  Future<void> runSteps() async {
+    await step(() {
+      return Future.delayed(Duration(seconds: 3));
+    });
 
-    return AssistTaskResult.success('Analysis completed.');
+    await step(() {
+      return Future.delayed(Duration(seconds: 5));
+    });
   }
 }

@@ -1,15 +1,13 @@
-import 'package:assist_core/tasks/base/assist_task_result.dart';
-
 import '../base/assist_task.dart';
+import '../base/task_event.dart';
 
-class AnalyzeTask extends AssistTask {
+class FormatTask extends AssistTask {
   @override
   String get name => 'Code Formatter';
 
   @override
-  Future<AssistTaskResult> run() async {
+  Future<TaskEvent> run() async {
     await Future.delayed(Duration(seconds: 3));
-
-    return AssistTaskResult.success('Code formatted.');
+    throw UnimplementedError();
   }
 }
