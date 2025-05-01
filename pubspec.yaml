@@ -8,12 +8,18 @@ workspace:
 environment:
   sdk: ^3.6.0
 
+# This allows us to use assist during development.
+# by running the activate script in melos
+executables:
+  assist: assist_dev
+
 dependencies:
   meta: ^1.16.0
   path: ^1.9.1
 
 dev_dependencies:
   melos: ^7.0.0-dev.8
+  chalkdart: ^2.0.9
 
 melos:
   ide:
@@ -34,3 +40,14 @@ melos:
       name: Format Code
       description: Run dart format on all packages
       run: melos format
+
+    activate:
+      description: Activate the local version of assist for development.
+      steps:
+        - rm -rf ./.dart_tool/pub/bin/assist_workspace
+        - dart pub global activate --source="path" . --executable="assist"
+          --overwrite
+
+    activate:pub:
+      description: Activate the published version of assist.
+      run: dart pub global activate assist --overwrite
