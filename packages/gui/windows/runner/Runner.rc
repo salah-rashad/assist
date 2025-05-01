@@ -89,13 +89,14 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "dev.salahr.pub-assist" "\0"
-            VALUE "FileDescription", "gui" "\0"
+                VALUE
+"CompanyName", "com.example" "\0"
+VALUE "FileDescription", "assist_gui" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "gui" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 dev.salahr.pub-assist. All rights reserved." "\0"
-            VALUE "OriginalFilename", "gui.exe" "\0"
-            VALUE "ProductName", "gui" "\0"
+VALUE "InternalName", "assist_gui" "\0"
+VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
+VALUE "OriginalFilename", "assist_gui.exe" "\0"
+VALUE "ProductName", "assist_gui" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

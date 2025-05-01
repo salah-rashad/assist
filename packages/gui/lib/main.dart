@@ -1,23 +1,26 @@
+import 'package:assist_core/services/service.secure_storage.dart';
+import 'package:assist_gui/core/constants/constants.dart';
+import 'package:assist_gui/core/utils/bloc_observer.dart';
+import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:gui/src/pages/home_page.dart';
 
-void main(List<String> args) {
+import 'app/app.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final projectPath = args.isNotEmpty ? args.first : 'No path provided';
-  runApp(MyApp(projectPath: projectPath));
-}
+  await EasyLocalization.ensureInitialized();
+  await SecureStorageManager.initialize();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.projectPath});
+  EasyLocalization.logger.enableLevels = [];
+  Bloc.observer = AppBlocObserver();
 
-  final String projectPath;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Assist',
-      theme: ThemeData(primarySwatch: Colors.indigo),
-      home: HomePage(projectPath: projectPath),
-    );
-  }
+  runApp(
+    EasyLocalization(
+      supportedLocales: Constants.supportedLocales,
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      child: const MainApp(),
+    ),
+  );
 }

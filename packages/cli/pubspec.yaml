@@ -12,12 +12,13 @@ environment:
 resolution: workspace
 
 dependencies:
+  assist_core: ^0.1.0
+
   meta: ^1.16.0
   path: ^1.9.1
   args: ^2.7.0
   promptly: ^1.0.0-alpha.8
 
-  assist_core: ^0.1.0
 
 dev_dependencies:
   lints: ^5.1.1

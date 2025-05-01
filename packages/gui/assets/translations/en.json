@@ -1,0 +1,7 @@
+{
+  "actions": {
+    "create_new_project": "Create New Project",
+    "publish_package": "Publish Package"
+  },
+  "dashboard": "Dashboard"
+}
