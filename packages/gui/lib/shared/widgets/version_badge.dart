@@ -1,5 +1,4 @@
 import 'package:assist_core/assist_core.dart';
-import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/shared/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
 
@@ -10,22 +9,21 @@ class VersionBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final label = "v $version";
+
     // final isMajor = version.major > 0;
     // final isMinor = version.minor > 0 && version.major == 0;
     // final isPatch =
     //     version.patch > 0 && version.major == 0 && version.minor == 0;
-    //
-    // Color color;
+
     // if (isMajor) {
-    //   color = context.colorScheme.primary;
+    //   return StatusBadge.info(label);
     // } else if (isMinor) {
-    //   color = Colors.orange;
+    //   return StatusBadge.warning(label);
     // } else {
-    //   color = context.colorScheme.destructive;
+    //   return StatusBadge.error(label);
     // }
 
-    final color = context.colorScheme.mutedForeground;
-
-    return StatusBadge.normal("v $version");
+    return StatusBadge.normal(label);
   }
 }

@@ -21,7 +21,14 @@ enum StatusBadgeType { normal, success, error, warning, info }
 /// - [label] can be a [Widget], [String], or [IconData].
 class StatusBadge extends StatelessWidget {
   const StatusBadge._({required this.label, required this.type})
-      : assert(label != null),
+      : customColor = null,
+        assert(label != null),
+        assert(label is Widget || label is String || label is IconData);
+
+  const StatusBadge.customColor(
+      {super.key, required this.label, required this.customColor})
+      : type = StatusBadgeType.normal,
+        assert(label != null),
         assert(label is Widget || label is String || label is IconData);
 
   factory StatusBadge.normal(label) =>
@@ -41,6 +48,7 @@ class StatusBadge extends StatelessWidget {
 
   final dynamic label;
   final StatusBadgeType type;
+  final Color? customColor;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +62,7 @@ class StatusBadge extends StatelessWidget {
       label_ = Icon(label);
     }
 
-    Color color = mapStatusToColor(type, context);
+    final color = customColor ?? mapStatusToColor(type, context);
     return ShadBadge.outline(
       foregroundColor: color,
       backgroundColor: color.withValues(alpha: 0.2),
