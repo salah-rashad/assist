@@ -4,7 +4,7 @@ version: 0.1.0
 repository: https://github.com/salah-rashad/assist
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.6.0
 
 resolution: workspace
 

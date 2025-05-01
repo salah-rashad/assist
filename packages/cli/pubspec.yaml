@@ -7,7 +7,7 @@ issue_tracker: https://github.com/salah-rashad/assist/issues
 documentation: https://github.com/salah-rashad/assist
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.6.0
 
 resolution: workspace
 
