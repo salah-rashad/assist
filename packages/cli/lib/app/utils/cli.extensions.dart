@@ -76,7 +76,7 @@ extension ProjectTypeExtension on ProjectType {
       ProjectType.flutter => flutterVersion,
       ProjectType.dart => dartVersion,
     };
-    return generateChoice(name, version, false);
+    return generateChoice(name.titleCase, version, false);
   }
 }
 
@@ -94,7 +94,7 @@ extension FlutterProjectTemplateExtension on FlutterProjectTemplate {
 
 extension AndroidLanguageExtension on AndroidLanguage {
   String toChoice() {
-    return generateChoice(name, null, isDefault);
+    return generateChoice(name.titleCase, null, isDefault);
   }
 }
 
