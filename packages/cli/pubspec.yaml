@@ -1,6 +1,6 @@
 name: assist
 description: "A tool that helps Dart and Flutter developers save time by automating tasks and making project management easier."
-version: 0.2.2
+version: 0.3.0
 homepage: https://github.com/salah-rashad/assist
 repository: https://github.com/salah-rashad/assist
 issue_tracker: https://github.com/salah-rashad/assist/issues
@@ -12,7 +12,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  assist_core: ^0.1.0
+  assist_core: ^0.3.0
 
   meta: ^1.16.0
   path: ^1.9.1

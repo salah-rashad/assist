@@ -1,3 +1,14 @@
+## 0.3.0
+
+- **REFACTOR**: move core files to `assist_core` and migrate CLI to depend on `assist_core` package.
+- **PERF**: use melos v7.0.0-dev.8 pre-release with pub workspaces for better ide analyzer
+  performance and monorepo management.
+- **FIX**: set min Dart SDK version to ^3.6.0.
+- **FIX**: clean up pubspec.yaml and improve command formatting in cli.printer.dart.
+- **FIX**: update choice generation to use title case for better readability.
+- **FEAT**: add/update `README.md` and `CONTRIBUTING.md`.
+- **FEAT**(gui): Add initial project structure with core services, themes, and UI components.
+
 ## 0.2.2
 
 - Enhance color handling in CLI.
