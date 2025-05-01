@@ -1,7 +1,7 @@
 import 'package:assist_core/assist_core.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/shared/widgets/status_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 class VersionBadge extends StatelessWidget {
   const VersionBadge({super.key, required this.version});
@@ -26,14 +26,6 @@ class VersionBadge extends StatelessWidget {
 
     final color = context.colorScheme.mutedForeground;
 
-    return ShadBadge.raw(
-      variant: ShadBadgeVariant.outline,
-      foregroundColor: color,
-      backgroundColor: color.withValues(alpha: 0.2),
-      shape: StadiumBorder(
-        side: BorderSide(color: color.withValues(alpha: 0.8)),
-      ),
-      child: Text('v $version'),
-    );
+    return StatusBadge.normal("v $version");
   }
 }

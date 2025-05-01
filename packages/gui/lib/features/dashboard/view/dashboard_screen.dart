@@ -21,11 +21,11 @@ class DashboardScreen extends StatelessWidget {
     final pubspec = context.pubspec;
 
     final healthItems = <String, StatusBadge>{
-      "Analyzer": StatusBadge.success(Text("✔")),
-      "Formatter": StatusBadge.success(Text("✔")),
-      "Tests": StatusBadge.error(Text("✖")),
-      "Git Status": StatusBadge.warning(Text("⚠")),
-      "Changelog": StatusBadge.normal(Text("MISSING")),
+      "Analyzer": StatusBadge.success(),
+      "Formatter": StatusBadge.success(),
+      "Tests": StatusBadge.error(),
+      "Git Status": StatusBadge.warning(),
+      "Changelog": StatusBadge.info(),
     };
 
     final sdkVersionItems = <String, Widget>{

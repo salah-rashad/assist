@@ -20,8 +20,8 @@ final class LightTheme extends AppTheme {
 
   @override
   ExtendedColors get extendedColors => ExtendedColors(
-        success: const Color(0xff00E200),
-        warning: const Color(0xFFE3A702),
+        success: const Color(0xff05941d),
+        warning: const Color(0xFFDE7D15),
         info: const Color(0xFF2196F3),
       );
 }

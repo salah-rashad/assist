@@ -31,7 +31,7 @@ final class DarkTheme extends AppTheme {
   @override
   ExtendedColors get extendedColors => ExtendedColors(
         success: const Color(0xFF67c75f),
-        warning: const Color(0xFFFFC107),
+        warning: const Color(0xFFFEA425),
         info: const Color(0xFF2196F3),
       );
 }
