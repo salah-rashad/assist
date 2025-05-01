@@ -12,6 +12,7 @@ import '../../project/controller/project_cubit.dart';
 import '../widgets/dashboard_quick_actions_grid.dart';
 import '../widgets/package_info_header.dart';
 import '../widgets/package_links_bar.dart';
+import '../widgets/project_health_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -20,13 +21,13 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pubspec = context.pubspec;
 
-    final healthItems = <String, StatusBadge>{
-      "Analyzer": StatusBadge.success(),
-      "Formatter": StatusBadge.success(),
-      "Tests": StatusBadge.error(),
-      "Git Status": StatusBadge.warning(),
-      "Changelog": StatusBadge.info(),
-    };
+    final healthItems = [
+      StatusItem(title: "Analyzer", status: StatusBadge.success()),
+      StatusItem(title: "Formatter", status: StatusBadge.success()),
+      StatusItem(title: "Tests", status: StatusBadge.error()),
+      StatusItem(title: "Git Status", status: StatusBadge.warning()),
+      StatusItem(title: "Changelog", status: StatusBadge.info()),
+    ];
 
     final sdkVersionItems = <String, Widget>{
       "Flutter": FutureBuilder(
@@ -102,7 +103,7 @@ class DashboardScreen extends StatelessWidget {
                 spacing: 16.0,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Flexible(child: buildStatusCard(context, healthItems)),
+                  Flexible(child: ProjectHealthCard(items: healthItems)),
                   ShadCard(child: StatusTable(items: sdkVersionItems)),
                 ],
               ),
@@ -110,36 +111,6 @@ class DashboardScreen extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-
-  Widget buildStatusCard(
-    BuildContext context,
-    Map<String, StatusBadge> healthItems,
-  ) {
-    return Stack(
-      children: [
-        ShadCard(
-          title: Text("Status"),
-          description: Text("Last check: 2 hours ago"),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: StatusTable(
-              items: healthItems,
-              valueAlignment: AlignmentDirectional.centerEnd,
-            ),
-          ),
-        ),
-        PositionedDirectional(
-          top: 16,
-          end: 16,
-          child: ShadIconButton.ghost(
-            icon: Icon(LucideIcons.refreshCw),
-            foregroundColor: context.colorScheme.mutedForeground,
-            padding: EdgeInsets.zero,
-          ),
-        ),
-      ],
     );
   }
 

@@ -35,6 +35,23 @@ sealed class AppTheme {
           hoverBackgroundColor:
               colorScheme.mutedForeground.withValues(alpha: 0.1),
         ),
+        tooltipTheme: ShadTooltipTheme(
+          decoration: ShadDecoration(
+              color: colorScheme.secondary,
+              border: ShadBorder.all(
+                radius: BorderRadius.all(Radius.circular(8)),
+                padding: EdgeInsets.zero,
+                color: colorScheme.mutedForeground,
+                width: 1,
+              ),
+              shadows: [
+                BoxShadow(
+                  blurRadius: 3,
+                  color: colorScheme.foreground.withValues(alpha: 0.1),
+                  offset: Offset(0, 2),
+                ),
+              ]),
+        ),
         // secondaryButtonTheme: ShadButtonTheme(
         //   hoverBackgroundColor: colorScheme.secondaryForeground.withValues(
         //     alpha: 0.1,
