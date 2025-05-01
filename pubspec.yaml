@@ -1,5 +1,9 @@
 name: assist_workspace
 publish_to: none
+workspace:
+  - packages/cli
+  - packages/core
+  - packages/gui
 
 environment:
   sdk: ^3.6.0
@@ -8,4 +12,24 @@ dependencies:
   meta: ^1.16.0
   path: ^1.9.1
 dev_dependencies:
-  melos: ^6.3.2
+  melos: ^7.0.0-dev.8
+
+melos:
+  ide:
+    intellij: true
+
+  scripts:
+    pre-commit:
+      description: pre-commit git hook script
+      steps:
+        - format --output none --set-exit-if-changed
+        - analyze --fatal-infos
+
+    get:
+      name: Pub Get
+      description: Run pub get on all packages
+      run: melos exec -- dart pub get
+    format:
+      name: Format Code
+      description: Run dart format on all packages
+      run: melos format

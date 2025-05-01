@@ -9,6 +9,8 @@ documentation: https://github.com/salah-rashad/assist
 environment:
   sdk: ^3.7.2
 
+resolution: workspace
+
 dependencies:
   meta: ^1.16.0
   path: ^1.9.1

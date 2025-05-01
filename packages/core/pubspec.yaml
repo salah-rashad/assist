@@ -6,6 +6,8 @@ repository: https://github.com/salah-rashad/assist
 environment:
   sdk: ^3.7.2
 
+resolution: workspace
+
 dependencies:
   io: ^1.0.5
   path: ^1.9.1
