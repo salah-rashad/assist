@@ -1,40 +1,50 @@
-name: assist
-description: "A tool that helps Dart and Flutter developers save time by automating tasks and making project management easier."
-version: 0.2.2
-homepage: https://github.com/salah-rashad/assist
-repository: https://github.com/salah-rashad/assist
-issue_tracker: https://github.com/salah-rashad/assist/issues
-documentation: https://github.com/salah-rashad/assist
+name: assist_workspace
+publish_to: none
+workspace:
+  - packages/cli
+  - packages/core
+  - packages/gui
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.6.0
 
-dependencies:
-  meta: ^1.16.0
-  args: ^2.7.0
-  path: ^1.9.1
-  promptly: ^1.0.0-alpha.8
-  pubspec_parse: ^1.5.0
+# This allows us to use assist during development.
+# by running the activate script in melos
+executables:
+  assist: assist_dev
 
 dev_dependencies:
-  lints: ^5.1.1
-  test: ^1.25.15
+  melos: ^7.0.0-dev.8
+  chalkdart: ^2.0.9
 
-executables:
-  assist: assist
+melos:
+  ide:
+    intellij: true
 
-platforms:
-  windows:
-  linux:
-  macos:
+  scripts:
+    pre-commit:
+      description: pre-commit git hook script
+      steps:
+        - format --output none --set-exit-if-changed
+        - analyze --fatal-infos
 
-topics:
-  - management
-  - package
-  - automation
-  - publish
-  - tools
+    get:
+      name: Pub Get
+      description: Run pub get on all packages
+      run: melos exec -- dart pub get
 
-screenshots:
-  - description: 'Flutter Create'
-    path: 'assets/images/flutter_create.gif'
+    format:
+      name: Format Code
+      description: Run dart format on all packages
+      run: melos format
+
+    activate:
+      description: Activate the local version of assist for development.
+      steps:
+        - rm -rf ./.dart_tool/pub/bin/assist_workspace
+        - dart pub global activate --source="path" . --executable="assist"
+          --overwrite
+
+    activate:pub:
+      description: Activate the published version of assist.
+      run: dart pub global activate assist --overwrite

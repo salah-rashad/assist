@@ -1,0 +1,7 @@
+{
+  "actions": {
+    "create_new_project": "إنشاء مشروع جديد",
+    "publish_package": "نشر الحزمة"
+  },
+  "dashboard": "الرئيسية"
+}

@@ -18,7 +18,7 @@ with automated tasks and tools to improve developer experience.
 
 - ### Create
   - [x] Create Dart project
-  - [ ] Create Flutter project
+  - [X] Create Flutter project
 
 - ### Publishing
   - [ ] Pre-publish checklist and confirmation
