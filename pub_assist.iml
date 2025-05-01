@@ -6,12 +6,15 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
-      <excludeFolder url="file://$MODULE_DIR$/gui/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/gui/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/gui/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/cli/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/packages/cli/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/cli/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/gui/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/gui/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/gui/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
