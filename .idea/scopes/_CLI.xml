@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="⚙️ CLI" pattern="file[melos_assist]:assets/*||file[melos_assist]:bin/*||file[melos_assist]:lib/*||file[melos_assist]:CHANGELOG.md||file[melos_assist]:pubspec.yaml||file[melos_assist]:README.md||file[melos_assist_core]:lib/*||file[melos_assist_core]:pubspec.yaml||file[melos_assist]:lib//*||file[melos_assist]:bin//*||file[melos_assist]:assets//*||file[melos_assist_core]:lib//*" />
+</component>

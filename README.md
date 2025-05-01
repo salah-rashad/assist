@@ -49,14 +49,10 @@ packages/
 └── gui/    # Flutter-based GUI for visual project management
 ```
 
----
+## 🧰 Prerequisites
 
-## 🧰 Prequisites
-
-- Dart SDK (for CLI)
-- Flutter SDK (for GUI)
-
----
+- **Dart SDK** 3.6.0 or later
+- **Flutter SDK** 3.27.0 or later (for GUI)
 
 ## 🛠️ Setup Instructions
 
