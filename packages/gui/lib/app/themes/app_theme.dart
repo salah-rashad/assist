@@ -35,6 +35,17 @@ sealed class AppTheme {
           hoverBackgroundColor:
               colorScheme.mutedForeground.withValues(alpha: 0.1),
         ),
+        sonnerTheme: ShadSonnerTheme(
+          visibleToastsAmount: 5,
+        ),
+        primaryToastTheme: ShadToastTheme(
+          duration: Duration(seconds: 5),
+          closeIconData: LucideIcons.x,
+        ),
+        destructiveToastTheme: ShadToastTheme(
+          duration: Duration(seconds: 5),
+          closeIconData: LucideIcons.x,
+        ),
         tooltipTheme: ShadTooltipTheme(
           decoration: ShadDecoration(
               color: colorScheme.secondary,

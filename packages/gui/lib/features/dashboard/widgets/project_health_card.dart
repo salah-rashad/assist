@@ -1,3 +1,6 @@
+import 'package:assist_core/tasks/base/assist_task_manager.dart';
+import 'package:assist_core/tasks/tasks/task.analyze.dart';
+import 'package:assist_core/tasks/tasks/task.format.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -50,6 +53,10 @@ class ProjectHealthCard extends StatelessWidget {
             icon: Icon(LucideIcons.refreshCw),
             foregroundColor: context.colorScheme.mutedForeground,
             padding: EdgeInsets.zero,
+            onPressed: () {
+              taskManager.enqueue(AnalyzeTask());
+              taskManager.enqueue(FormatTask());
+            },
           ),
         ),
       ],

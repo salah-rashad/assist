@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../project/controller/project_cubit.dart';
+import '../../task_manager/view/running_tasks_list_tiles.dart';
 import '../widgets/dashboard_quick_actions_grid.dart';
 import '../widgets/package_info_header.dart';
 import '../widgets/package_links_bar.dart';
@@ -105,6 +106,8 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   Flexible(child: ProjectHealthCard(items: healthItems)),
                   ShadCard(child: StatusTable(items: sdkVersionItems)),
+                  ShadCard(
+                      title: Text("Tasks"), child: RunningTasksListTiles()),
                 ],
               ),
             ),

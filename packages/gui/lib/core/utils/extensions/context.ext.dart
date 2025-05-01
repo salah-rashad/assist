@@ -31,3 +31,7 @@ extension ContextProject on BuildContext {
 
   Pubspec get pubspec => project.pubspec;
 }
+
+// extension ContextTaskManager on BuildContext {
+//   List<AssistTask> get tasks => taskManager.pendingTasks;
+// }
