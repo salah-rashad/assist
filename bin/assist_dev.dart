@@ -8,11 +8,4 @@ void main(List<String> arguments) async {
   print(' ![DEVELOPMENT MODE] '.black.darkGray);
   print(' ');
   assist.main(arguments);
-
-  // if (arguments.contains('-h') || arguments.contains('--help')) {
-  //   print('---------------------------------------------------------');
-  //   print('| You are running a local development version of assist. |');
-  //   print('---------------------------------------------------------');
-  //   print('\n');
-  // }
 }

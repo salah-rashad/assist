@@ -13,10 +13,6 @@ environment:
 executables:
   assist: assist_dev
 
-dependencies:
-  meta: ^1.16.0
-  path: ^1.9.1
-
 dev_dependencies:
   melos: ^7.0.0-dev.8
   chalkdart: ^2.0.9
@@ -36,6 +32,7 @@ melos:
       name: Pub Get
       description: Run pub get on all packages
       run: melos exec -- dart pub get
+
     format:
       name: Format Code
       description: Run dart format on all packages
