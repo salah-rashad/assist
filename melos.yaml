@@ -1,0 +1,4 @@
+name: assist_workspace
+
+packages:
+  - packages/**

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pub_assist.iml" filepath="$PROJECT_DIR$/pub_assist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/cli/melos_assist.iml" filepath="$PROJECT_DIR$/packages/cli/melos_assist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/core/melos_core.iml" filepath="$PROJECT_DIR$/packages/core/melos_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/gui/melos_gui.iml" filepath="$PROJECT_DIR$/packages/gui/melos_gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_assist_workspace.iml" filepath="$PROJECT_DIR$/melos_assist_workspace.iml" />
     </modules>
   </component>
 </project>
