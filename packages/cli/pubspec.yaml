@@ -40,5 +40,5 @@ topics:
   - tools
 
 screenshots:
-  - description: 'Flutter Create'
-    path: 'assets/images/flutter_create.gif'
+  - description: 'Assist Logo'
+    path: 'assets/images/logo.png'
