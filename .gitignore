@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -30,6 +32,21 @@ migrate_working_dir/
 .flutter-plugins
 .flutter-plugins-dependencies
 build/
+**/ios/Flutter/.last_build_id
+.pub-cache/
+.pub/
+/build/
 
 # melos-monorepo
 pubspec_overrides.yaml
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
