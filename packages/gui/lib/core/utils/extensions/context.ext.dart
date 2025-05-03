@@ -80,7 +80,11 @@ extension ContextShadToast on BuildContext {
       id: id,
       duration: const Duration(seconds: 10),
       title: Text(task.name),
-      description: Text(error.toString()),
+      description: Text(
+        error.toString(),
+        maxLines: 8,
+        overflow: TextOverflow.fade,
+      ),
       action: !showRetry
           ? null
           : ShadButton.secondary(

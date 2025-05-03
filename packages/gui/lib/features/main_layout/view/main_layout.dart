@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../shared/widgets/breadcrumps.dart';
+import '../../task_manager/view/task_status_bar.dart';
 import '../widgets/app_nav_rail.dart';
 import '../widgets/app_top_bar.dart';
 
@@ -30,32 +31,50 @@ class MainLayout extends StatelessWidget {
         context.colorScheme.primary.withValues(alpha: 0.05),
         context.colorScheme.background,
       ),
-      body: Row(
+      body: Column(
         children: [
-          AppNavRail(
-            navigationShell: navigationShell,
-            onDestinationSelected: (index) => goBranch(navigationShell, index),
-          ),
           Expanded(
-            child: Column(
+            child: Row(
               children: [
-                Row(children: [Breadcrumbs(), Expanded(child: AppTopBar())]),
+                AppNavRail(
+                  navigationShell: navigationShell,
+                  onDestinationSelected: (index) =>
+                      goBranch(navigationShell, index),
+                ),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.only(
-                      bottom: 16,
-                      end: 16,
-                    ),
-                    child: ShadCard(
-                      padding: const EdgeInsets.all(16),
-                      radius: BorderRadius.all(Radius.circular(16)),
-                      child: navigationShell,
-                    ),
+                  child: Column(
+                    children: [
+                      Row(children: [
+                        Breadcrumbs(),
+                        Expanded(child: AppTopBar())
+                      ]),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(
+                            end: 16,
+                          ),
+                          child: ShadCard(
+                            padding: const EdgeInsets.all(16),
+                            radius: BorderRadius.all(Radius.circular(16)),
+                            child: navigationShell,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            child: Row(
+              children: [
+                const Spacer(),
+                TaskStatusBar(),
+              ],
+            ),
+          )
         ],
       ),
     );

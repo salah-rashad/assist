@@ -23,7 +23,7 @@ class PackageLinksBar extends StatelessWidget {
             path: "/packages/${project.pubspec.name}",
           );
 
-    final repositoryData = switch (homepage?.host) {
+    final repositoryData = switch (repository?.host) {
       "github.com" => (LucideIcons.github, 'GitHub'),
       "gitlab.com" => (LucideIcons.gitlab, 'GitLab'),
       _ => (LucideIcons.box, 'Repository'),

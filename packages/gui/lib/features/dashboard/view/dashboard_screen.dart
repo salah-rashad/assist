@@ -2,18 +2,16 @@ import 'package:assist_core/constants/strings.dart';
 import 'package:assist_core/services/service.dart.dart';
 import 'package:assist_core/services/service.flutter.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
-import 'package:assist_gui/shared/widgets/status_badge.dart';
 import 'package:assist_gui/shared/widgets/status_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../project/controller/project_cubit.dart';
-import '../../task_manager/view/running_tasks_list_tiles.dart';
 import '../widgets/dashboard_quick_actions_grid.dart';
 import '../widgets/package_info_header.dart';
 import '../widgets/package_links_bar.dart';
-import '../widgets/project_health_card.dart';
+import '../widgets/project_status_check_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -22,28 +20,20 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final pubspec = context.pubspec;
 
-    final healthItems = [
-      StatusItem(title: "Analyzer", status: StatusBadge.success()),
-      StatusItem(title: "Formatter", status: StatusBadge.success()),
-      StatusItem(title: "Tests", status: StatusBadge.error()),
-      StatusItem(title: "Git Status", status: StatusBadge.warning()),
-      StatusItem(title: "Changelog", status: StatusBadge.info()),
-    ];
-
-    final sdkVersionItems = <String, Widget>{
-      "Flutter": FutureBuilder(
+    final sdkVersionItems = <Widget, Widget>{
+      Text("Flutter"): FutureBuilder(
         future: FlutterService.version(),
         builder: (context, snapshot) {
           final data = snapshot.data;
           return Text(data ?? "...");
         },
       ),
-      "Dart": Text(DartService.version()),
+      Text("Dart"): Text(DartService.version()),
     };
 
-    final packageSdkVersionItems = <String, Widget>{
-      "Flutter": Text(pubspec.environment["flutter"].toString()),
-      "Dart": Text(pubspec.environment["sdk"].toString()),
+    final packageSdkVersionItems = <Widget, Widget>{
+      Text("Flutter"): Text(pubspec.environment["flutter"]?.toString() ?? ""),
+      Text("Dart"): Text(pubspec.environment["sdk"].toString()),
     };
 
     return BlocBuilder<ProjectCubit, ProjectState>(
@@ -56,8 +46,7 @@ class DashboardScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 32,
             children: [
-              Flexible(
-                flex: 2,
+              Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,17 +90,17 @@ class DashboardScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Flexible(
-                flex: 1,
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 350, minWidth: 300),
                 child: Column(
                   spacing: 16.0,
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Flexible(child: ProjectHealthCard(items: healthItems)),
+                    Flexible(child: ProjectStatusCheckCard()),
                     ShadCard(child: StatusTable(items: sdkVersionItems)),
-                    ShadCard(
-                        title: Text("Tasks"), child: RunningTasksListTiles()),
+                    // ShadCard(
+                    //     title: Text("Tasks"), child: RunningTasksListTiles()),
                   ],
                 ),
               ),
@@ -126,7 +115,7 @@ class DashboardScreen extends StatelessWidget {
     return ShadButton.secondary(
       size: ShadButtonSize.sm,
       leading: Icon(LucideIcons.refreshCw),
-      onPressed: () => context.read<ProjectCubit>().reload(),
+      onPressed: () => context.read<ProjectCubit>().reload(context),
       child: Text('Reload'),
     );
   }

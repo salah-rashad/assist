@@ -3,32 +3,29 @@ import 'dart:io';
 import 'package:assist_core/models/project.dart';
 import 'package:assist_core/services/service.project_watcher.dart';
 import 'package:assist_core/services/service.pubspec.dart';
-import 'package:assist_core/tasks/task.analyze.dart';
-import 'package:assist_core/tasks/task.format.dart';
-import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/core/utils/logger.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
+import '../../task_manager/controller/mixins/status_check_tasks.dart';
+
 part 'project_state.dart';
 
-class ProjectCubit extends Cubit<ProjectState> {
+class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
   ProjectCubit({required String projectPath})
-      : assert(projectPath.isNotEmpty, 'Project path must not be empty'),
+      : project = Project(path: projectPath),
+        assert(projectPath.isNotEmpty, 'Project path must not be empty'),
         assert(
           Directory(projectPath).existsSync(),
           'Project path does not exist',
         ),
-        project = Project(path: projectPath),
-        super(ProjectInitial());
+        super(ProjectInitial()) {
+    initializeCheckTasks(project);
+  }
 
   final Project project;
   final _watcher = ProjectFileWatcherService();
-
-  // tasks
-  final AnalyzeTask analyzeTask = AnalyzeTask();
-  final FormatTask formatTask = FormatTask();
 
   @override
   Future<void> close() {
@@ -36,13 +33,14 @@ class ProjectCubit extends Cubit<ProjectState> {
     return super.close();
   }
 
-  load() {
+  load(BuildContext context) {
     emit(ProjectLoading());
 
     Logger.gray('Loading project...');
     Logger.data('Path', project.path);
 
     _initializePubspec();
+    runStatusCheck(context);
     _watchProjectFiles();
 
     Logger.data('🚀', 'Project loaded');
@@ -50,9 +48,9 @@ class ProjectCubit extends Cubit<ProjectState> {
     emit(ProjectLoaded());
   }
 
-  reload() {
+  reload(BuildContext context) {
     _watcher.dispose();
-    load();
+    load(context);
   }
 
   void _initializePubspec() {
@@ -88,14 +86,5 @@ class ProjectCubit extends Cubit<ProjectState> {
     // );
     // _watcher.start(projectPath: project.path);
     // Logger.data('🕵', 'Project is being watched');
-  }
-
-  void runAnalyze() {
-    analyzeTask.execute();
-  }
-
-  void runCheckTasks(BuildContext context) {
-    context.taskManager.submitTask(analyzeTask);
-    context.taskManager.submitTask(formatTask);
   }
 }

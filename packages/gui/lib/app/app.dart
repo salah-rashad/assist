@@ -1,5 +1,4 @@
 import 'package:assist_core/constants/strings.dart';
-import 'package:assist_core/services/task_manager/task_event.dart';
 import 'package:assist_gui/app/routing/app_router.dart';
 import 'package:assist_gui/app/themes/app_theme.dart';
 import 'package:assist_gui/features/auth/controller/auth_cubit.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../core/constants/env.dart';
-import '../core/utils/task_event_handler.dart';
 import '../features/task_manager/controller/task_manager_cubit.dart';
 
 class MainApp extends StatelessWidget {
@@ -21,13 +19,14 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // must be first
+        BlocProvider(create: (_) => TaskManagerCubit(), lazy: false),
         BlocProvider(
-          create: (_) => ProjectCubit(projectPath: Env.pwd)..load(),
+          create: (ctx) => ProjectCubit(projectPath: Env.pwd)..load(ctx),
           lazy: false,
         ),
         BlocProvider(create: (_) => AuthCubit(), lazy: false),
         BlocProvider(create: (_) => SettingsCubit(), lazy: false),
-        BlocProvider(create: (_) => TaskManagerCubit(), lazy: true),
       ],
       child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, state) {
@@ -41,12 +40,6 @@ class MainApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            builder: (context, child) {
-              return BlocListener<TaskManagerCubit, TaskEvent?>(
-                listener: handleTaskEvent,
-                child: child!,
-              );
-            },
           );
         },
       ),

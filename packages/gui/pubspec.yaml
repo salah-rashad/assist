@@ -1,6 +1,7 @@
 name: assist_gui
 description: "Assist GUI"
 publish_to: 'none'
+version: 0.3.0
 
 environment:
   sdk: ^3.6.0
@@ -24,6 +25,8 @@ dependencies:
   auto_size_text: ^3.0.0
   url_launcher: ^6.3.1
   flutter_breadcrumb: ^1.0.1
+  google_fonts: ^6.2.1
+  terminal_color_parser: ^0.8.0
 
 dev_dependencies:
   flutter_test:
