@@ -40,11 +40,12 @@ sealed class AppTheme {
         ),
         primaryToastTheme: ShadToastTheme(
           duration: Duration(seconds: 5),
-          closeIconData: LucideIcons.x,
+          closeIcon: Icon(LucideIcons.x, size: 12),
         ),
         destructiveToastTheme: ShadToastTheme(
           duration: Duration(seconds: 5),
           closeIconData: LucideIcons.x,
+          closeIcon: Icon(LucideIcons.x, size: 12),
         ),
         tooltipTheme: ShadTooltipTheme(
           decoration: ShadDecoration(

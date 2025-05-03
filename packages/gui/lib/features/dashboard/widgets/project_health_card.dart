@@ -1,8 +1,7 @@
-import 'package:assist_core/tasks/base/assist_task_manager.dart';
-import 'package:assist_core/tasks/tasks/task.analyze.dart';
-import 'package:assist_core/tasks/tasks/task.format.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/features/project/controller/project_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 import '../../../shared/widgets/status_badge.dart';
@@ -54,8 +53,7 @@ class ProjectHealthCard extends StatelessWidget {
             foregroundColor: context.colorScheme.mutedForeground,
             padding: EdgeInsets.zero,
             onPressed: () {
-              taskManager.enqueue(AnalyzeTask());
-              taskManager.enqueue(FormatTask());
+              context.read<ProjectCubit>().runCheckTasks(context);
             },
           ),
         ),

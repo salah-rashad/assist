@@ -1,49 +1,29 @@
 import 'dart:async';
 
-import 'package:assist_core/tasks/base/assist_task.dart';
-import 'package:assist_core/tasks/base/assist_task_manager.dart';
-import 'package:assist_core/tasks/base/task_event.dart';
+import 'package:assist_core/services/task_manager/task_event.dart';
+import 'package:assist_core/services/task_manager/task_manager.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
-part 'task_manager_state.dart';
+class TaskManagerCubit extends Cubit<TaskEvent?> {
+  late final TaskManager _taskManager;
 
-class TaskManagerCubit extends Cubit<TaskManagerState> {
-  StreamSubscription? _currentTaskStreamSub;
-  StreamSubscription? _taskEventStreamSub;
-
-  TaskManagerCubit() : super(TaskManagerIdle()) {
-    _currentTaskStreamSub = taskManager.currentTaskStream.listen((task) {
-      if (task == null) {
-        emit(TaskManagerIdle());
-      } else {
-        emit(TaskManagerRunning());
-      }
-    });
-
-    _taskEventStreamSub = taskManager.taskEventStream.listen((event) {
-      emit(TaskManagerEvent(event));
-    });
+  TaskManagerCubit() : super(null) {
+    _taskManager = TaskManager(onEvent: emit);
   }
 
-  List<AssistTask> get pending => taskManager.pendingTasks;
+  List<Task> get pendingTasks => _taskManager.pendingTasks;
 
-  void submitTask(AssistTask task) {
-    taskManager.enqueue(task);
+  void submitTask(Task task) {
+    _taskManager.enqueue(task);
   }
 
-  void cancelCurrent() {
-    taskManager.cancelCurrentTask();
-  }
-
-  void cancelById(String id) {
-    taskManager.cancelQueuedTask(id);
+  void cancelTask(String id) {
+    _taskManager.cancelTaskById(id);
   }
 
   @override
   Future<void> close() {
-    _currentTaskStreamSub?.cancel();
-    _taskEventStreamSub?.cancel();
+    _taskManager.cancelAll();
     return super.close();
   }
 }

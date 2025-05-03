@@ -49,69 +49,74 @@ class DashboardScreen extends StatelessWidget {
     return BlocBuilder<ProjectCubit, ProjectState>(
       builder: (context, state) {
         final pubspec = context.pubspec;
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 32,
-          children: [
-            Flexible(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+        return SingleChildScrollView(
+          primary: true,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 32,
+            children: [
+              Flexible(
+                flex: 2,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PackageInfoHeader(),
+                              SizedBox(height: 16),
+                              PackageLinksBar(),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            PackageInfoHeader(),
-                            SizedBox(height: 16),
-                            PackageLinksBar(),
+                            buildReloadButton(context),
+                            StatusTable(
+                              items: packageSdkVersionItems,
+                              padding: EdgeInsets.zero,
+                              keyWidth: FixedColumnWidth(80),
+                              valueWidth: MaxColumnWidth(
+                                FixedColumnWidth(50),
+                                FixedColumnWidth(150),
+                              ),
+                              valueAlignment: AlignmentDirectional.centerEnd,
+                            ),
                           ],
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          buildReloadButton(context),
-                          StatusTable(
-                            items: packageSdkVersionItems,
-                            padding: EdgeInsets.zero,
-                            keyWidth: FixedColumnWidth(80),
-                            valueWidth: MaxColumnWidth(
-                              FixedColumnWidth(50),
-                              FixedColumnWidth(150),
-                            ),
-                            valueAlignment: AlignmentDirectional.centerEnd,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  ShadSeparator.horizontal(),
-                  DashboardQuickActionsGrid(
-                    canPublish: pubspec.publishTo == null,
-                    isGitHub: pubspec.repository?.host == Strings.githubHost,
-                  ),
-                ],
+                      ],
+                    ),
+                    ShadSeparator.horizontal(),
+                    DashboardQuickActionsGrid(
+                      canPublish: pubspec.publishTo == null,
+                      isGitHub: pubspec.repository?.host == Strings.githubHost,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Column(
-                spacing: 16.0,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Flexible(child: ProjectHealthCard(items: healthItems)),
-                  ShadCard(child: StatusTable(items: sdkVersionItems)),
-                  ShadCard(
-                      title: Text("Tasks"), child: RunningTasksListTiles()),
-                ],
+              Flexible(
+                flex: 1,
+                child: Column(
+                  spacing: 16.0,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Flexible(child: ProjectHealthCard(items: healthItems)),
+                    ShadCard(child: StatusTable(items: sdkVersionItems)),
+                    ShadCard(
+                        title: Text("Tasks"), child: RunningTasksListTiles()),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );

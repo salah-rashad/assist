@@ -1,17 +1,23 @@
-import 'package:assist_core/tasks/base/assist_task.dart';
+import 'package:assist_core/services/task_manager/task_manager.dart';
+import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key, required this.task});
 
-  final AssistTask task;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
+    final isRunning = task.isRunning;
+    final isCancelled = task.isCancelled;
+
     return ListTile(
+      enabled: !isCancelled,
       title: Text(task.name),
-      leading: task.isRunning
+      subtitle: Text(task.status.name),
+      leading: isRunning
           ? SizedBox.square(
               dimension: 18,
               child: CircularProgressIndicator(
@@ -23,8 +29,11 @@ class TaskTile extends StatelessWidget {
       trailing: ShadTooltip(
         builder: (context) => Text('Cancel'),
         child: ShadIconButton.destructive(
+          enabled: !isCancelled,
           icon: const Icon(LucideIcons.x, size: 12),
-          onPressed: task.cancel,
+          onPressed: () {
+            context.taskManager.cancelTask(task.id);
+          },
           width: 18,
           height: 18,
           padding: EdgeInsets.zero,

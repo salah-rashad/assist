@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:assist_core/models/project.dart';
 import 'package:assist_core/services/service.project_watcher.dart';
 import 'package:assist_core/services/service.pubspec.dart';
+import 'package:assist_core/tasks/task.analyze.dart';
+import 'package:assist_core/tasks/task.format.dart';
+import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/core/utils/logger.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
 part 'project_state.dart';
@@ -23,6 +26,10 @@ class ProjectCubit extends Cubit<ProjectState> {
   final Project project;
   final _watcher = ProjectFileWatcherService();
 
+  // tasks
+  final AnalyzeTask analyzeTask = AnalyzeTask();
+  final FormatTask formatTask = FormatTask();
+
   @override
   Future<void> close() {
     _watcher.dispose();
@@ -36,11 +43,16 @@ class ProjectCubit extends Cubit<ProjectState> {
     Logger.data('Path', project.path);
 
     _initializePubspec();
-    // _watchProjectFiles();
+    _watchProjectFiles();
 
     Logger.data('🚀', 'Project loaded');
 
     emit(ProjectLoaded());
+  }
+
+  reload() {
+    _watcher.dispose();
+    load();
   }
 
   void _initializePubspec() {
@@ -51,35 +63,39 @@ class ProjectCubit extends Cubit<ProjectState> {
     Logger.data('✔', 'Pubspec loaded');
   }
 
-  // void _watchProjectFiles() {
-  //   _watcher.dispose();
-  //   _watcher.events.listen(
-  //     (event) {
-  //       switch (event.fileType) {
-  //         case ProjectFileType.pubspec:
-  //           _initializePubspec();
-  //           emit(PubspecChanged());
-  //           break;
-  //         case ProjectFileType.changelog:
-  //           emit(ChangelogChanged());
-  //           break;
-  //         case ProjectFileType.readme:
-  //           emit(ReadmeChanged());
-  //           break;
-  //         case ProjectFileType.other:
-  //           break;
-  //       }
-  //     },
-  //     onError: (error) {
-  //       Logger.error('Error watching project', error);
-  //     },
-  //   );
-  //   _watcher.start(projectPath: project.path);
-  //   Logger.data('🕵', 'Project is being watched');
-  // }
+  void _watchProjectFiles() {
+    // _watcher.dispose();
+    // _watcher.events.listen(
+    //   (event) {
+    //     switch (event.fileType) {
+    //       case ProjectFileType.pubspec:
+    //         _initializePubspec();
+    //         emit(PubspecChanged());
+    //         break;
+    //       case ProjectFileType.changelog:
+    //         emit(ChangelogChanged());
+    //         break;
+    //       case ProjectFileType.readme:
+    //         emit(ReadmeChanged());
+    //         break;
+    //       case ProjectFileType.other:
+    //         break;
+    //     }
+    //   },
+    //   onError: (error) {
+    //     Logger.error('Error watching project', error);
+    //   },
+    // );
+    // _watcher.start(projectPath: project.path);
+    // Logger.data('🕵', 'Project is being watched');
+  }
 
-  reload() {
-    _watcher.dispose();
-    load();
+  void runAnalyze() {
+    analyzeTask.execute();
+  }
+
+  void runCheckTasks(BuildContext context) {
+    context.taskManager.submitTask(analyzeTask);
+    context.taskManager.submitTask(formatTask);
   }
 }

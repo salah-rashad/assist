@@ -1,3 +1,5 @@
+import 'package:assist_core/services/task_manager/task_event.dart';
+import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +11,17 @@ class RunningTasksListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TaskManagerCubit, TaskManagerState>(
+    return BlocBuilder<TaskManagerCubit, TaskEvent?>(
       builder: (context, state) {
         final cubit = context.read<TaskManagerCubit>();
-        final tasks = cubit.pending;
+        final tasks = cubit.pendingTasks;
+
+        if (tasks.isEmpty) {
+          return Text(
+            "No tasks running",
+            style: context.textTheme.muted,
+          );
+        }
         return ListView.builder(
           shrinkWrap: true,
           itemCount: tasks.length,
