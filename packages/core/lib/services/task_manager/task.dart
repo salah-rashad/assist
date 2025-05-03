@@ -6,21 +6,30 @@ abstract class Task<T> {
   /// The operation used to execute the task
   CancelableOperation<T>? _operation;
 
+  /// The result of the task
+  Future<T?> get result => Future.value(_operation?.valueOrCancellation());
+
+  /// The error thrown by the task
+  Object? error;
+
   /// unique task id (UUID v1 time based)
   final String id = Uuid().v1();
-  TaskStatus status = TaskStatus.idle;
 
-  bool get isIdle => status == TaskStatus.idle;
-  bool get isPending => status == TaskStatus.pending;
-  bool get isRunning => status == TaskStatus.running;
-  bool get isCompleted => status == TaskStatus.completed;
-  bool get isCancelled => status == TaskStatus.cancelled;
-  bool get isFailed => status == TaskStatus.failed;
+  /// The current status of the task
+  TaskStatus _status = TaskStatus.idle;
+
+  TaskStatus get status => _status;
+
+  bool get isIdle => _status == TaskStatus.idle;
+  bool get isPending => _status == TaskStatus.pending;
+  bool get isRunning => _status == TaskStatus.running;
+  bool get isCompleted => _status == TaskStatus.completed;
+  bool get isCancelled => _status == TaskStatus.cancelled;
+  bool get isFailed => _status == TaskStatus.failed;
 
   String get name;
 
-  /// The logic to execute the task
-  ///
+  /// The logic to execute the task.
   /// Shouldn't be called directly but rather through [run]
   @protected
   Future<T> execute();
@@ -28,17 +37,20 @@ abstract class Task<T> {
   /// Runs the task operation and returns the result
   Future<T?> run({OnTaskEvent? onEvent, void Function()? onComplete}) {
     _operation = CancelableOperation.fromFuture(execute())
-      ..then((_) {
-        status = TaskStatus.completed;
+      ..then((value) {
+        error = null;
+        _status = TaskStatus.completed;
         onEvent?.call(TaskCompleted(this));
       }, onError: (error, stackTrace) {
+        this.error = error;
         if (status != TaskStatus.cancelled) {
-          status = TaskStatus.failed;
+          _status = TaskStatus.failed;
           onEvent?.call(TaskFailed(this, error, stackTrace));
         }
       }, onCancel: () {
+        error = null;
         if (status != TaskStatus.cancelled) {
-          status = TaskStatus.cancelled;
+          _status = TaskStatus.cancelled;
           onEvent?.call(TaskCancelled(this));
         }
       }).value.whenComplete(
@@ -52,7 +64,7 @@ abstract class Task<T> {
 
   /// Manually cancel the task
   void cancel() {
-    status = TaskStatus.cancelled;
+    _status = TaskStatus.cancelled;
     _operation?.cancel();
   }
 }

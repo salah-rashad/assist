@@ -1,12 +1,26 @@
+import 'dart:io';
+
 import '../services/task_manager/task_manager.dart';
 
 class FormatTask extends Task {
+  final String projectPath;
+
+  FormatTask({required this.projectPath});
+
   @override
-  String get name => 'format';
+  String get name => 'Format';
 
   @override
   Future<void> execute() async {
-    await Future.delayed(Duration(seconds: 3));
-    throw Exception("Could not format");
+    final result = await Process.run(
+      'dart',
+      ['format', projectPath],
+      runInShell: true,
+    );
+
+    if (result.exitCode != 0) {
+      print(result.stderr);
+      throw Exception(result.stderr);
+    }
   }
 }

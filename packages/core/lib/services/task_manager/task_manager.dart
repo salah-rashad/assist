@@ -28,7 +28,7 @@ class TaskManager {
   void enqueue(Task task) {
     if (_taskQueue.contains(task)) return;
     _taskQueue.add(task);
-    task.status = TaskStatus.pending;
+    task._status = TaskStatus.pending;
     onEvent?.call(TaskAdded(task));
     _processNext();
   }
@@ -44,7 +44,7 @@ class TaskManager {
       return;
     }
 
-    task.status = TaskStatus.running;
+    task._status = TaskStatus.running;
     onEvent?.call(TaskStarted(task));
 
     task.run(
