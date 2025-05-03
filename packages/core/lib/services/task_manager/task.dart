@@ -2,15 +2,29 @@ part of 'task_manager.dart';
 
 enum TaskStatus { idle, pending, running, completed, cancelled, failed }
 
+class TaskResult {
+  final Object? value;
+  final Object? error;
+  final StackTrace? stackTrace;
+
+  const TaskResult({this.value, this.error, this.stackTrace});
+
+  @override
+  String toString() {
+    return value?.toString() ?? error?.toString() ?? '';
+  }
+}
+
 abstract class Task<T> {
   /// The operation used to execute the task
   CancelableOperation<T>? _operation;
 
-  /// The result of the task
-  Future<T?> get result => Future.value(_operation?.valueOrCancellation());
+  /// The result of the task as a future
+  Future<T?> get resultAsync => Future.value(_operation?.valueOrCancellation());
 
-  /// The error thrown by the task
-  Object? error;
+  /// The result of the task if completed
+  /// Contains the value, error and stack trace
+  TaskResult? result;
 
   /// unique task id (UUID v1 time based)
   final String id = Uuid().v1();
@@ -36,19 +50,20 @@ abstract class Task<T> {
 
   /// Runs the task operation and returns the result
   Future<T?> run({OnTaskEvent? onEvent, void Function()? onComplete}) {
+    result = null;
     _operation = CancelableOperation.fromFuture(execute())
       ..then((value) {
-        error = null;
+        result = TaskResult(value: value);
         _status = TaskStatus.completed;
         onEvent?.call(TaskCompleted(this));
       }, onError: (error, stackTrace) {
-        this.error = error;
+        result = TaskResult(error: error, stackTrace: stackTrace);
         if (status != TaskStatus.cancelled) {
           _status = TaskStatus.failed;
           onEvent?.call(TaskFailed(this, error, stackTrace));
         }
       }, onCancel: () {
-        error = null;
+        result = null;
         if (status != TaskStatus.cancelled) {
           _status = TaskStatus.cancelled;
           onEvent?.call(TaskCancelled(this));

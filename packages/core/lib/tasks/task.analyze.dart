@@ -1,25 +1,16 @@
-import 'dart:io';
+import 'package:assist_core/services/task_manager/shell_task.dart';
 
-import '../services/task_manager/task_manager.dart';
-
-class AnalyzeTask extends Task {
-  final String projectPath;
-
-  AnalyzeTask({required this.projectPath});
+class AnalyzeTask extends ShellTask {
+  AnalyzeTask({required String projectPath})
+      : super(
+          'dart',
+          [
+            'analyze',
+            '--fatal-infos',
+            projectPath,
+          ],
+        );
 
   @override
   String get name => 'Analyze';
-
-  @override
-  Future<void> execute() async {
-    final result = await Process.run(
-      'dart',
-      ['analyze', projectPath],
-      runInShell: true,
-    );
-
-    if (result.exitCode != 0) {
-      throw Exception(result.stderr);
-    }
-  }
 }

@@ -12,3 +12,8 @@ Directory getTempDirectory() {
   }
   return directory;
 }
+
+String stripAnsi(String input) {
+  final ansiRegex = RegExp(r'\x1B\[[0-9;]*m');
+  return input.replaceAll(ansiRegex, '');
+}

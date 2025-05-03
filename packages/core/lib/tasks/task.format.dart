@@ -1,26 +1,16 @@
-import 'dart:io';
+import 'package:assist_core/services/task_manager/shell_task.dart';
 
-import '../services/task_manager/task_manager.dart';
-
-class FormatTask extends Task {
+class FormatTask extends ShellTask {
   final String projectPath;
 
-  FormatTask({required this.projectPath});
+  FormatTask({required this.projectPath})
+      : super('dart', [
+          'format',
+          '--output=none',
+          '--set-exit-if-changed',
+          projectPath,
+        ]);
 
   @override
   String get name => 'Format';
-
-  @override
-  Future<void> execute() async {
-    final result = await Process.run(
-      'dart',
-      ['format', projectPath],
-      runInShell: true,
-    );
-
-    if (result.exitCode != 0) {
-      print(result.stderr);
-      throw Exception(result.stderr);
-    }
-  }
 }

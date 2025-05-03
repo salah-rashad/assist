@@ -1,30 +1,18 @@
-import 'dart:io';
+import 'package:assist_core/services/task_manager/shell_task.dart';
 
 import '../constants/enums.dart';
-import '../services/task_manager/task_manager.dart';
 
-class PubGetTask extends Task {
+class PubGetTask extends ShellTask {
   final String projectPath;
   final ProjectType? projectType;
 
-  PubGetTask({required this.projectPath, required this.projectType});
+  PubGetTask({required this.projectPath, required this.projectType})
+      : super(
+          projectType == ProjectType.flutter ? 'flutter' : 'dart',
+          ['pub', 'get'],
+          workingDirectory: projectPath,
+        );
 
   @override
   String get name => 'Pub Get';
-
-  @override
-  Future<void> execute() async {
-    final executable = projectType == ProjectType.flutter ? 'flutter' : 'dart';
-
-    final result = await Process.run(
-      executable,
-      ['pub', 'get'],
-      workingDirectory: projectPath,
-      runInShell: true,
-    );
-
-    if (result.exitCode != 0) {
-      throw Exception(result.stderr);
-    }
-  }
 }
