@@ -1,6 +1,5 @@
+import 'package:assist_core/constants/enums.dart';
 import 'package:assist_core/services/task_manager/shell_task.dart';
-
-import '../constants/enums.dart';
 
 class PubGetTask extends ShellTask {
   final String projectPath;

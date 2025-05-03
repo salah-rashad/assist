@@ -13,9 +13,11 @@ environment:
 executables:
   assist: assist_dev
 
+dependencies:
+  chalkdart: ^2.0.9
+
 dev_dependencies:
   melos: ^7.0.0-dev.8
-  chalkdart: ^2.0.9
 
 melos:
   ide:
@@ -27,6 +29,11 @@ melos:
       steps:
         - format --output none --set-exit-if-changed
         - analyze --fatal-infos
+
+    analyze:
+      name: Analyze Code
+      description: Run dart analyze on all packages
+      run: melos exec -- dart analyze
 
     get:
       name: Pub Get

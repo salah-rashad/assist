@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist_core/constants/paths.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
-
-import '../utils/cli.helpers.dart';
 
 /// Service to install the GUI
 class InstallService {
@@ -82,7 +81,7 @@ class InstallService {
 
   Future install(String installDir) async {
     await task(
-      "Decompressing Data...",
+      'Decompressing Data...',
       task: (spinner) async {
         await _uncompressData();
       },
@@ -90,7 +89,7 @@ class InstallService {
     );
     line();
     await task(
-      "Configuring...",
+      'Configuring...',
       task: (spinner) async {
         await _uncompressData();
       },
@@ -98,7 +97,7 @@ class InstallService {
     );
     line();
     await task(
-      "Installing data...",
+      'Installing data...',
       task: (spinner) async {
         await _install();
       },

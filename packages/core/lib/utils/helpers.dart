@@ -1,8 +1,7 @@
 import 'dart:io';
 
+import 'package:assist_core/constants/paths.dart';
 import 'package:path/path.dart' as p;
-
-import '../constants/paths.dart';
 
 Directory getTempDirectory() {
   final systemTempDir = Directory.systemTemp;

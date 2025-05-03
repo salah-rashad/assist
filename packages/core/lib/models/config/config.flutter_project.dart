@@ -1,6 +1,5 @@
+import 'package:assist_core/models/config/config.base.dart';
 import 'package:path/path.dart' as p;
-
-import 'config.base.dart';
 
 class FlutterProjectConfig extends CommandConfigBase {
   const FlutterProjectConfig({

@@ -1,8 +1,7 @@
 import 'dart:io';
 
+import 'package:assist/app/cli/components/command_task.dart';
 import 'package:promptly/promptly.dart';
-
-import '../components/command_task.dart';
 
 class LaunchAppTask extends CommandTask<Process> {
   LaunchAppTask(this.projectDir, this.platform);

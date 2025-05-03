@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../models/config/config.flutter_project.dart';
+import 'package:assist_core/models/config/config.flutter_project.dart';
 
 /// Service for all Flutter related tasks
 abstract class FlutterService {

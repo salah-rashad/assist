@@ -9,7 +9,7 @@ Future<int> handleRuntimeErrors(Future<int> Function() runLogic) async {
     return await runLogic();
   } on CliException catch (error, stackTrace) {
     return finishWithError(
-      "FAILURE",
+      'FAILURE',
       message: error.message,
       stackTrace: stackTrace,
       exitCode: error.exitCode,

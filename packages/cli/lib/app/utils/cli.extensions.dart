@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist_core/constants/enums.dart';
 import 'package:promptly/promptly.dart';
-
-import 'cli.helpers.dart';
 
 extension StreamExtension on Stream<List<int>> {
   Future<void> asLines(void Function(String data) onData) {
