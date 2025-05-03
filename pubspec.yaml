@@ -41,6 +41,7 @@ melos:
     activate:
       description: Activate the local version of assist for development.
       steps:
+        - dart pub upgrade
         - rm -rf ./.dart_tool/pub/bin/assist_workspace
         - dart pub global activate --source="path" . --executable="assist"
           --overwrite
