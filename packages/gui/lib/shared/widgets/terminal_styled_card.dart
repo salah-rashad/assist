@@ -21,20 +21,23 @@ class TerminalStyledCard extends StatelessWidget {
       child: ShadCard(
         backgroundColor: Colors.black.withValues(alpha: 0.95),
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: SelectionArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DefaultTextStyle(
-                  style: terminalStyle(context),
-                  textAlign: TextAlign.start,
-                  child: child,
-                ),
-                if (stackTrace != null) ...[
-                  _buildStackTraceBox(context, stackTrace)
-                ]
-              ],
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: 120),
+          child: SingleChildScrollView(
+            child: SelectionArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DefaultTextStyle(
+                    style: terminalStyle(context),
+                    textAlign: TextAlign.start,
+                    child: child,
+                  ),
+                  if (stackTrace != null) ...[
+                    _buildStackTraceBox(context, stackTrace)
+                  ]
+                ],
+              ),
             ),
           ),
         ),
