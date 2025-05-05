@@ -30,7 +30,7 @@ class TaskCompleted extends TaskEvent {
 }
 
 class TaskFailed extends TaskEvent {
-  final Object? error;
+  final dynamic error;
   final StackTrace? stackTrace;
 
   TaskFailed(super.task, this.error, [this.stackTrace]);

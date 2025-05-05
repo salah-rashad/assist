@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:assist_core/constants/exceptions.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:path/path.dart' as path;
 import 'package:pubspec_parse/pubspec_parse.dart';
 

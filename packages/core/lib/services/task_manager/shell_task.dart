@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:assist_core/services/task_manager/task_manager.dart';
 
-abstract class ShellTask extends Task<String> {
+abstract class ShellTask<T> extends Task<T, T> {
   final String executable;
   final List<String> arguments;
   final String? workingDirectory;
@@ -12,7 +12,7 @@ abstract class ShellTask extends Task<String> {
   String get fullCommand => '$executable ${arguments.join(' ')}';
 
   @override
-  Future<String> execute() async {
+  Future<T> execute() async {
     final result = await Process.run(
       executable,
       arguments,
@@ -20,16 +20,23 @@ abstract class ShellTask extends Task<String> {
       runInShell: true,
     );
 
-    print(result.stdout);
-
     return handleResult(result);
   }
 
-  String handleResult(ProcessResult result) {
+  T handleResult(ProcessResult result) {
+    final output = result.stdout;
+    final error = result.stderr;
+
     if (result.exitCode != 0) {
-      throw Exception(result.stderr);
+      final data = output.toString().trim().isNotEmpty ? output : error;
+      throw data;
     }
 
-    return result.stdout.toString();
+    return result.stdout;
+  }
+
+  @override
+  bool isErrorOfType(Type type) {
+    return super.isErrorOfType(type) || type == String;
   }
 }

@@ -7,6 +7,7 @@ import 'package:github/github.dart';
 export 'package:github/github.dart' show CurrentUser;
 export 'package:pub_semver/pub_semver.dart' show Version;
 export 'package:pubspec_parse/pubspec_parse.dart';
+export 'package:test_report_parser/test_report_parser.dart';
 
 GitHub get github {
   final token = SecureStorageManager.getToken();

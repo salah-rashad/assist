@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:assist_core/services/task_manager/task_event.dart';
+import 'package:assist_core/services/task_manager/task_result.dart';
 import 'package:async/async.dart';
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
@@ -47,12 +50,22 @@ class TaskManager {
     task._status = TaskStatus.running;
     onEvent?.call(TaskStarted(task));
 
-    task.run(
-      onEvent: onEvent,
-      onComplete: () {
-        _completeTask(task);
-      },
-    );
+    task
+        .run(onEvent: onEvent)
+        .value
+        .whenComplete(() => _completeTask(task))
+        .onError((e, s) => _handleError(e, s, task));
+  }
+
+  _handleError(e, s, Task task) {
+    if (!task.isErrorOfType(e.runtimeType)) {
+      log(
+        'Error',
+        name: 'TaskManager',
+        error: e,
+        stackTrace: s,
+      );
+    }
   }
 
   void _completeTask(Task task) {
