@@ -11,21 +11,21 @@ class PackageLinksBar extends StatelessWidget {
     final project = context.project;
     final name = project.pubspec.name;
     final repository = project.pubspec.repository;
-    final homepage = Uri.tryParse(project.pubspec.homepage?.trim() ?? "");
+    final homepage = Uri.tryParse(project.pubspec.homepage?.trim() ?? '');
     final documentation = Uri.tryParse(
-      project.pubspec.documentation?.trim() ?? "",
+      project.pubspec.documentation?.trim() ?? '',
     );
     final pubDev = name.trim().isEmpty
         ? null
         : Uri(
-            scheme: "https",
-            host: "pub.dev",
-            path: "/packages/${project.pubspec.name}",
+            scheme: 'https',
+            host: 'pub.dev',
+            path: '/packages/${project.pubspec.name}',
           );
 
     final repositoryData = switch (repository?.host) {
-      "github.com" => (LucideIcons.github, 'GitHub'),
-      "gitlab.com" => (LucideIcons.gitlab, 'GitLab'),
+      'github.com' => (LucideIcons.github, 'GitHub'),
+      'gitlab.com' => (LucideIcons.gitlab, 'GitLab'),
       _ => (LucideIcons.box, 'Repository'),
     };
     return Wrap(
@@ -39,17 +39,17 @@ class PackageLinksBar extends StatelessWidget {
         ),
         _buildLinkItem(
           icon: LucideIcons.globe,
-          label: "Homepage",
+          label: 'Homepage',
           uri: homepage,
         ),
         _buildLinkItem(
           icon: LucideIcons.book,
-          label: "Documentation",
+          label: 'Documentation',
           uri: documentation,
         ),
         _buildLinkItem(
           icon: LucideIcons.package,
-          label: "Pub.dev",
+          label: 'Pub.dev',
           uri: pubDev,
         ),
       ],

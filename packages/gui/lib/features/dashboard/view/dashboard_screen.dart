@@ -2,16 +2,15 @@ import 'package:assist_core/constants/strings.dart';
 import 'package:assist_core/services/service.dart.dart';
 import 'package:assist_core/services/service.flutter.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/features/dashboard/widgets/dashboard_quick_actions_grid.dart';
+import 'package:assist_gui/features/dashboard/widgets/package_info_header.dart';
+import 'package:assist_gui/features/dashboard/widgets/package_links_bar.dart';
+import 'package:assist_gui/features/dashboard/widgets/project_status_check_card.dart';
+import 'package:assist_gui/features/project/controller/project_cubit.dart';
 import 'package:assist_gui/shared/widgets/status_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../project/controller/project_cubit.dart';
-import '../widgets/dashboard_quick_actions_grid.dart';
-import '../widgets/package_info_header.dart';
-import '../widgets/package_links_bar.dart';
-import '../widgets/project_status_check_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -21,19 +20,19 @@ class DashboardScreen extends StatelessWidget {
     final pubspec = context.pubspec;
 
     final sdkVersionItems = <Widget, Widget>{
-      Text("Flutter"): FutureBuilder(
+      Text('Flutter'): FutureBuilder(
         future: FlutterService.version(),
         builder: (context, snapshot) {
           final data = snapshot.data;
-          return Text(data ?? "...");
+          return Text(data ?? '...');
         },
       ),
-      Text("Dart"): Text(DartService.version()),
+      Text('Dart'): Text(DartService.version()),
     };
 
     final packageSdkVersionItems = <Widget, Widget>{
-      Text("Flutter"): Text(pubspec.environment["flutter"]?.toString() ?? ""),
-      Text("Dart"): Text(pubspec.environment["sdk"].toString()),
+      Text('Flutter'): Text(pubspec.environment['flutter']?.toString() ?? ''),
+      Text('Dart'): Text(pubspec.environment['sdk'].toString()),
     };
 
     return BlocBuilder<ProjectCubit, ProjectState>(

@@ -1,9 +1,8 @@
 import 'package:assist_gui/app/routing/route_names.dart';
 import 'package:assist_gui/features/dashboard/view/dashboard_screen.dart';
+import 'package:assist_gui/features/main_layout/view/main_layout.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../features/main_layout/view/main_layout.dart';
 
 typedef NavKey = GlobalKey<NavigatorState>;
 

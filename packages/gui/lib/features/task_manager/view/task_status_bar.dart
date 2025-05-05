@@ -1,11 +1,11 @@
 import 'package:assist_core/services/task_manager/task_event.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
+import 'package:assist_gui/features/task_manager/widgets/running_tasks_list_tiles.dart';
+import 'package:assist_gui/shared/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../controller/task_manager_cubit.dart';
-import '../widgets/running_tasks_list_tiles.dart';
 
 class TaskStatusBar extends StatelessWidget {
   const TaskStatusBar({super.key});
@@ -29,7 +29,7 @@ class TaskStatusBar extends StatelessWidget {
           popover: (context) => RunningTasksListTiles(),
           child: tasks.isEmpty
               ? ShadTooltip(
-                  builder: (_) => Text("No tasks running"),
+                  builder: (_) => Text('No tasks running'),
                   child: ShadIconButton.ghost(
                     icon: Icon(LucideIcons.circleCheckBig),
                     foregroundColor: context.colorScheme.mutedForeground,
@@ -44,14 +44,8 @@ class TaskStatusBar extends StatelessWidget {
                   child: Row(
                     spacing: 8,
                     children: [
-                      Text("${currentTask?.name}"),
-                      SizedBox.square(
-                        dimension: 8,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          strokeCap: StrokeCap.round,
-                        ),
-                      )
+                      Text('${currentTask?.name}'),
+                      LoadingIndicator(size: 8, strokeWidth: 2)
                     ],
                   ),
                 ),
@@ -67,9 +61,9 @@ class TaskStatusBar extends StatelessWidget {
     final name = task.name;
 
     return switch (event) {
-      TaskCompleted() => context.showSuccessSonner(name, "Task completed"),
-      TaskCancelled() => context.showErrorSonner(name, "Task cancelled"),
-      TaskFailed() => context.showErrorSonner(name, "Task failed"),
+      TaskCompleted() => context.showSuccessSonner(name, 'Task completed'),
+      TaskCancelled() => context.showErrorSonner(name, 'Task cancelled'),
+      TaskFailed() => context.showErrorSonner(name, 'Task failed'),
       _ => null,
     };
   }

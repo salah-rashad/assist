@@ -26,7 +26,7 @@ class AnsiText extends StatelessWidget {
 
     List<TextSpan> spans = [];
     int lastIndex = 0;
-    TextStyle currentStyle = const TextStyle(color: Colors.white);
+    TextStyle currentStyle = style ?? const TextStyle(color: Colors.white);
 
     for (final match in matches) {
       if (match.start > lastIndex) {

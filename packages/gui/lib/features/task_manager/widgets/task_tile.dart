@@ -1,5 +1,6 @@
 import 'package:assist_core/services/task_manager/task_manager.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/shared/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -18,13 +19,7 @@ class TaskTile extends StatelessWidget {
       title: Text(task.name),
       subtitle: Text(task.status.name),
       leading: isRunning
-          ? SizedBox.square(
-              dimension: 18,
-              child: CircularProgressIndicator(
-                strokeWidth: 4,
-                strokeCap: StrokeCap.round,
-              ),
-            )
+          ? LoadingIndicator()
           : Icon(LucideIcons.chevronRight, size: 18),
       trailing: ShadTooltip(
         builder: (context) => Text('Cancel'),

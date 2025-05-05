@@ -4,11 +4,10 @@ import 'package:assist_core/models/project.dart';
 import 'package:assist_core/services/service.project_watcher.dart';
 import 'package:assist_core/services/service.pubspec.dart';
 import 'package:assist_gui/core/utils/logger.dart';
+import 'package:assist_gui/features/task_manager/controller/mixins/status_check_tasks.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
-
-import '../../task_manager/controller/mixins/status_check_tasks.dart';
 
 part 'project_state.dart';
 

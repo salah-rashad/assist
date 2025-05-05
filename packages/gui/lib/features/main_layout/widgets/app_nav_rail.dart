@@ -67,7 +67,7 @@ class AppNavRail extends StatelessWidget {
               child: Center(child: Icon(LucideIcons.box)),
             ),
             AutoSizeText(
-              "Assist",
+              'Assist',
               style: context.textTheme.large,
               minFontSize: 14,
             ),

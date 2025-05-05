@@ -1,10 +1,9 @@
 import 'package:assist_core/services/task_manager/task_event.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
+import 'package:assist_gui/features/task_manager/widgets/task_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../widgets/task_tile.dart';
 
 class RunningTasksListTiles extends StatelessWidget {
   const RunningTasksListTiles({super.key});
@@ -26,7 +25,7 @@ class RunningTasksListTiles extends StatelessWidget {
           child: Builder(builder: (context) {
             if (tasks.isEmpty) {
               return Text(
-                "No tasks running",
+                'No tasks running',
                 style: context.textTheme.muted,
               );
             }

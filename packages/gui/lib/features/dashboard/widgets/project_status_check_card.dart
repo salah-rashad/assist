@@ -1,15 +1,16 @@
+import 'package:assist_core/services/task_manager/shell_task.dart';
 import 'package:assist_core/services/task_manager/task_event.dart';
-import 'package:assist_core/services/task_manager/task_manager.dart';
+import 'package:assist_core/tasks/task.tests.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/core/utils/extensions/task.ext.dart';
 import 'package:assist_gui/features/project/controller/project_cubit.dart';
 import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
+import 'package:assist_gui/shared/dialogs/task_result/shell_task_report_dialog.dart';
+import 'package:assist_gui/shared/dialogs/task_result/unit_test_report_dialog.dart';
 import 'package:assist_gui/shared/widgets/status_table.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../../shared/dialogs/task_result/task_result_details_dialog.dart';
 
 class ProjectStatusCheckCard extends StatelessWidget {
   const ProjectStatusCheckCard({super.key});
@@ -23,15 +24,16 @@ class ProjectStatusCheckCard extends StatelessWidget {
         return Stack(
           children: [
             ShadCard(
-              title: Text("Status"),
-              description: Text("Last check: 2 hours ago"),
+              title: Text('Status'),
+              description: Text('Last check: 2 hours ago'),
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: StatusTable(
                   items: Map.fromEntries(
                     cubit.checkTasks.map(
                       (item) {
-                        final hasDetails = item.isCompleted || item.isFailed;
+                        final hasDetails = item is ShellTask &&
+                            (item.isCompleted || item.isFailed);
                         return MapEntry(
                           Text(
                             item.name,
@@ -47,7 +49,7 @@ class ProjectStatusCheckCard extends StatelessWidget {
                                 : MouseCursor.defer,
                             onTap: () {
                               if (hasDetails) {
-                                _showTaskResultDetailsDialog(context, item);
+                                _showShellTaskResultDialog(context, item);
                               }
                             },
                             child: item.statusAsWidget(context),
@@ -80,11 +82,14 @@ class ProjectStatusCheckCard extends StatelessWidget {
   }
 }
 
-_showTaskResultDetailsDialog(BuildContext context, Task task) {
+_showShellTaskResultDialog(BuildContext context, ShellTask task) {
   showShadDialog(
     context: context,
     builder: (context) {
-      return TaskResultDetailsDialog(task: task);
+      if (task is UnitTestTask) {
+        return UnitTestReportDialog(task: task);
+      }
+      return ShellTaskReportDialog(task: task);
     },
   );
 }

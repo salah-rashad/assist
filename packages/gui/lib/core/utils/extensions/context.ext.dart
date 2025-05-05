@@ -1,6 +1,7 @@
 import 'package:assist_core/assist_core.dart';
 import 'package:assist_core/models/project.dart';
 import 'package:assist_core/services/task_manager/task_manager.dart';
+import 'package:assist_gui/app/themes/theme_extenstions/extended_colors.dart';
 import 'package:assist_gui/core/utils/extensions/shad_theme.ext.dart';
 import 'package:assist_gui/features/auth/controller/auth_cubit.dart';
 import 'package:assist_gui/features/project/controller/project_cubit.dart';
@@ -8,8 +9,6 @@ import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../../app/themes/theme_extenstions/extended_colors.dart';
 
 extension ContextTheme on BuildContext {
   ShadThemeData get theme => ShadTheme.of(this);

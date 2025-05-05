@@ -1,12 +1,11 @@
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/features/main_layout/widgets/app_nav_rail.dart';
+import 'package:assist_gui/features/main_layout/widgets/app_top_bar.dart';
+import 'package:assist_gui/features/task_manager/view/task_status_bar.dart';
+import 'package:assist_gui/shared/widgets/breadcrumps.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../../shared/widgets/breadcrumps.dart';
-import '../../task_manager/view/task_status_bar.dart';
-import '../widgets/app_nav_rail.dart';
-import '../widgets/app_top_bar.dart';
 
 class MainLayout extends StatelessWidget {
   const MainLayout({super.key, required this.navigationShell});

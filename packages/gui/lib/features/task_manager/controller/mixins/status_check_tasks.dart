@@ -12,7 +12,7 @@ mixin StatusCheckTasks {
   late final PubGetTask pubGetTask;
   late final AnalyzeTask analyzeTask;
   late final FormatTask formatTask;
-  late final UnitTestsTask unitTestsTask;
+  late final UnitTestTask unitTestsTask;
 
   late final List<Task> checkTasks = [
     pubGetTask,
@@ -26,7 +26,7 @@ mixin StatusCheckTasks {
         PubGetTask(projectPath: project.path, projectType: project.projectType);
     analyzeTask = AnalyzeTask(projectPath: project.path);
     formatTask = FormatTask(projectPath: project.path);
-    unitTestsTask = UnitTestsTask(
+    unitTestsTask = UnitTestTask(
         projectPath: project.path, projectType: project.projectType);
   }
 

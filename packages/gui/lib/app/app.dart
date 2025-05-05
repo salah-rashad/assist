@@ -1,16 +1,15 @@
 import 'package:assist_core/constants/strings.dart';
 import 'package:assist_gui/app/routing/app_router.dart';
 import 'package:assist_gui/app/themes/app_theme.dart';
+import 'package:assist_gui/core/constants/env.dart';
 import 'package:assist_gui/features/auth/controller/auth_cubit.dart';
 import 'package:assist_gui/features/project/controller/project_cubit.dart';
 import 'package:assist_gui/features/settings/controller/settings_cubit.dart';
+import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../core/constants/env.dart';
-import '../features/task_manager/controller/task_manager_cubit.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
