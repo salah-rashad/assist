@@ -9,7 +9,7 @@ import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist/app/utils/error_handler.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:assist_core/constants/enums.dart';
-import 'package:assist_core/constants/exceptions.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:assist_core/models/config/config.base.dart';
 import 'package:assist_core/models/config/config.dart_project.dart';
 import 'package:assist_core/models/config/config.flutter_project.dart';
