@@ -11,7 +11,7 @@ class OAuthCallbackServer {
     _server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
     print('🚀 OAuth Callback Server started at http://localhost:$port/');
 
-    await for (HttpRequest request in _server!) {
+    await for (final HttpRequest request in _server!) {
       final uri = request.uri;
 
       if (uri.path == '/callback') {

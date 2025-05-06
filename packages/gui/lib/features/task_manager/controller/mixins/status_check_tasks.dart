@@ -31,7 +31,7 @@ mixin StatusCheckTasks {
   }
 
   void runStatusCheck(BuildContext context) {
-    for (var task in checkTasks) {
+    for (final task in checkTasks) {
       context.taskManager.submitTask(task);
     }
   }

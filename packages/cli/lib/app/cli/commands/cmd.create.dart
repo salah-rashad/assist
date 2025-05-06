@@ -37,7 +37,7 @@ class CreateCommand extends Command<int> {
       );
       line();
       line();
-      ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
+      final ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
       final isFlutter = projectType == ProjectType.flutter;
       final isDart = projectType == ProjectType.dart;
 
@@ -170,7 +170,7 @@ class CreateCommand extends Command<int> {
       );
 
       if (result == yes) {
-        String confirmation = confirmOverwrite(projectName);
+        final String confirmation = confirmOverwrite(projectName);
         final isValid = confirmation == projectName;
 
         if (!isValid) {
@@ -270,7 +270,7 @@ class CreateCommand extends Command<int> {
       throw ProjectCreationFailedException(exitCode: exitCode);
     }
 
-    String suggestions = _suggestions(projectDir);
+    final String suggestions = _suggestions(projectDir);
 
     return finishSuccesfuly(
       'SUCCESS',

@@ -24,7 +24,7 @@ class AnsiText extends StatelessWidget {
     final regex = RegExp(r'\x1B\[(\d+)(;\d+)*m');
     final matches = regex.allMatches(input);
 
-    List<TextSpan> spans = [];
+    final List<TextSpan> spans = [];
     int lastIndex = 0;
     TextStyle? currentStyle = style;
 

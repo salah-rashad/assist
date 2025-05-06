@@ -898,7 +898,7 @@ extension StringColors on String {
   String get cOnYellowGreen => onRgb(r: 154, g: 205, b: 50);
 
   String hex(dynamic hex) {
-    var rgb_ = _hex2rgb(hex);
+    final rgb_ = _hex2rgb(hex);
     return rgb(r: rgb_[0], g: rgb_[1], b: rgb_[2]);
   }
 
@@ -906,23 +906,23 @@ extension StringColors on String {
   /// This dynamically accepts color hex codes as integer codes (0xAABBCC) or (0xABC)
   /// or as strings ('#AABBCC') or ('#ABC')
   String onHex(dynamic hex) {
-    var rgb_ = _hex2rgb(hex);
+    final rgb_ = _hex2rgb(hex);
     return onRgb(r: rgb_[0], g: rgb_[1], b: rgb_[2]);
   }
 }
 
 List<int> _hex2rgb(dynamic arg) {
   if (arg is num || arg is int) {
-    int intval = arg.floor();
-    int r = (intval >> 16) & 0xFF;
-    int g = (intval >> 8) & 0xFF;
-    int b = intval & 0xFF;
+    final int intval = arg.floor();
+    final int r = (intval >> 16) & 0xFF;
+    final int g = (intval >> 8) & 0xFF;
+    final int b = intval & 0xFF;
 
     return [r, g, b];
   }
-  var str = arg.toString();
-  var hexstuff = RegExp('[a-f0-9]{6}|[a-f0-9]{3}', caseSensitive: false);
-  var match = hexstuff.firstMatch(str);
+  final str = arg.toString();
+  final hexstuff = RegExp('[a-f0-9]{6}|[a-f0-9]{3}', caseSensitive: false);
+  final match = hexstuff.firstMatch(str);
   if (match == null) {
     return [0, 0, 0];
   }
@@ -934,11 +934,11 @@ List<int> _hex2rgb(dynamic arg) {
       return ch + ch;
     }).join('');
   }
-  int intval = int.parse(colorString, radix: 16);
+  final int intval = int.parse(colorString, radix: 16);
 
-  int r = (intval >> 16) & 0xFF;
-  int g = (intval >> 8) & 0xFF;
-  int b = intval & 0xFF;
+  final int r = (intval >> 16) & 0xFF;
+  final int g = (intval >> 8) & 0xFF;
+  final int b = intval & 0xFF;
 
   return [r, g, b];
 }

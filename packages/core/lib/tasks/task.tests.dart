@@ -38,7 +38,7 @@ class UnitTestTask extends ShellTask<TestReport> {
 
   @override
   TestReport handleResult(ProcessResult result) {
-    String output = result.stdout;
+    final String output = result.stdout;
     final report = _parseEvents(output);
 
     if (result.exitCode != 0) {
@@ -51,7 +51,7 @@ class UnitTestTask extends ShellTask<TestReport> {
   TestReport _parseEvents(String output) {
     final lines = output.split('\n');
 
-    List<Event> events = [];
+    final List<Event> events = [];
     for (final line in lines) {
       if (line.trim().isEmpty) continue;
       final event = parseJsonToEvent(line);

@@ -181,7 +181,7 @@ class TestEventsParser {
           tests[event.testID] = updatedTest;
           suites[test.suiteID]?.tests.add(updatedTest);
 
-          int? lastGroupId = updatedTest.groupIDs.lastOrNull;
+          final int? lastGroupId = updatedTest.groupIDs.lastOrNull;
           if (lastGroupId != null) {
             groups[lastGroupId]?.tests.add(updatedTest);
           }
