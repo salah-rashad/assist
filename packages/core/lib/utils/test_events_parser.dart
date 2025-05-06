@@ -43,6 +43,8 @@ class TestSuiteUnit {
   final String platform;
   final List<TestGroupUnit> groups;
   final List<TestCaseUnit> tests;
+  final bool isLoadFailure;
+  final String? loadErrorMessage;
 
   bool get isSucceeded => tests.every((test) => test.success);
 
@@ -52,6 +54,8 @@ class TestSuiteUnit {
     required this.platform,
     required this.groups,
     required this.tests,
+    required this.isLoadFailure,
+    required this.loadErrorMessage,
   });
 }
 
@@ -127,6 +131,8 @@ class TestEventsParser {
           platform: event.suite.platform,
           groups: [],
           tests: [],
+          isLoadFailure: false, // filled in later
+          loadErrorMessage: null, // filled in later
         );
       } else if (event is GroupEvent) {
         groups[event.group.id] = TestGroupUnit(
@@ -175,9 +181,14 @@ class TestEventsParser {
           tests[event.testID] = updatedTest;
           suites[test.suiteID]?.tests.add(updatedTest);
 
-          for (final groupId in test.groupIDs) {
-            groups[groupId]?.tests.add(updatedTest);
+          int? lastGroupId = updatedTest.groupIDs.lastOrNull;
+          if (lastGroupId != null) {
+            groups[lastGroupId]?.tests.add(updatedTest);
           }
+
+          // for (final groupId in test.groupIDs) {
+          //   groups[groupId]?.tests.add(updatedTest);
+          // }
 
           totalTime = event.time;
           if (event.result != 'success') overallSuccess = false;
@@ -186,6 +197,8 @@ class TestEventsParser {
         overallSuccess = event.success ?? false;
       }
     }
+
+    _applyTweaks(suites, groups, tests);
 
     // attach groups to their suites
     for (final group in groups.values) {
@@ -197,8 +210,6 @@ class TestEventsParser {
       }
     }
 
-    tests.removeWhere((key, value) => value.hidden);
-
     return TestReport(
       json: json,
       suites: suites.values.toList(),
@@ -209,6 +220,51 @@ class TestEventsParser {
       totalFailures: tests.values.where((t) => !t.success).length,
       totalSkipped: tests.values.where((t) => t.skipped).length,
     );
+  }
+
+  static void _applyTweaks(Map<int, TestSuiteUnit> suites,
+      Map<int, TestGroupUnit> groups, Map<int, TestCaseUnit> tests) {
+    // Add load error message to failed suites
+    for (final suite in suites.values) {
+      bool isLoadingTest(TestCaseUnit t) => t.name.startsWith('loading ');
+
+      final loadTest = suite.tests.firstWhereOrNull(
+        (t) => isLoadingTest(t) && t.error != null,
+      );
+
+      final hasGroups = suite.groups.isNotEmpty;
+      final hasTests = suite.tests.where((t) => !isLoadingTest(t)).isNotEmpty;
+
+      if (loadTest != null && !hasGroups && !hasTests) {
+        suites[suite.id] = TestSuiteUnit(
+          id: suite.id,
+          path: suite.path,
+          platform: suite.platform,
+          groups: suite.groups,
+          tests: suite.tests,
+          isLoadFailure: true,
+          loadErrorMessage:
+              loadTest.error ?? 'Unknown error while loading suite.',
+        );
+      }
+    }
+
+    // Remove hidden tests like "loading" tests
+    tests.removeWhere((key, value) => value.hidden);
+
+    // update root group's name
+    groups.updateAll(
+      (key, value) {
+        if (value.parentID == null) {
+          return value.copyWith(name: 'Root');
+        }
+
+        return value;
+      },
+    );
+
+    // remove empty groups
+    groups.removeWhere((key, value) => value.tests.isEmpty);
   }
 }
 
