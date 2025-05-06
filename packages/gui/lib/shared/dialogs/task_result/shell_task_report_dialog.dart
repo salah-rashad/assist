@@ -1,6 +1,7 @@
 import 'package:assist_core/services/task_manager/shell_task.dart';
 import 'package:assist_core/services/task_manager/task_event.dart';
 import 'package:assist_core/utils/helpers.dart';
+import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/core/utils/helpers.dart';
 import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
 import 'package:assist_gui/shared/widgets/ansi_rich_text.dart';
@@ -25,6 +26,7 @@ class ShellTaskReportDialog extends StatelessWidget {
         final output = task.result?.toString() ?? '';
         final strippedLog = stripAnsi(output);
         final stackTrace = task.result?.stackTrace?.toString();
+        final isError = task.result?.error != null;
 
         return ShadDialog(
           constraints: BoxConstraints(maxWidth: 600),
@@ -41,7 +43,13 @@ class ShellTaskReportDialog extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: TerminalStyledCard(
-              child: Text.rich(AnsiText(output).asTextSpan()),
+              child: Text.rich(
+                AnsiText(output).asTextSpan(),
+                style: TextStyle(
+                    color: isError
+                        ? context.colorScheme.destructive
+                        : context.colorScheme.background),
+              ),
               stackTrace: stackTrace == null ? null : Text(stackTrace),
             ),
           ),

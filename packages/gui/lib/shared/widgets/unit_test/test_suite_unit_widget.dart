@@ -3,6 +3,7 @@ import 'package:assist_core/tasks/task.tests.dart';
 import 'package:assist_core/utils/test_events_parser.dart';
 import 'package:assist_gui/app/themes/app_theme.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
+import 'package:assist_gui/core/utils/helpers.dart';
 import 'package:assist_gui/shared/widgets/loading_indicator.dart';
 import 'package:assist_gui/shared/widgets/unit_test/test_group_unit_widget.dart';
 import 'package:assist_gui/shared/widgets/unit_test/test_suite_unit_footer.dart';
@@ -21,19 +22,14 @@ class TestSuiteUnitWidget extends StatefulWidget {
 
 class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
   late final UnitTestTask suiteTask;
-  late TestSuiteUnit? suite;
+  TestSuiteUnit? suite;
 
   String get path => widget.suite.path;
   TaskStatus get status => suiteTask.status;
 
-  final GlobalKey _contentKey = GlobalKey();
-
   @override
   void initState() {
     super.initState();
-
-    _handleAutoFocus();
-
     suite = widget.suite;
 
     suiteTask = UnitTestTask(
@@ -62,7 +58,6 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
         suite = report.suites.firstOrNull;
       }
     });
-    _handleAutoFocus();
   }
 
   @override
@@ -83,46 +78,32 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
             backgroundColor: Colors.black.withValues(alpha: 0.95),
             padding: const EdgeInsets.all(16),
             title: Text(
-              widget.suite.path,
+              path,
               style: TextStyle(fontSize: 16),
             ),
             trailing: LoadingIndicator(),
           );
         }
 
-        // Rename root group
-        final groups = suite.groups.mapIndexed((i, group) {
-          if (i == 0) {
-            return group.copyWith(name: 'Root');
-          }
-          return group;
-        });
-
-        return TapRegion(
-          onTapUpInside: (event) => _handleAutoFocus(),
-          child: ShadCard(
-            backgroundColor: Colors.black.withValues(alpha: 0.95),
-            padding: const EdgeInsets.all(16),
-            footer: TestSuiteUnitFooter(suite: suite),
+        return ShadCard(
+          backgroundColor: Colors.black.withValues(alpha: 0.95),
+          padding: EdgeInsets.zero,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: ShadAccordionItem(
               value: widget.suite.id,
               padding: EdgeInsets.zero,
               duration: const Duration(milliseconds: 200),
-              separator: SizedBox.shrink(),
               title: Text(suite.path),
               child: SelectionArea(
-                key: _contentKey,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Column(
-                    spacing: 8,
-                    children: [
-                      for (final group in groups)
-                        TestGroupUnitWidget(group: group),
-                    ],
-                  ),
+                  child: suite.isLoadFailure
+                      ? _buildFailureMessage(context, suite.loadErrorMessage)
+                      : _buildGroupUnits(suite.groups),
                 ),
               ),
+              separator: TestSuiteUnitFooter(suite: suite),
             ),
           ),
         );
@@ -130,25 +111,27 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
     );
   }
 
-  /// Auto scroll to this widget when expanded
-  void _handleAutoFocus() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 250), () {
-        final isNowExpanded =
-            (_contentKey.currentContext?.size?.height ?? 0) > 0;
-        if (isNowExpanded) {
-          if (!mounted) return;
-          final renderObject = context.findRenderObject();
-          if (renderObject != null) {
-            Scrollable.maybeOf(context)?.position.ensureVisible(
-                  renderObject,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOutCirc,
-                  alignment: 0,
-                );
-          }
-        }
-      });
-    });
+  Widget _buildFailureMessage(BuildContext context, String? message) {
+    return Text(
+      message.toString(),
+      style: terminalStyle(context).apply(
+        color: context.colorScheme.destructive,
+      ),
+    );
+  }
+
+  Widget _buildGroupUnits(Iterable<TestGroupUnit> groups) {
+    if (groups.isEmpty) {
+      return const Text(
+        'No tests found.',
+        style: TextStyle(color: Colors.white24),
+      );
+    }
+    return Column(
+      spacing: 8,
+      children: [
+        for (final group in groups) TestGroupUnitWidget(group: group),
+      ],
+    );
   }
 }

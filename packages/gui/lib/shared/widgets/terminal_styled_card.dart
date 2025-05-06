@@ -18,15 +18,17 @@ class TerminalStyledCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShadTheme(
       data: AppTheme.dark.themeData(),
-      child: ShadCard(
-        backgroundColor: Colors.black.withValues(alpha: 0.95),
-        padding: const EdgeInsets.all(16),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: 120),
-          child: SingleChildScrollView(
+      child: Builder(builder: (context) {
+        return ShadCard(
+          backgroundColor: Colors.black.withValues(alpha: 0.95),
+          padding: const EdgeInsets.all(16),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: 120),
             child: SelectionArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 16,
                 children: [
                   DefaultTextStyle(
                     style: terminalStyle(context),
@@ -40,8 +42,8 @@ class TerminalStyledCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 

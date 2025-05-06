@@ -51,7 +51,13 @@ class TestCaseUnitWidget extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              Text(test.name, style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                test.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: context.colorScheme.mutedForeground,
+                ),
+              ),
               const Spacer(),
               Text(
                 test.duration.toDurationString(),

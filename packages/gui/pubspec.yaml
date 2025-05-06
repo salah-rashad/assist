@@ -39,3 +39,4 @@ flutter:
 
   assets:
     - assets/translations/
+    - assets/images/

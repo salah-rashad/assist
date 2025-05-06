@@ -11,15 +11,6 @@ class TestGroupUnitWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tests = getTestsInExactGroup(
-      groupId: group.id,
-      allTests: group.tests,
-    );
-
-    if (tests.isEmpty) {
-      return SizedBox.shrink();
-    }
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: Column(
@@ -31,7 +22,7 @@ class TestGroupUnitWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 24),
             color: Colors.white.withValues(alpha: 0.05),
           ),
-          for (final test in tests) TestCaseUnitWidget(test: test),
+          for (final test in group.tests) TestCaseUnitWidget(test: test),
         ],
       ),
     );
@@ -44,9 +35,10 @@ class TestGroupUnitWidget extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            LucideIcons.arrowBigRightDash,
+            LucideIcons.chevronsRight,
             size: 16,
-            color: context.colorScheme.secondaryForeground,
+            color:
+                context.colorScheme.secondaryForeground.withValues(alpha: 0.3),
           ),
           const SizedBox(width: 8),
           Flexible(
@@ -62,14 +54,5 @@ class TestGroupUnitWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  List<TestCaseUnit> getTestsInExactGroup({
-    required int groupId,
-    required List<TestCaseUnit> allTests,
-  }) {
-    return allTests.where((test) {
-      return test.groupIDs.isNotEmpty && test.groupIDs.last == groupId;
-    }).toList();
   }
 }
