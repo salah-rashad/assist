@@ -28,8 +28,7 @@ abstract class ShellTask<T> extends Task<T, T> {
     final error = result.stderr;
 
     if (result.exitCode != 0) {
-      final data = output.toString().trim().isNotEmpty ? output : error;
-      throw data;
+      throw '$output\n$error';
     }
 
     return result.stdout;
