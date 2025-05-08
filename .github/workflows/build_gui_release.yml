@@ -27,8 +27,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Enable desktop support
-        run: flutter config --enable-${{ matrix.os == 'windows-latest' && 'windows' || matrix.os == 'macos-latest' && 'macos' || 'linux' }}
+#      - name: Enable desktop support
+#        run: flutter config --enable-${{ matrix.os == 'windows-latest' && 'windows' || matrix.os == 'macos-latest' && 'macos' || 'linux' }}
 
       - name: Install dependencies
         run: flutter pub get
@@ -36,11 +36,11 @@ jobs:
       - name: Build GUI App
         run: |
           if [[ "${{ runner.os }}" == "Windows" ]]; then
-            flutter build windows
+            flutter build windows --release
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            flutter build macos
+            flutter build macos --release
           else
-            flutter build linux
+            flutter build linux --release
           fi
 
       - name: Archive Build
@@ -56,7 +56,7 @@ jobs:
           fi
 
       - name: Upload to Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: dist/*
         env:
