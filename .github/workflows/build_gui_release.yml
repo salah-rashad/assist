@@ -3,23 +3,18 @@ name: Build GUI Release
 on:
   push:
     tags:
-      - 'assist-v*'          # Trigger only on version tags like v1.2.3
+      - 'assist-v*'
 
 jobs:
-  build:
-    name: Build ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
+  build-linux:
+    name: Build (Linux)
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: packages/gui
 
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -27,14 +22,7 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Enable desktop support
-        run: flutter config --enable-${{ matrix.os == 'windows-latest' && 'windows' || matrix.os == 'macos-latest' && 'macos' || 'linux' }}-desktop
-
-      - name: Install dependencies
-        run: flutter pub get
-
       - name: Install Linux GUI dependencies
-        if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -44,29 +32,90 @@ jobs:
             libjsoncpp-dev \
             libcurl4-openssl-dev
 
-      - name: Build GUI App
+      - name: Build Flutter app (Linux)
         run: |
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            flutter build windows --release
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            flutter build macos --release
-          else
-            flutter build linux --release
-          fi
+          flutter pub get
+          flutter build linux
 
-      - name: Archive Build
+      - name: Archive bundle
         run: |
-          version=${GITHUB_REF#refs/tags/}
+          mkdir -p dist
+          tar -czf dist/assist_gui-linux-${{ github.ref_name }}.tar.gz -C build/linux/x64/release/bundle .
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packages/gui/dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+#############################################################
+
+  build-windows:
+    name: Build (Windows)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: packages/gui
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Flutter app (Windows)
+        run: |
+          flutter pub get
+          flutter build windows
+
+      - name: Archive build output
+        run: |
           mkdir dist
-          if [[ "${{ runner.os }}" == "Windows" ]]; then
-            7z a dist/assist_gui-windows-$version.zip build/windows/runner/Release/*
-          elif [[ "${{ runner.os }}" == "macOS" ]]; then
-            ditto -c -k --sequesterRsrc --keepParent build/macos/Build/Products/Release/Assist.app dist/assist_gui-macos-$version.zip
-          else
-            tar -czf dist/assist_gui-linux-$version.tar.gz -C build/linux/x64/release/bundle .
-          fi
+          ls build/windows/x64/runner/Release
+          7z a dist/assist_gui-windows-${{ github.ref_name }}.zip ./build/windows/x64/runner/Release/*
 
-      - name: Upload to Release
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packages/gui/dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+
+#############################################################
+
+  build-macos:
+    name: Build (macOS)
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: packages/gui
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Build Flutter app (macOS)
+        run: |
+          flutter pub get
+          flutter build macos
+
+      - name: Archive app bundle
+        shell: bash
+        run: |
+          mkdir -p dist
+          app_bundle=$(find build/macos/Build/Products/Release -name "*.app" | head -n 1)
+          ditto -c -k --sequesterRsrc --keepParent "$app_bundle" dist/assist_gui-macos-${{ github.ref_name }}.zip
+
+      - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: packages/gui/dist/*
