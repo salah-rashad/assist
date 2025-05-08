@@ -40,7 +40,6 @@ jobs:
           sudo apt-get install -y \
             libgtk-3-dev \
             libayatana-appindicator3-dev \
-            libgnome-keyring-dev \
             libsecret-1-dev \
             libjsoncpp-dev \
             libcurl4-openssl-dev
