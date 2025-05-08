@@ -1,6 +1,6 @@
 abstract class CliStrings {
   // DO NOT MANUALLY CHANGE THIS LINE
-  static const String version = '0.3.0';
+  static const String version = '0.3.1';
 
   static const String appName = 'Assist';
 

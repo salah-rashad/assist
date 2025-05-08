@@ -1,3 +1,15 @@
+## 0.3.1
+
+ - **REFACTOR**: simplify SupportedPlatform enum and update GUI executable path logic.
+ - **REFACTOR**(core): remove redundant core directory.
+ - **FIX**: fix install issues in service.install.dart.
+ - **FEAT**: update version to 0.3.0 and add version update script that runs after `melos version`.
+ - **FEAT**(cli): add debug mode flag, primitive implementation of the install command, and update the run command.
+ - **FEAT**(cli): update exception imports to use exceptions.cli.dart for CLI tasks.
+ - **FEAT**: update and apply analysis options everywhere.
+ - **DOCS**: add build GUI release badge to README.
+ - **DOCS**(cli): add preview section to README showcasing terminal output vs interactive GUI.
+
 ## 0.3.0
 
 - **REFACTOR**: move core files to `assist_core` and migrate CLI to depend on `assist_core` package.
