@@ -111,7 +111,17 @@ extension SupportedPlatformExtension on SupportedPlatform {
   }
 
   String getGuiExecutablePath() {
-    return p.join(getGuiInstallPath(), guiExecutable);
+    final guiExecutable = 'assist_gui';
+    final installPath = getGuiInstallPath();
+
+    return switch (this) {
+      SupportedPlatform.windows => p.join(installPath, guiExecutable),
+      SupportedPlatform.linux => p.join(installPath, guiExecutable),
+
+      // e.g <installPath>/assist_gui.app/Contents/MacOS/assist_gui
+      SupportedPlatform.macos => p.join(installPath, '$guiExecutable.app',
+          'Contents', 'MacOS', guiExecutable),
+    };
   }
 }
 

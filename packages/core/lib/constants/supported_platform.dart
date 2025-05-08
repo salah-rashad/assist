@@ -1,13 +1,9 @@
 import 'dart:io';
 
 enum SupportedPlatform {
-  windows('assist_gui.exe'),
-  linux('assist_gui'),
-  macos('assist_gui');
-
-  final String guiExecutable;
-
-  const SupportedPlatform(this.guiExecutable);
+  windows,
+  linux,
+  macos;
 
   static SupportedPlatform get current {
     if (Platform.isWindows) return windows;
