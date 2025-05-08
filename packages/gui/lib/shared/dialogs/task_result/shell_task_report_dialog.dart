@@ -46,9 +46,7 @@ class ShellTaskReportDialog extends StatelessWidget {
               child: Text.rich(
                 AnsiText(output).asTextSpan(),
                 style: TextStyle(
-                    color: isError
-                        ? context.colorScheme.destructive
-                        : context.colorScheme.background),
+                    color: isError ? context.colorScheme.destructive : null),
               ),
               stackTrace: stackTrace == null ? null : Text(stackTrace),
             ),
