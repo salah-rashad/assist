@@ -26,7 +26,7 @@ jobs:
         with:
           channel: stable
           cache: true
-      - name: Install dart dependencies
+      - name: Install Dart dependencies
         run: dart pub get
       - name: Install Flutter dependencies
         run: flutter pub get
