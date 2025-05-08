@@ -6,7 +6,7 @@ void main() {
     final content = constantsFile.readAsStringSync();
 
     // Extract the new version from the pubspec.yaml
-    final pubspec = File('pubspec.yaml').readAsStringSync();
+    final pubspec = File('packages/cli/pubspec.yaml').readAsStringSync();
     final versionMatch = RegExp(r'version:\s*(\S+)').firstMatch(pubspec);
 
     if (versionMatch == null) {

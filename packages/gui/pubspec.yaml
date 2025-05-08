@@ -1,5 +1,6 @@
 name: assist_gui
 description: "Assist GUI"
+publish_to: none
 version: 0.3.0
 
 environment:
