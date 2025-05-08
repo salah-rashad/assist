@@ -24,6 +24,14 @@ melos:
   ide:
     intellij: true
 
+  command:
+    version:
+      hooks:
+        preCommit: |
+          dart tool/update_version.dart
+          dart analyze
+          git add packages/cli/lib/app/core/cli.strings.dart
+
   scripts:
     pre-commit:
       description: pre-commit git hook script
@@ -88,10 +96,4 @@ melos:
         - flutter build macos --release
         - cp -r build/macos/x64/release/bundle/* $INSTALL_DIR
 
-command:
-  version:
-    hooks:
-      post: |
-        dart tool/update_version.dart
-        dart analyze
-        git add packages/cli/lib/app/core/cli.strings.dart
+
