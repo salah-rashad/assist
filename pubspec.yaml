@@ -1,4 +1,5 @@
 name: assist_workspace
+version: 0.3.0
 publish_to: none
 workspace:
   - packages/cli
@@ -86,3 +87,11 @@ melos:
         - cd packages/gui
         - flutter build macos --release
         - cp -r build/macos/x64/release/bundle/* $INSTALL_DIR
+
+command:
+  version:
+    hooks:
+      preCommit: |
+        dart tool/update_version.dart
+        dart analyze
+        git add packages/cli/lib/app/core/cli.strings.dart
