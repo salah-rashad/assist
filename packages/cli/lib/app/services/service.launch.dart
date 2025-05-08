@@ -1,7 +1,10 @@
 import 'dart:io';
 
-import 'package:assist/app/utils/platform_utils.dart';
-import 'package:path/path.dart' as p;
+import 'package:assist/app/utils/cli.extensions.dart';
+import 'package:assist/main.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
+import 'package:assist_core/constants/strings.dart';
+import 'package:assist_core/constants/supported_platform.dart';
 
 /// Service for launching the GUI
 class LaunchService {
@@ -10,35 +13,22 @@ class LaunchService {
   final String projectDir;
 
   /// Launches the GUI
-  Future<int> launch() async {
-    final data = getPlatformExecutable();
-    final platform = data.platform;
-    final guiExec = data.exec;
+  Future<Process> launch() async {
+    final platform = SupportedPlatform.current;
+    final guiExecPath = platform.getGuiExecutablePath();
 
-    final scriptDir = File(Platform.script.toFilePath()).parent.path;
-
-    final sourcePath = p.join(
-      p.dirname(scriptDir),
-      'bin',
-      'build',
-      platform,
-      guiExec,
-    );
-
-    print(sourcePath);
-
-    final process = await Process.start(
-      sourcePath,
-      [],
-      environment: {'assist_pwd': projectDir},
-      runInShell: true,
-    );
-
-    if (true) {
-      await stdout.addStream(process.stdout);
-      await stderr.addStream(process.stderr);
+    if (!await File(guiExecPath).exists()) {
+      throw LaunchAppFailedException(suggestions: [
+        'Make sure you have installed the GUI',
+        'Run `${app.executableName} install` to install the GUI.',
+      ]);
     }
 
-    return process.exitCode;
+    return await Process.start(
+      guiExecPath,
+      [projectDir],
+      environment: {EnvVarKeys.pwd: projectDir},
+      runInShell: true,
+    );
   }
 }

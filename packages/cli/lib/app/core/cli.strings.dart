@@ -1,8 +1,6 @@
 abstract class CliStrings {
   static const String version = '0.2.2';
 
-  static const String executableName = 'assist';
-
   static const String appName = 'Assist';
 
   static const String description = 'Manage your Dart/Flutter projects easily.';

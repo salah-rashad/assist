@@ -4,20 +4,20 @@ import 'package:assist/app/cli/tasks/task.run.launch_app.dart';
 import 'package:assist/app/cli/tasks/task.run.path_validation.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist/app/utils/error_handler.dart';
-import 'package:assist/app/utils/platform_utils.dart';
+import 'package:assist_core/constants/supported_platform.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 
 /// Command to run the GUI
 class RunCommand extends Command<int> {
-  RunCommand() : super('run', 'Run the GUI.');
+  RunCommand() : super('run', 'Run a project on Assist GUI.');
 
   @override
   Future<int> run() async {
     return handleRuntimeErrors(() async {
       final args = argResults?.rest;
       final arg0 = args?.firstOrNull;
-      final platform = getPlatformExecutable().platform;
+      final platform = SupportedPlatform.current;
 
       String projectDir = arg0 ?? '';
       projectDir = p.normalize(p.absolute(projectDir));

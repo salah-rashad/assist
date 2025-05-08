@@ -18,6 +18,8 @@ dependencies:
   path: ^1.9.1
   args: ^2.7.0
   promptly: ^1.0.0-alpha.8
+  archive: ^4.0.7
+  http: ^1.4.0
 
 
 dev_dependencies:

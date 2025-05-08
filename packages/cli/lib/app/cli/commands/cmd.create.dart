@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:assist/app/cli/components/command_task.dart';
 import 'package:assist/app/cli/tasks/task.create.dart_project.dart';
 import 'package:assist/app/cli/tasks/task.create.flutter_project.dart';
-import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist/app/utils/error_handler.dart';
 import 'package:assist/app/utils/string_colors.dart';
+import 'package:assist/main.dart';
 import 'package:assist_core/constants/enums.dart';
 import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:assist_core/models/config/config.base.dart';
@@ -37,7 +37,8 @@ class CreateCommand extends Command<int> {
       );
       line();
       line();
-      final ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
+      final ProjectType projectType =
+          selectProjectType(flutterVersion, dartVersion);
       final isFlutter = projectType == ProjectType.flutter;
       final isDart = projectType == ProjectType.dart;
 
@@ -239,7 +240,7 @@ class CreateCommand extends Command<int> {
   String _suggestions(String projectDir) {
     final sb = StringBuffer();
     sb.writeln(
-      'Run `${CliStrings.executableName} help` to see available commands.',
+      'Run `${app.executableName} help` to see available commands.',
     );
     sb.writeln();
     sb.writeln(

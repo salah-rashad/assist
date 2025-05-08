@@ -30,9 +30,9 @@ abstract class Printer {
 
     final usage = console.sectionLine('Usage');
     final command1 =
-        '${CliStrings.executableName} ${'<project_directory>'.cGray.italic()}';
+        '${app.executableName} ${'<project_directory>'.cGray.italic()}';
     final command2 =
-        '${CliStrings.executableName} ${'run'.dim()} ${'<project_directory>'.cGray.italic()}';
+        '${app.executableName} ${'run'.dim()} ${'<project_directory>'.cGray.italic()}';
     final moreInfo = 'For more information, visit: '
         '${linkLine('https://github.com/salah-rashad/assist', 'GitHub')}'
         ' | '
@@ -48,5 +48,16 @@ abstract class Printer {
     sb.write(moreInfo.prefixLine());
 
     return sb.toString();
+  }
+
+  static void printSuggestions(List<String> suggestions) {
+    final sb = StringBuffer();
+    sb.writeln(''.prefixLine());
+    sb.write(theme.colors.hint('Suggestions').prefixWarning());
+    for (final line in suggestions) {
+      sb.writeln('');
+      sb.write(theme.colors.warning(line).prefix(''));
+    }
+    writeln(sb.toString());
   }
 }
