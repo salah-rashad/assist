@@ -27,8 +27,8 @@ jobs:
           channel: stable
           cache: true
 
-#      - name: Enable desktop support
-#        run: flutter config --enable-${{ matrix.os == 'windows-latest' && 'windows' || matrix.os == 'macos-latest' && 'macos' || 'linux' }}
+      - name: Enable desktop support
+        run: flutter config --enable-${{ matrix.os == 'windows-latest' && 'windows' || matrix.os == 'macos-latest' && 'macos' || 'linux' }}-desktop
 
       - name: Install dependencies
         run: flutter pub get
