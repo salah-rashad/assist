@@ -3,7 +3,7 @@ name: Build GUI Release
 on:
   push:
     tags:
-      - 'v*'          # Trigger only on version tags like v1.2.3
+      - 'assist-v*'          # Trigger only on version tags like v1.2.3
     branches:
       - main
 
