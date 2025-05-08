@@ -27,7 +27,7 @@ melos:
     version:
       hooks:
         preCommit: |
-          dart tool/update_version.dart
+          dart tool/version_pre_commit.dart
           dart analyze
           git add packages/cli/lib/app/core/cli.strings.dart
 
