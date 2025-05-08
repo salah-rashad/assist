@@ -11,13 +11,13 @@ Future<void> main() async {
 
 void updateVersion(String newVersion) {
   try {
-    final constantsFile = File('packages/cli/lib/app/core/cli.strings.dart');
+    final constantsFile = File('packages/core/lib/constants/version.dart');
     final content = constantsFile.readAsStringSync();
 
     // Replace the version string in the constants file
     final updatedContent = content.replaceAll(
-      RegExp(r"const\s+String\s+version\s*=\s*'[^']*';"),
-      "const String version = '$newVersion';",
+      RegExp(r"const\s+String\s+assistVersion\s*=\s*'[^']*';"),
+      "const String assistVersion = '$newVersion';",
     );
 
     constantsFile.writeAsStringSync(updatedContent);

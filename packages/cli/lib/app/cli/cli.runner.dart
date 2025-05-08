@@ -4,6 +4,7 @@ import 'package:assist/app/cli/commands/cmd.install.dart';
 import 'package:assist/app/cli/commands/cmd.run.dart';
 import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/string_colors.dart';
+import 'package:assist_core/constants/version.dart';
 import 'package:promptly/promptly.dart';
 
 part 'cli.theme.dart';
@@ -14,7 +15,7 @@ class AssistCliRunner extends CommandRunner {
       : super(
           'assist',
           CliStrings.description,
-          version: CliStrings.version,
+          version: assistVersion,
           theme: CliThemes.defaultTheme,
         ) {
     argParser.addFlag(

@@ -1,7 +1,6 @@
-abstract class CliStrings {
-  // DO NOT MANUALLY CHANGE THIS LINE
-  static const String version = '0.3.1';
+import 'package:assist_core/constants/version.dart';
 
+abstract class CliStrings {
   static const String appName = 'Assist';
 
   static const String description = 'Manage your Dart/Flutter projects easily.';
@@ -20,5 +19,5 @@ abstract class CliStrings {
 │  │  │⎽ ⎺│⎽ ⎺│ │⎽ ⎺│ ╭─╯  
 ╰──┴──┴───┴───┴─┴───┴─╯''';
 
-  static String logoArtWithVersion() => '$logoArt   v$version';
+  static String logoArtWithVersion() => '$logoArt   v$assistVersion';
 }

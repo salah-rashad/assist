@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:archive/archive_io.dart';
-import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist/main.dart';
 import 'package:assist_core/constants/supported_platform.dart';
+import 'package:assist_core/constants/version.dart';
 import 'package:assist_core/services/assist_config_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
@@ -122,7 +122,7 @@ class InstallService {
   }
 
   Future<void> install() async {
-    final cliVersion = app.version ?? CliStrings.version;
+    final cliVersion = app.version ?? assistVersion;
     final platform = SupportedPlatform.current;
     final fileName = _getArchiveFileName(platform, cliVersion);
 
