@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:chalkdart/chalkstrings.dart';
+
 import 'helpers.dart';
 
 Future<void> main() async {
@@ -19,9 +21,11 @@ void updateVersion(String newVersion) {
     );
 
     constantsFile.writeAsStringSync(updatedContent);
-    print('✅ Updated version to $newVersion in "${constantsFile.path}"');
+    print('✔ Updated version to $newVersion in "${constantsFile.path}"'
+        .black
+        .onGreen);
   } catch (e) {
-    stderr.writeln('❌ Error updating version: $e');
+    stderr.writeln('❌ Error updating version: $e'.black.onIndianRed);
     exit(1);
   }
 }
