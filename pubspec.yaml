@@ -11,7 +11,7 @@ environment:
 # This allows us to use assist during development.
 # by running the activate script in melos
 executables:
-  assist: assist_dev
+  assist-dev: assist_dev
 
 dependencies:
   chalkdart: ^2.0.9
@@ -50,9 +50,39 @@ melos:
       steps:
         - dart pub upgrade
         - rm -rf ./.dart_tool/pub/bin/assist_workspace
-        - dart pub global activate --source="path" . --executable="assist"
+        - dart pub global activate --source="path" . --executable="assist-dev"
           --overwrite
 
     activate:pub:
       description: Activate the published version of assist.
       run: dart pub global activate assist --overwrite
+
+    build:gui:linux:
+      name: Build GUI (Linux)
+      description: Build a release app bundle for Linux.
+      steps:
+        - INSTALL_DIR=$HOME/.assist-dev/gui
+        - mkdir -p $INSTALL_DIR
+        - cd packages/gui
+        - flutter build linux --release
+        - cp -r build/linux/x64/release/bundle/* $INSTALL_DIR
+
+    build:gui:windows:
+      name: Build GUI (Windows)
+      description: Build a release app bundle for Windows.
+      steps:
+        - INSTALL_DIR=$USERPROFILE/.assist-dev/gui
+        - mkdir -p $INSTALL_DIR
+        - cd packages/gui
+        - flutter build windows --release
+        - cp -r build/windows/x64/release/bundle/* $INSTALL_DIR
+
+    build:gui:macos:
+      name: Build GUI (macOS)
+      description: Build a release app bundle for macOS.
+      steps:
+        - INSTALL_DIR=$HOME/.assist-dev/gui
+        - mkdir -p $INSTALL_DIR
+        - cd packages/gui
+        - flutter build macos --release
+        - cp -r build/macos/x64/release/bundle/* $INSTALL_DIR
