@@ -81,13 +81,13 @@ class InstallService {
 
   String _getArchiveFileName(SupportedPlatform platform, String version) {
     return switch (platform) {
-      SupportedPlatform.windows => 'assist_gui-windows-$version.zip',
-      SupportedPlatform.linux => 'assist_gui-linux-$version.tar.gz',
-      SupportedPlatform.macos => 'assist_gui-macos-$version.zip',
+      SupportedPlatform.windows => 'assist_gui-windows-assist-v$version.zip',
+      SupportedPlatform.linux => 'assist_gui-linux-assist-v$version.tar.gz',
+      SupportedPlatform.macos => 'assist_gui-macos-assist-v$version.zip',
     };
   }
 
-  void _extractArchive(String archivePath, String outputDir) {
+  Future<void> _extractArchive(String archivePath, String outputDir) async {
     final file = File(archivePath);
     final bytes = file.readAsBytesSync();
 
@@ -97,7 +97,7 @@ class InstallService {
     } else if (archivePath.endsWith('.tar.gz')) {
       final archive =
           TarDecoder().decodeBytes(GZipDecoder().decodeBytes(bytes));
-      extractArchiveToDisk(archive, outputDir);
+      await extractArchiveToDisk(archive, outputDir);
     } else {
       throw Exception('Unsupported archive format.');
     }
@@ -127,13 +127,16 @@ class InstallService {
     final fileName = _getArchiveFileName(platform, cliVersion);
 
     final releaseUrl =
-        'https://github.com/$_owner/$_repo/releases/download/v$cliVersion/$fileName';
+        'https://github.com/$_owner/$_repo/releases/download/assist-v$cliVersion/$fileName';
 
     final tempDir = Directory.systemTemp.createTempSync('assist_gui_');
     final archivePath = p.join(tempDir.path, fileName);
     final extractedPath = p.join(tempDir.path, 'extracted');
 
+    print('Temp dir: ${tempDir.path}');
+
     print('⬇️ Downloading GUI release for $platform...');
+    print(releaseUrl);
     final response = await http.get(Uri.parse(releaseUrl));
 
     if (response.statusCode != 200) {
@@ -143,7 +146,7 @@ class InstallService {
     await File(archivePath).writeAsBytes(response.bodyBytes);
 
     print('📦 Extracting...');
-    _extractArchive(archivePath, extractedPath);
+    await _extractArchive(archivePath, extractedPath);
 
     final installPath = getInstallDirectory().path;
     final installDir = Directory(installPath);
@@ -153,12 +156,19 @@ class InstallService {
     }
 
     // Move full bundle into installDir
-    Directory(extractedPath).renameSync(installPath);
+    _copyDirectory(Directory(extractedPath), Directory(installPath));
+
+    // Clean up
+    // tempDir.deleteSync(recursive: true);
 
     // Find entry executable
     final guiExecutable = _findExecutable(installPath);
     if (guiExecutable == null) {
       throw Exception('❌ Could not find GUI executable inside bundle.');
+    }
+
+    if (Platform.isLinux || Platform.isMacOS) {
+      await Process.run('chmod', ['+x', guiExecutable]);
     }
 
     print('✅ Installed GUI to: $installPath');
@@ -194,5 +204,23 @@ class InstallService {
     //   },
     //   successMessage: '[Done] ${'Installation'.gray()}',
     // );
+  }
+
+  void _copyDirectory(Directory source, Directory destination) {
+    if (!destination.existsSync()) {
+      destination.createSync(recursive: true);
+    }
+
+    for (final entity in source.listSync(recursive: true)) {
+      final relativePath = entity.path.substring(source.path.length + 1);
+      final newPath = p.join(destination.path, relativePath);
+
+      if (entity is File) {
+        File(newPath).createSync(recursive: true);
+        entity.copySync(newPath);
+      } else if (entity is Directory) {
+        Directory(newPath).createSync(recursive: true);
+      }
+    }
   }
 }
