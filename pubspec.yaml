@@ -1,5 +1,4 @@
 name: assist_workspace
-version: 0.3.0
 publish_to: none
 workspace:
   - packages/cli
@@ -27,7 +26,7 @@ melos:
   command:
     version:
       hooks:
-        post: |
+        preCommit: |
           dart tool/update_version.dart
           dart analyze
           git add packages/cli/lib/app/core/cli.strings.dart
