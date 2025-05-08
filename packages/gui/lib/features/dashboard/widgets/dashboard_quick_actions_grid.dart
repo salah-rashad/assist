@@ -1,10 +1,9 @@
+import 'package:assist_gui/app/routing/route_names.dart';
+import 'package:assist_gui/shared/widgets/quick_action_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../../app/routing/route_names.dart';
-import '../../../shared/widgets/quick_action_button.dart';
 
 class DashboardQuickActionsGrid extends StatelessWidget {
   const DashboardQuickActionsGrid({

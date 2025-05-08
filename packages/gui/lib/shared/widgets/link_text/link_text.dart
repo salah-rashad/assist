@@ -1,6 +1,5 @@
+import 'package:assist_gui/shared/widgets/link_text/default_link_text_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'default_link_text_theme.dart';
 
 /// A clickable text widget with effects on hover.
 ///

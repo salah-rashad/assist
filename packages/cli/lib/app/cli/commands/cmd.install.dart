@@ -1,13 +1,12 @@
+import 'package:assist/app/core/cli.strings.dart';
+import 'package:assist/app/services/service.install.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:promptly/promptly.dart';
-
-import '../../core/cli.strings.dart';
-import '../../services/service.install.dart';
 
 /// Command to install the GUI
 class InstallCommand extends Command<int> {
   InstallCommand()
-      : super('install', "Install the GUI and initialize the tool.");
+      : super('install', 'Install the GUI and initialize the tool.');
 
   @override
   Future<int> run() async {

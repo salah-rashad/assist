@@ -1,8 +1,7 @@
 import 'dart:io';
 
+import 'package:assist/app/core/cli.strings.dart';
 import 'package:path/path.dart' as p;
-
-import '../core/cli.strings.dart';
 
 /// Returns the platform-specific executable to launch
 ({String platform, String exec}) getPlatformExecutable() {

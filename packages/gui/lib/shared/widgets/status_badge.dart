@@ -57,7 +57,7 @@ class StatusBadge extends StatelessWidget {
     if (label is Widget) {
       label_ = label;
     } else if (label is String) {
-      label_ = Text(label);
+      label_ = Text(label, maxLines: 1, overflow: TextOverflow.ellipsis);
     } else if (label is IconData) {
       label_ = Icon(label);
     }
@@ -73,12 +73,7 @@ class StatusBadge extends StatelessWidget {
       child: IconTheme(
         data:
             IconThemeData(size: context.textTheme.small.fontSize, color: color),
-        child: ConstrainedBox(
-          constraints: BoxConstraints.tightFor(
-            height: context.textTheme.small.fontSize,
-          ),
-          child: label_,
-        ),
+        child: label_,
       ),
     );
   }

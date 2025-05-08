@@ -1,4 +1,4 @@
-import 'package:assist_core/constants/exceptions.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:promptly/promptly.dart';
 
 /// Handle runtime errors thrown by the app.
@@ -9,7 +9,7 @@ Future<int> handleRuntimeErrors(Future<int> Function() runLogic) async {
     return await runLogic();
   } on CliException catch (error, stackTrace) {
     return finishWithError(
-      "FAILURE",
+      'FAILURE',
       message: error.message,
       stackTrace: stackTrace,
       exitCode: error.exitCode,

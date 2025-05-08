@@ -1,6 +1,5 @@
+import 'package:assist_gui/app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import '../app_theme.dart';
 
 class ExtendedColors extends ThemeExtension<ExtendedColors> {
   const ExtendedColors({

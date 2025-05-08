@@ -20,7 +20,7 @@ class GithubLoginVerificationDialog extends StatelessWidget {
     return ShadDialog(
       title: const Text('Login with GitHub'),
       description: const Text(
-        "Please visit the following URL and enter the code to complete the login process.",
+        'Please visit the following URL and enter the code to complete the login process.',
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

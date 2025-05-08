@@ -1,10 +1,10 @@
+import 'package:assist_gui/features/auth/controller/auth_cubit.dart';
+import 'package:assist_gui/shared/dialogs/github_login_verification_dialog.dart';
+import 'package:assist_gui/shared/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-
-import '../../../shared/dialogs/github_login_verification_dialog.dart';
-import '../../auth/controller/auth_cubit.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({super.key});
@@ -16,7 +16,7 @@ class UserAvatar extends StatelessWidget {
         if (state is AuthLoginFailure) {
           ShadSonner.maybeOf(context)?.show(
             ShadToast.destructive(
-              title: Text("Error"),
+              title: Text('Error'),
               description: Text(state.message),
             ),
           );
@@ -50,10 +50,7 @@ class UserAvatar extends StatelessWidget {
     return SizedBox.square(
       dimension: 40,
       child: Center(
-        child: SizedBox.square(
-          dimension: 24,
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
+        child: LoadingIndicator(size: 24, strokeWidth: 2),
       ),
     );
   }

@@ -1,13 +1,12 @@
+import 'package:assist/app/cli/cli.printer.dart';
+import 'package:assist/app/cli/tasks/task.run.check_pubspec.dart';
+import 'package:assist/app/cli/tasks/task.run.launch_app.dart';
+import 'package:assist/app/cli/tasks/task.run.path_validation.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
+import 'package:assist/app/utils/error_handler.dart';
+import 'package:assist/app/utils/platform_utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
-
-import '../../utils/error_handler.dart';
-import '../../utils/platform_utils.dart';
-import '../cli.printer.dart';
-import '../tasks/task.run.check_pubspec.dart';
-import '../tasks/task.run.launch_app.dart';
-import '../tasks/task.run.path_validation.dart';
 
 /// Command to run the GUI
 class RunCommand extends Command<int> {

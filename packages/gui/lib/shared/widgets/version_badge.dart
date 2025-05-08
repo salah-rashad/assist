@@ -9,7 +9,7 @@ class VersionBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final label = "v $version";
+    final label = 'v $version';
 
     // final isMajor = version.major > 0;
     // final isMinor = version.minor > 0 && version.major == 0;

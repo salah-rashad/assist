@@ -12,7 +12,7 @@ class StatusTable extends StatelessWidget {
     this.padding,
   });
 
-  final Map<String, Widget> items;
+  final Map<Widget, Widget> items;
   final TableColumnWidth? keyWidth;
   final TableColumnWidth? valueWidth;
   final AlignmentGeometry? keyAlignment;
@@ -37,13 +37,11 @@ class StatusTable extends StatelessWidget {
                 padding: padding,
                 child: Align(
                   alignment: keyAlignment,
-                  child: Text(
-                    entry.key,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  child: DefaultTextStyle(
                     style: context.textTheme.small.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
+                    child: entry.key,
                   ),
                 ),
               ),

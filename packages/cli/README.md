@@ -55,6 +55,14 @@ Assist covers all the repetitive, easy-to-forget tasks in your Dart & Flutter pa
 
 > Perfect for solo devs, package authors, and open source maintainers.
 
+## 🖼️ Preview: From Raw Output to Polished UX
+
+| **❌ Traditional Terminal Output**           | **✅ Assist Interactive GUI**                |
+|---------------------------------------------|---------------------------------------------|
+| ![](assets/images/unit_test_cli_output.png) | ![](assets/images/unit_test_gui_output.png) |
+  
+> Assist bridges the gap between automation and usability.
+
 ## 🛠️ Installation
 
 ```bash

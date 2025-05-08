@@ -1,8 +1,7 @@
 import 'dart:io';
 
+import 'package:assist_core/constants/paths.dart';
 import 'package:path/path.dart' as p;
-
-import '../constants/paths.dart';
 
 Directory getTempDirectory() {
   final systemTempDir = Directory.systemTemp;
@@ -11,4 +10,9 @@ Directory getTempDirectory() {
     directory.createSync(recursive: true);
   }
   return directory;
+}
+
+String stripAnsi(String input) {
+  final ansiRegex = RegExp(r'\x1B\[[0-9;]*m');
+  return input.replaceAll(ansiRegex, '');
 }

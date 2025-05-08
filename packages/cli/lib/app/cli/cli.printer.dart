@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
+import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:assist/main.dart';
 import 'package:promptly/promptly.dart';
-
-import '../core/cli.strings.dart';
-import '../utils/cli.helpers.dart';
 
 /// CLI printer
 abstract class Printer {

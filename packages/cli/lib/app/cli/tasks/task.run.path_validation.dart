@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:assist_core/constants/exceptions.dart';
+import 'package:assist/app/cli/components/command_task.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:promptly/promptly.dart';
-
-import '../components/command_task.dart';
 
 class PathValidationTask extends CommandTask {
   PathValidationTask(this.projectDir);

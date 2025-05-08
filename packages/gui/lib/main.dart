@@ -1,11 +1,10 @@
 import 'package:assist_core/services/service.secure_storage.dart';
+import 'package:assist_gui/app/app.dart';
 import 'package:assist_gui/core/constants/constants.dart';
 import 'package:assist_gui/core/utils/bloc_observer.dart';
 import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import 'app/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

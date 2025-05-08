@@ -1,11 +1,10 @@
 import 'package:assist_core/assist_core.dart';
 import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/shared/widgets/link_text/link_text.dart';
+import 'package:assist_gui/shared/widgets/version_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../../../shared/widgets/version_badge.dart';
 
 class PackageInfoHeader extends StatelessWidget {
   const PackageInfoHeader({super.key});
@@ -51,7 +50,7 @@ class PackageInfoHeader extends StatelessWidget {
     return LinkText(
       path,
       icon: Icon(LucideIcons.folderUp),
-      onTap: () => launchUrlString("file://$path"),
+      onTap: () => launchUrlString('file://$path'),
       style: context.textTheme.muted,
     );
   }

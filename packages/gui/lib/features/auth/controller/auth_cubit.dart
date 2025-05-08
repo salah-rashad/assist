@@ -38,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     // register on session timeout callback
     loginSession.onSessionError = (error) {
-      log("Error", error: error);
+      log('Error', error: error);
       emit(AuthLoginFailure(error));
     };
 
@@ -59,7 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
       user = await github.users.getCurrentUser();
       emit(Authenticated());
     } catch (e) {
-      log("Error", error: e);
+      log('Error', error: e);
       emit(Unauthenticated());
     }
   }

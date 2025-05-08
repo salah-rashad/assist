@@ -1,7 +1,6 @@
+import 'package:assist_gui/shared/widgets/link_text/link_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'link_text.dart';
 
 /// A widget that provides a [LinkTextThemeData] to its descendants.
 ///

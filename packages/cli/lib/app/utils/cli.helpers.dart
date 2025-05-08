@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
 import 'package:assist_core/services/service.pubspec.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
-
-import '../core/cli.strings.dart';
 
 /// Get the current theme
 Theme get theme => console.theme;

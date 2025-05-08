@@ -1,8 +1,7 @@
 import 'dart:io';
 
+import 'package:assist/app/utils/platform_utils.dart';
 import 'package:path/path.dart' as p;
-
-import '../utils/platform_utils.dart';
 
 /// Service for launching the GUI
 class LaunchService {
@@ -31,7 +30,7 @@ class LaunchService {
     final process = await Process.start(
       sourcePath,
       [],
-      environment: {"assist_pwd": projectDir},
+      environment: {'assist_pwd': projectDir},
       runInShell: true,
     );
 

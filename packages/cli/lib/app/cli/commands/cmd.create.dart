@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:assist/app/cli/components/command_task.dart';
 import 'package:assist/app/cli/tasks/task.create.dart_project.dart';
+import 'package:assist/app/cli/tasks/task.create.flutter_project.dart';
+import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/cli.extensions.dart';
+import 'package:assist/app/utils/cli.helpers.dart';
+import 'package:assist/app/utils/error_handler.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:assist_core/constants/enums.dart';
-import 'package:assist_core/constants/exceptions.dart';
+import 'package:assist_core/constants/exceptions.cli.dart';
 import 'package:assist_core/models/config/config.base.dart';
 import 'package:assist_core/models/config/config.dart_project.dart';
 import 'package:assist_core/models/config/config.flutter_project.dart';
@@ -12,12 +17,6 @@ import 'package:assist_core/services/service.dart.dart';
 import 'package:assist_core/services/service.flutter.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
-
-import '../../core/cli.strings.dart';
-import '../../utils/cli.helpers.dart';
-import '../../utils/error_handler.dart';
-import '../components/command_task.dart';
-import '../tasks/task.create.flutter_project.dart';
 
 part 'cmd.create.dart.dart';
 part 'cmd.create.flutter.dart';
@@ -38,7 +37,7 @@ class CreateCommand extends Command<int> {
       );
       line();
       line();
-      ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
+      final ProjectType projectType = selectProjectType(flutterVersion, dartVersion);
       final isFlutter = projectType == ProjectType.flutter;
       final isDart = projectType == ProjectType.dart;
 
@@ -141,7 +140,7 @@ class CreateCommand extends Command<int> {
     final parentDir = prompt(
       'Enter parent directory:',
       initialText: defaultPath,
-      validator: GenericValidator("Directory does not exist.", (value) {
+      validator: GenericValidator('Directory does not exist.', (value) {
         return Directory(value).existsSync();
       }),
     );
@@ -171,7 +170,7 @@ class CreateCommand extends Command<int> {
       );
 
       if (result == yes) {
-        String confirmation = confirmOverwrite(projectName);
+        final String confirmation = confirmOverwrite(projectName);
         final isValid = confirmation == projectName;
 
         if (!isValid) {
@@ -205,7 +204,7 @@ class CreateCommand extends Command<int> {
       error('Maximum attempts reached.');
       return confirmation;
     } else {
-      error("Incorrect confirmation.");
+      error('Incorrect confirmation.');
       return confirmOverwrite(projectName);
     }
   }
@@ -217,7 +216,7 @@ class CreateCommand extends Command<int> {
     // void l(x) => line(message: '\b$x'.lightGray, prefix: '');
     final commandLineList = config.toCommandLineList();
     for (final l in commandLineList) {
-      writeln("\t${l.strip().cLightBlue.italic()}".prefixLine());
+      writeln('\t${l.strip().cLightBlue.italic()}'.prefixLine());
     }
 
     line();
@@ -271,7 +270,7 @@ class CreateCommand extends Command<int> {
       throw ProjectCreationFailedException(exitCode: exitCode);
     }
 
-    String suggestions = _suggestions(projectDir);
+    final String suggestions = _suggestions(projectDir);
 
     return finishSuccesfuly(
       'SUCCESS',

@@ -13,9 +13,11 @@ environment:
 executables:
   assist: assist_dev
 
+dependencies:
+  chalkdart: ^2.0.9
+
 dev_dependencies:
   melos: ^7.0.0-dev.8
-  chalkdart: ^2.0.9
 
 melos:
   ide:
@@ -26,12 +28,17 @@ melos:
       description: pre-commit git hook script
       steps:
         - format --output none --set-exit-if-changed
-        - analyze --fatal-infos
+        - analyze
 
     get:
       name: Pub Get
-      description: Run pub get on all packages
-      run: melos exec -- dart pub get
+      description: Run pub get on workspace
+      run: dart pub get
+
+    analyze:
+      name: Analyze Code
+      description: Run dart analyze on all packages
+      run: melos exec -- dart analyze --fatal-infos
 
     format:
       name: Format Code
@@ -41,6 +48,7 @@ melos:
     activate:
       description: Activate the local version of assist for development.
       steps:
+        - dart pub upgrade
         - rm -rf ./.dart_tool/pub/bin/assist_workspace
         - dart pub global activate --source="path" . --executable="assist"
           --overwrite

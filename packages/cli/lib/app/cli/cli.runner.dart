@@ -1,11 +1,10 @@
+import 'package:assist/app/cli/cli.printer.dart';
+import 'package:assist/app/cli/commands/cmd.create.dart';
+import 'package:assist/app/cli/commands/cmd.install.dart';
+import 'package:assist/app/cli/commands/cmd.run.dart';
+import 'package:assist/app/core/cli.strings.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:promptly/promptly.dart';
-
-import '../core/cli.strings.dart';
-import 'cli.printer.dart';
-import 'commands/cmd.create.dart';
-import 'commands/cmd.install.dart';
-import 'commands/cmd.run.dart';
 
 part 'cli.theme.dart';
 

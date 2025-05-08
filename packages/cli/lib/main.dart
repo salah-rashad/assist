@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:assist/app/cli/cli.runner.dart';
 import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
-
-import 'app/cli/cli.runner.dart';
 
 final app = AssistCliRunner();
 

@@ -41,7 +41,7 @@ class ProjectFileWatcherService {
     final dir = Directory(projectPath);
 
     if (!dir.existsSync()) {
-      throw FileSystemException("Project path does not exist", projectPath);
+      throw FileSystemException('Project path does not exist', projectPath);
     }
 
     _watchSubscription = dir.watch(recursive: false).listen((event) {

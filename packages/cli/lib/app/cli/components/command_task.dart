@@ -1,10 +1,9 @@
 import 'dart:math' as math;
 
+import 'package:assist/app/utils/cli.helpers.dart';
 import 'package:assist/app/utils/string_colors.dart';
 import 'package:meta/meta.dart';
 import 'package:promptly/promptly.dart';
-
-import '../../utils/cli.helpers.dart';
 
 String _style(String s, StyleFunction? style) => style?.call(s) ?? s;
 
