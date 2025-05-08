@@ -91,7 +91,7 @@ melos:
 command:
   version:
     hooks:
-      preCommit: |
+      post: |
         dart tool/update_version.dart
         dart analyze
         git add packages/cli/lib/app/core/cli.strings.dart
