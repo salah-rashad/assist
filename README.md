@@ -85,19 +85,32 @@ packages/
 To run your CLI version with your changes:
 
 1. Activate the CLI globally (once):
+   - Method 1: (Using Melos)
+      ```bash
+      melos run activate
+      ```
+   - Method 2: (Manually)
+      ```bash
+      dart pub upgrade
+      rm -rf ./.dart_tool/pub/bin/assist_workspace
+      dart pub global activate --source="path" . --executable="assist-dev" --overwrite
+      ```
+2. Run the CLI in development mode:
    ```bash
-   rm -rf ./.dart_tool/pub/bin/assist_workspace
-   dart pub global activate --source="path" . --executable="assist" --overwrite
-   ```
-2. run the CLI:
-   ```bash
-   assist
+   assist-dev
    # Now you can run assist anywhere with your changes
    ```
 
-> [!NOTE]  
-> To revert back to the **_[pub.dev](https://pub.dev/packages/assist)_** version, run:  
-> `dart pub global activate assist`
+## 🐞 Debugging the GUI
+
+The GUI requires a local Dart/Flutter project to run in.
+
+To run the GUI with your changes:
+
+1. Update the `ASSIST_PWD` variable in `.env` file to your desired local project directory.
+2. Run the GUI:
+   - **_Android Studio_**: run  the `gui` run configuration.
+   - **_VS Code_**: run the `gui` run configuration in the `.vscode/launch.json` file.
 
 ---
 
