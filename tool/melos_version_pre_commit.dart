@@ -1,22 +1,10 @@
 import 'dart:io';
 
+import 'helpers.dart';
+
 Future<void> main() async {
   final newVersion = getNewVersion();
   updateVersion(newVersion);
-  await addCommitTag(newVersion);
-}
-
-String getNewVersion() {
-  // Extract the new version from the pubspec.yaml
-  final pubspec = File('packages/cli/pubspec.yaml').readAsStringSync();
-  final versionMatch = RegExp(r'version:\s*(\S+)').firstMatch(pubspec);
-
-  if (versionMatch == null) {
-    stderr.writeln('❌ Could not find version in pubspec.yaml');
-    exit(1);
-  }
-
-  return versionMatch.group(1)!;
 }
 
 void updateVersion(String newVersion) {
@@ -34,16 +22,6 @@ void updateVersion(String newVersion) {
     print('✅ Updated version to $newVersion in "${constantsFile.path}"');
   } catch (e) {
     stderr.writeln('❌ Error updating version: $e');
-    exit(1);
-  }
-}
-
-/// Add commit tag to git commit e.g. "assist-v0.3.0"
-Future<void> addCommitTag(String newVersion) async {
-  final process = await Process.run('git', ['tag', 'assist-v$newVersion']);
-
-  if (process.exitCode != 0) {
-    stderr.writeln('❌ Error adding commit tag: ${process.stderr}');
     exit(1);
   }
 }
