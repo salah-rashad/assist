@@ -1,7 +1,6 @@
 import 'package:assist_core/constants/strings.dart';
 import 'package:assist_gui/app/routing/app_router.dart';
 import 'package:assist_gui/app/themes/app_theme.dart';
-import 'package:assist_gui/core/constants/env.dart';
 import 'package:assist_gui/features/auth/controller/auth_cubit.dart';
 import 'package:assist_gui/features/project/controller/project_cubit.dart';
 import 'package:assist_gui/features/settings/controller/settings_cubit.dart';
@@ -12,7 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  const MainApp({super.key, required this.projectPath});
+
+  final String projectPath;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class MainApp extends StatelessWidget {
         // must be first
         BlocProvider(create: (_) => TaskManagerCubit(), lazy: false),
         BlocProvider(
-          create: (ctx) => ProjectCubit(projectPath: Env.pwd)..load(ctx),
+          create: (ctx) => ProjectCubit(projectPath: projectPath)..load(ctx),
           lazy: false,
         ),
         BlocProvider(create: (_) => AuthCubit(), lazy: false),
