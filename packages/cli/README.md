@@ -7,7 +7,7 @@
 </a>
 
 [![Build GUI Release](https://github.com/salah-rashad/assist/actions/workflows/build_gui_release.yml/badge.svg)](https://github.com/salah-rashad/assist/actions/workflows/build_gui_release.yml)
-
+[![Quality Check](https://github.com/salah-rashad/assist/actions/workflows/pull_request.yml/badge.svg)](https://github.com/salah-rashad/assist/actions/workflows/pull_request.yml)
 
 ---
 
