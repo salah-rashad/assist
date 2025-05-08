@@ -6,6 +6,9 @@
     <img src="https://img.shields.io/pub/dm/assist.svg?label=Downloads&labelColor=black&color=34495e" alt="Pub Downloads"/>
 </a>
 
+[![Build GUI Release](https://github.com/salah-rashad/assist/actions/workflows/build_gui_release.yml/badge.svg)](https://github.com/salah-rashad/assist/actions/workflows/build_gui_release.yml)
+
+
 ---
 
 #### 🚧 Under Development 🚧
