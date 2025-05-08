@@ -12,15 +12,36 @@ part 'cli.theme.dart';
 class AssistCliRunner extends CommandRunner {
   AssistCliRunner()
       : super(
-          CliStrings.executableName,
+          'assist',
           CliStrings.description,
           version: CliStrings.version,
           theme: CliThemes.defaultTheme,
         ) {
+    argParser.addFlag(
+      hide: true,
+      'dev',
+      help: 'Run in debug mode',
+      negatable: true,
+      callback: (value) {
+        _isDevMode = value;
+        if (_isDevMode) {
+          _showDebugModeMessage();
+        }
+      },
+    );
+
     addCommand(InstallCommand());
     addCommand(RunCommand());
     addCommand(CreateCommand());
   }
+
+  bool _isDevMode = false;
+
+  bool get isDevMode => _isDevMode;
+
+  @override
+  String get executableName =>
+      super.executableName + (_isDevMode ? '-dev' : '');
 
   @override
   Never usageException(String message) => Printer.printUsageError(message);
@@ -32,4 +53,11 @@ class AssistCliRunner extends CommandRunner {
 
   @override
   String? get usageFooter => Printer.mainUsageFooter();
+}
+
+void _showDebugModeMessage() {
+  writeln(' ');
+  write('🚧 ');
+  writeln('![DEVELOPMENT MODE]'.cWhite.cOnOrangeRed.italic().bold());
+  writeln(' ');
 }

@@ -1,7 +1,11 @@
 import 'dart:convert';
 
 import 'package:assist/app/utils/cli.helpers.dart';
+import 'package:assist/main.dart';
 import 'package:assist_core/constants/enums.dart';
+import 'package:assist_core/constants/paths.dart';
+import 'package:assist_core/constants/supported_platform.dart';
+import 'package:path/path.dart' as p;
 import 'package:promptly/promptly.dart';
 
 extension StreamExtension on Stream<List<int>> {
@@ -94,6 +98,20 @@ extension FlutterProjectTemplateExtension on FlutterProjectTemplate {
 extension AndroidLanguageExtension on AndroidLanguage {
   String toChoice() {
     return generateChoice(name.titleCase, null, isDefault);
+  }
+}
+
+extension SupportedPlatformExtension on SupportedPlatform {
+  String getGuiInstallPath() {
+    if (app.isDevMode) {
+      return p.join(getHomePath(), kCacheDirDev, kGuiDir);
+    } else {
+      return p.join(getHomePath(), kCacheDir, kGuiDir, app.version);
+    }
+  }
+
+  String getGuiExecutablePath() {
+    return p.join(getGuiInstallPath(), guiExecutable);
   }
 }
 
