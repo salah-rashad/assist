@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 abstract class CliException implements Exception {
   final String? command;
   final int? _exitCode;
+  final List<String> suggestions;
 
   @mustCallSuper
   int? get exitCode => _exitCode;
@@ -12,8 +13,12 @@ abstract class CliException implements Exception {
   // String get title => 'Error';
   String get message => 'Command failed';
 
-  CliException({required this.command, required int? exitCode})
-      : _exitCode = exitCode;
+  CliException({
+    required this.command,
+    required int? exitCode,
+    required List<String>? suggestions,
+  })  : _exitCode = exitCode,
+        suggestions = suggestions ?? [];
 
   @override
   String toString() => 'Error: $message';
@@ -23,7 +28,8 @@ abstract class CliException implements Exception {
 class PubspecNotFoundException extends CliException {
   final String projectDir;
 
-  PubspecNotFoundException(this.projectDir, {super.command, super.exitCode});
+  PubspecNotFoundException(this.projectDir,
+      {super.command, super.exitCode, super.suggestions});
 
   @override
   int? get exitCode => super.exitCode ?? ExitCode.osFile.code;
@@ -37,7 +43,8 @@ class PubspecNotFoundException extends CliException {
 class DirectoryNotFoundException extends CliException {
   final String projectDir;
 
-  DirectoryNotFoundException(this.projectDir, {super.command, super.exitCode});
+  DirectoryNotFoundException(this.projectDir,
+      {super.command, super.exitCode, super.suggestions});
 
   @override
   int get exitCode => super.exitCode ?? ExitCode.osFile.code;
@@ -48,7 +55,7 @@ class DirectoryNotFoundException extends CliException {
 
 /// Thrown when the `pubspec.yaml` file cannot be parsed
 class PubspecParseException extends CliException {
-  PubspecParseException({super.command, super.exitCode});
+  PubspecParseException({super.command, super.exitCode, super.suggestions});
 
   @override
   int get exitCode => super.exitCode ?? ExitCode.osFile.code;
@@ -59,7 +66,8 @@ class PubspecParseException extends CliException {
 
 /// Thrown when a command is cancelled by the user
 class CommandCancelledByUserException extends CliException {
-  CommandCancelledByUserException({super.command, super.exitCode});
+  CommandCancelledByUserException(
+      {super.command, super.exitCode, super.suggestions});
 
   @override
   int get exitCode => super.exitCode ?? ExitCode.usage.code;
@@ -70,7 +78,8 @@ class CommandCancelledByUserException extends CliException {
 
 /// Thrown when the overwrite confirmation fails
 class OverwriteConfirmationFailedException extends CliException {
-  OverwriteConfirmationFailedException({super.command, super.exitCode});
+  OverwriteConfirmationFailedException(
+      {super.command, super.exitCode, super.suggestions});
 
   @override
   int get exitCode => super.exitCode ?? ExitCode.usage.code;
@@ -81,11 +90,22 @@ class OverwriteConfirmationFailedException extends CliException {
 
 /// Thrown when the project creation fails
 class ProjectCreationFailedException extends CliException {
-  ProjectCreationFailedException({super.command, super.exitCode});
+  ProjectCreationFailedException(
+      {super.command, super.exitCode, super.suggestions});
 
   @override
   int get exitCode => super.exitCode ?? ExitCode.cantCreate.code;
 
   @override
   String get message => 'Project creation failed. Please check the logs.';
+}
+
+class LaunchAppFailedException extends CliException {
+  LaunchAppFailedException({super.command, super.exitCode, super.suggestions});
+
+  @override
+  int get exitCode => super.exitCode ?? ExitCode.software.code;
+
+  @override
+  String get message => 'Executable not found.';
 }
