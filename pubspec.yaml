@@ -19,7 +19,7 @@ dependencies:
 
 dev_dependencies:
   melos: ^7.0.0-dev.8
-  test:
+  test: ^1.25.15
   assist_core:
   assist:
 

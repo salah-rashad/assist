@@ -1,18 +1,25 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:equatable/equatable.dart';
+
 enum ProjectFileType { pubspec, changelog, readme, other }
 
 enum ProjectFileEventType { modified, deleted, moved }
 
-class ProjectFileEvent {
+class ProjectFileEvent extends Equatable {
   final ProjectFileType fileType;
   final ProjectFileEventType eventType;
   final String path;
 
   ProjectFileEvent(this.fileType, this.eventType, this.path);
+
+  @override
+  List<Object?> get props => [fileType, eventType, path];
 }
 
+/// Service for watching project files and triggering events when they change
+/// e.g. `pubspec.yaml` or `CHANGELOG.md`
 class ProjectFileWatcherService {
   final Duration debounceDuration;
 

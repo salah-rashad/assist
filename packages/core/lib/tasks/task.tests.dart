@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:assist_core/constants/enums.dart';
 import 'package:assist_core/services/task_manager/shell_task.dart';
 import 'package:assist_core/utils/test_events_parser.dart';
+import 'package:path/path.dart' as p;
 import 'package:test_report_parser/test_report_parser.dart';
 
 class UnitTestTask extends ShellTask<TestReport> {
@@ -23,7 +24,7 @@ class UnitTestTask extends ShellTask<TestReport> {
     this.testName,
     this.testFilePath,
   }) : super(
-          projectType == ProjectType.flutter ? 'flutter' : 'dart',
+          projectType.isFlutter() ? 'flutter' : 'dart',
           [
             'test',
             if (testFilePath != null) testFilePath,
@@ -35,6 +36,16 @@ class UnitTestTask extends ShellTask<TestReport> {
 
   @override
   String get name => 'Unit Tests';
+
+  @override
+  Future<TestReport> execute() async {
+    final testFolder = Directory(p.join(projectPath, 'test'));
+    if (testFilePath == null && testName == null && !testFolder.existsSync()) {
+      // throw 'No tests found in $projectPath';
+      return TestReport.empty();
+    }
+    return super.execute();
+  }
 
   @override
   TestReport handleResult(ProcessResult result) {

@@ -28,6 +28,7 @@ dependencies:
   google_fonts: ^6.3.0
   terminal_color_parser: ^0.8.0
   collection: ^1.19.1
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:

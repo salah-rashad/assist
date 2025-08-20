@@ -1,16 +1,22 @@
 part of 'project_cubit.dart';
 
 @immutable
-sealed class ProjectState {}
+sealed class ProjectState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 final class ProjectInitial extends ProjectState {}
 
 final class ProjectLoading extends ProjectState {}
 
-final class PubspecChanged extends ProjectState {}
+final class ProjectFileChanged extends ProjectState {
+  final ProjectFileEvent event;
 
-final class ChangelogChanged extends ProjectState {}
+  ProjectFileChanged(this.event);
 
-final class ReadmeChanged extends ProjectState {}
+  @override
+  List<Object?> get props => [event];
+}
 
 final class ProjectLoaded extends ProjectState {}

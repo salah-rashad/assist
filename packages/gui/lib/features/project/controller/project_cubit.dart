@@ -6,6 +6,7 @@ import 'package:assist_core/services/service.pubspec.dart';
 import 'package:assist_gui/core/utils/logger.dart';
 import 'package:assist_gui/features/task_manager/controller/mixins/status_check_tasks.dart';
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
@@ -19,9 +20,7 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
           Directory(projectPath).existsSync(),
           'Project path does not exist',
         ),
-        super(ProjectInitial()) {
-    initializeCheckTasks(project);
-  }
+        super(ProjectInitial());
 
   final Project project;
   final _watcher = ProjectFileWatcherService();
@@ -39,6 +38,7 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
     Logger.data('Path', project.path);
 
     _initializePubspec();
+    initializeCheckTasks(project);
     runStatusCheck(context);
     _watchProjectFiles();
 
@@ -57,6 +57,7 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
     final pubspecService = PubspecService();
     final pubspec = pubspecService.parse(pubspecPath);
     project.pubspec = pubspec;
+    Logger.data('Project type', project.projectType.name);
     Logger.data('✔', 'Pubspec loaded');
   }
 
@@ -64,16 +65,14 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
     // _watcher.dispose();
     // _watcher.events.listen(
     //   (event) {
+    //     emit(ProjectFileChanged(event));
     //     switch (event.fileType) {
     //       case ProjectFileType.pubspec:
     //         _initializePubspec();
-    //         emit(PubspecChanged());
     //         break;
     //       case ProjectFileType.changelog:
-    //         emit(ChangelogChanged());
     //         break;
     //       case ProjectFileType.readme:
-    //         emit(ReadmeChanged());
     //         break;
     //       case ProjectFileType.other:
     //         break;

@@ -10,7 +10,14 @@ enum AndroidLanguage {
   bool get isDefault => this == defaultLanguage;
 }
 
-enum ProjectType { flutter, dart }
+enum ProjectType {
+  flutter,
+  dart;
+
+  bool isFlutter() => this == flutter;
+
+  bool isDart() => this == dart;
+}
 
 enum DartProjectTemplate {
   cli('cli', 'CLI', 'A command-line application with basic argument parsing.'),

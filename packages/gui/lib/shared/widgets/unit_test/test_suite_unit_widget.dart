@@ -9,6 +9,7 @@ import 'package:assist_gui/shared/widgets/unit_test/test_group_unit_widget.dart'
 import 'package:assist_gui/shared/widgets/unit_test/test_suite_unit_footer.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class TestSuiteUnitWidget extends StatefulWidget {
@@ -25,6 +26,7 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
   TestSuiteUnit? suite;
 
   String get path => widget.suite.path;
+
   TaskStatus get status => suiteTask.status;
 
   @override
@@ -78,7 +80,7 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
             backgroundColor: Colors.black.withValues(alpha: 0.95),
             padding: const EdgeInsets.all(16),
             title: Text(
-              path,
+              p.relative(path, from: context.project.path),
               style: TextStyle(fontSize: 16),
             ),
             trailing: LoadingIndicator(),
@@ -94,7 +96,12 @@ class _TestSuiteUnitWidgetState extends State<TestSuiteUnitWidget> {
               value: widget.suite.id,
               padding: EdgeInsets.zero,
               duration: const Duration(milliseconds: 200),
-              title: Text(suite.path),
+              title: Text(
+                p.relative(
+                  suite.path,
+                  from: p.join(context.project.path, 'test'),
+                ),
+              ),
               child: SelectionArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),

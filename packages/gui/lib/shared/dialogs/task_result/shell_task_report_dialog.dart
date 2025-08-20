@@ -1,10 +1,8 @@
 import 'package:assist_core/services/task_manager/shell_task.dart';
 import 'package:assist_core/services/task_manager/task_event.dart';
 import 'package:assist_core/utils/helpers.dart';
-import 'package:assist_gui/core/utils/extensions.dart';
 import 'package:assist_gui/core/utils/helpers.dart';
 import 'package:assist_gui/features/task_manager/controller/task_manager_cubit.dart';
-import 'package:assist_gui/shared/widgets/ansi_rich_text.dart';
 import 'package:assist_gui/shared/widgets/command_box.dart';
 import 'package:assist_gui/shared/widgets/task_report_title.dart';
 import 'package:assist_gui/shared/widgets/task_rerun_button.dart';
@@ -42,13 +40,10 @@ class ShellTaskReportDialog extends StatelessWidget {
           ],
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: TerminalStyledCard(
-              child: Text.rich(
-                AnsiText(output).asTextSpan(),
-                style: TextStyle(
-                    color: isError ? context.colorScheme.destructive : null),
-              ),
-              stackTrace: stackTrace == null ? null : Text(stackTrace),
+            child: TerminalStyledCard.ansii(
+              output: output,
+              isError: isError,
+              stackTrace: stackTrace,
             ),
           ),
         );

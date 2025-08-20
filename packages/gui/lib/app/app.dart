@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // must be first
+        // task manager must be first
         BlocProvider(create: (_) => TaskManagerCubit(), lazy: false),
         BlocProvider(
           create: (ctx) => ProjectCubit(projectPath: projectPath)..load(ctx),
