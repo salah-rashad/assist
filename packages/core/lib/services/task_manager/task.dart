@@ -84,6 +84,7 @@ abstract class Task<T, E> {
     _operation?.cancel();
   }
 
+  /// Returns true if the error is of type [E]
   bool isErrorOfType(Type type) {
     return type == E;
   }

@@ -1,6 +1,11 @@
 {
   "actions": {
+    "bump_version": "Bump Version",
     "create_new_project": "Create New Project",
+    "edit_changelog": "Edit Changelog",
+    "edit_pubspec": "Edit Pubspec",
+    "github_services": "Github Services",
+    "github_workflows": "Github Workflows",
     "publish_package": "Publish Package"
   },
   "dashboard": "Dashboard"

@@ -30,9 +30,12 @@ class DashboardScreen extends StatelessWidget {
       Text('Dart'): Text(DartService.version()),
     };
 
+    final flutterVersion = pubspec.environment['flutter']?.toString();
+    final dartVersion = pubspec.environment['sdk']?.toString();
+
     final packageSdkVersionItems = <Widget, Widget>{
-      Text('Flutter'): Text(pubspec.environment['flutter']?.toString() ?? ''),
-      Text('Dart'): Text(pubspec.environment['sdk'].toString()),
+      if (flutterVersion != null) Text('Flutter'): Text(flutterVersion),
+      if (dartVersion != null) Text('Dart'): Text(dartVersion),
     };
 
     return BlocBuilder<ProjectCubit, ProjectState>(

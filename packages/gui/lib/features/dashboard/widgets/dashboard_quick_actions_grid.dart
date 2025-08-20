@@ -20,14 +20,15 @@ class DashboardQuickActionsGrid extends StatelessWidget {
     return GridView(
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisExtent: 58,
-      ),
+          crossAxisCount: 3,
+          mainAxisExtent: 58.0,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0),
       children: [
         QuickActionButton(
           icon: Icon(LucideIcons.circleFadingArrowUp),
-          label: 'Bump Version'.tr(),
-          onPressed: () => context.goNamed(RouteNames.createProject),
+          label: 'actions.bump_version'.tr(),
+          onPressed: () => context.goNamed(RouteNames.bumpVersion),
         ),
         if (canPublish)
           QuickActionButton(
@@ -35,27 +36,27 @@ class DashboardQuickActionsGrid extends StatelessWidget {
             label: 'actions.publish_package'.tr(),
             onPressed: () => context.goNamed(RouteNames.publishPackage),
           ),
-        if (isGitHub)
-          QuickActionButton(
-            icon: Icon(LucideIcons.workflow),
-            label: 'GitHub Workflows'.tr(),
-            onPressed: () => context.goNamed(RouteNames.createProject),
-          ),
         QuickActionButton(
           icon: Icon(LucideIcons.notebookPen),
-          label: 'Edit Changelog'.tr(),
-          onPressed: () => context.goNamed(RouteNames.settings),
+          label: 'actions.edit_changelog'.tr(),
+          onPressed: () => context.goNamed(RouteNames.editChangelog),
         ),
         QuickActionButton(
           icon: Icon(LucideIcons.filePen),
-          label: 'Edit Pubspec'.tr(),
-          onPressed: () => context.goNamed(RouteNames.publishPackage),
+          label: 'actions.edit_pubspec'.tr(),
+          onPressed: () => context.goNamed(RouteNames.editPubspec),
         ),
         if (isGitHub)
           QuickActionButton(
+            icon: Icon(LucideIcons.workflow),
+            label: 'actions.github_workflows'.tr(),
+            onPressed: () => context.goNamed(RouteNames.githubWorkflows),
+          ),
+        if (isGitHub)
+          QuickActionButton(
             icon: Icon(LucideIcons.github),
-            label: 'Github Services'.tr(),
-            onPressed: () => context.goNamed(RouteNames.settings),
+            label: 'actions.github_services'.tr(),
+            onPressed: () => context.goNamed(RouteNames.githubServices),
           ),
       ],
     );

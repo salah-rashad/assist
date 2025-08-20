@@ -1,6 +1,11 @@
 {
   "actions": {
+    "bump_version": "ترقية الإصدار",
     "create_new_project": "إنشاء مشروع جديد",
+    "edit_changelog": "تحرير سجل التغييرات",
+    "edit_pubspec": "تحرير pubspec",
+    "github_services": "خدمات Github",
+    "github_workflows": "عمليات GitHub",
     "publish_package": "نشر الحزمة"
   },
   "dashboard": "الرئيسية"
