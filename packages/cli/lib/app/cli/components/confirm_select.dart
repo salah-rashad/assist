@@ -1,7 +1,7 @@
 import 'package:promptly/promptly.dart';
 
 bool confirmSelect(
-  prompt, {
+  String prompt, {
   String? yes,
   String? no,
   StyleFunction? promptStyle,

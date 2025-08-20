@@ -32,7 +32,7 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
     return super.close();
   }
 
-  load(BuildContext context) {
+  void load(BuildContext context) {
     emit(ProjectLoading());
 
     Logger.gray('Loading project...');
@@ -47,7 +47,7 @@ class ProjectCubit extends Cubit<ProjectState> with StatusCheckTasks {
     emit(ProjectLoaded());
   }
 
-  reload(BuildContext context) {
+  void reload(BuildContext context) {
     _watcher.dispose();
     load(context);
   }

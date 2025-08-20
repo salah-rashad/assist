@@ -54,7 +54,7 @@ class TaskStatusBar extends StatelessWidget {
     );
   }
 
-  _handleTaskEvent(BuildContext context, TaskEvent? event) {
+  dynamic _handleTaskEvent(BuildContext context, TaskEvent? event) {
     final task = event?.task;
     if (task == null) return;
 

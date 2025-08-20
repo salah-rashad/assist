@@ -4,6 +4,9 @@ abstract class Strings {
   static const String githubHost = 'github.com';
 }
 
-abstract class EnvVarKeys {
-  static const String pwd = 'ASSIST_PWD';
+/// Environment variables
+abstract class EnvVars {
+  /// Used to pass the project directory as an environment variable when running
+  /// in debug mode
+  static const String debugPwd = 'ASSIST_DEBUG_PWD';
 }

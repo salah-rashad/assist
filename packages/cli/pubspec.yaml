@@ -14,17 +14,16 @@ resolution: workspace
 dependencies:
   assist_core: ^0.3.1
 
-  meta: ^1.16.0
+  meta:
   path: ^1.9.1
   args: ^2.7.0
   promptly: ^1.0.0-alpha.8
   archive: ^4.0.7
   http: ^1.4.0
 
-
 dev_dependencies:
-  lints: ^5.1.1
-  test: ^1.25.15
+  lints: ^6.0.0
+  test:
 
 executables:
   assist: assist

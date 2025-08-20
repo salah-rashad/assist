@@ -31,19 +31,19 @@ class StatusBadge extends StatelessWidget {
         assert(label != null),
         assert(label is Widget || label is String || label is IconData);
 
-  factory StatusBadge.normal(label) =>
+  factory StatusBadge.normal(dynamic label) =>
       StatusBadge._(label: label, type: StatusBadgeType.normal);
 
-  factory StatusBadge.success([label]) =>
+  factory StatusBadge.success([dynamic label]) =>
       StatusBadge._(label: label ?? _success, type: StatusBadgeType.success);
 
-  factory StatusBadge.error([label]) =>
+  factory StatusBadge.error([dynamic label]) =>
       StatusBadge._(label: label ?? _error, type: StatusBadgeType.error);
 
-  factory StatusBadge.warning([label]) =>
+  factory StatusBadge.warning([dynamic label]) =>
       StatusBadge._(label: label ?? _warning, type: StatusBadgeType.warning);
 
-  factory StatusBadge.info([label]) =>
+  factory StatusBadge.info([dynamic label]) =>
       StatusBadge._(label: label ?? _info, type: StatusBadgeType.info);
 
   final dynamic label;

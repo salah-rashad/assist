@@ -1,5 +1,6 @@
 name: assist_workspace
 publish_to: none
+repository: https://github.com/salah-rashad/assist
 workspace:
   - packages/cli
   - packages/core
@@ -18,6 +19,12 @@ dependencies:
 
 dev_dependencies:
   melos: ^7.0.0-dev.8
+  test:
+  assist_core:
+  assist:
+
+dependency_overrides:
+  intl: ^0.20.2
 
 melos:
   ide:

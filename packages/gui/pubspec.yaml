@@ -14,25 +14,25 @@ dependencies:
 
   assist_core: ^0.3.1
 
-  meta: ^1.16.0
+  meta:
   path: ^1.9.1
   bloc: ^9.0.0
-  go_router: ^15.1.1
+  go_router: ^16.2.0
   flutter_bloc: ^9.1.1
-  shadcn_ui: ^0.25.1
+  shadcn_ui: ^0.28.5
   easy_localization: ^3.0.7+1
   flutter_feather_icons: ^2.0.0+1
   auto_size_text: ^3.0.0
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   flutter_breadcrumb: ^1.0.1
-  google_fonts: ^6.2.1
+  google_fonts: ^6.3.0
   terminal_color_parser: ^0.8.0
   collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true

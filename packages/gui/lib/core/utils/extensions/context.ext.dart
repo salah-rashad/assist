@@ -39,15 +39,15 @@ extension ContextTaskManager on BuildContext {
 }
 
 extension ContextShadToast on BuildContext {
-  hideSonner(Object? id) {
+  void hideSonner(Object? id) {
     ShadSonner.maybeOf(this)?.hide(id);
   }
 
-  showSonner(ShadToast toast) {
+  void showSonner(ShadToast toast) {
     ShadSonner.maybeOf(this)?.show(toast);
   }
 
-  showSuccessSonner([String? title, String? description]) {
+  dynamic showSuccessSonner([String? title, String? description]) {
     return showSonner(
       ShadToast(
         backgroundColor: extendedColors.success,
@@ -63,7 +63,7 @@ extension ContextShadToast on BuildContext {
     );
   }
 
-  showErrorSonner([String? title, String? description]) {
+  dynamic showErrorSonner([String? title, String? description]) {
     return showSonner(
       ShadToast.destructive(
         title: Text(title ?? ''),
@@ -72,7 +72,7 @@ extension ContextShadToast on BuildContext {
     );
   }
 
-  showTaskErrorSonner(Task task, Object? error, {bool showRetry = true}) {
+  void showTaskErrorSonner(Task task, Object? error, {bool showRetry = true}) {
     final id = task.id;
 
     final toast = ShadToast.destructive(

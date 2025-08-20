@@ -27,7 +27,7 @@ class LaunchService {
     return await Process.start(
       guiExecPath,
       [projectDir],
-      environment: {EnvVarKeys.pwd: projectDir},
+      environment: {EnvVars.debugPwd: projectDir},
       runInShell: true,
     );
   }

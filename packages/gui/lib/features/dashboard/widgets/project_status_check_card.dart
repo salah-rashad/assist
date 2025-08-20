@@ -82,7 +82,7 @@ class ProjectStatusCheckCard extends StatelessWidget {
   }
 }
 
-_showShellTaskResultDialog(BuildContext context, ShellTask task) {
+void _showShellTaskResultDialog(BuildContext context, ShellTask task) {
   showShadDialog(
     context: context,
     builder: (context) {

@@ -9,11 +9,11 @@ import 'package:promptly/promptly.dart';
 
 /// CLI printer
 abstract class Printer {
-  static newline() => print('\n');
+  static void newline() => print('\n');
 
-  static printLogo() => print(CliStrings.logoArt.cIndianRed.bold());
+  static void printLogo() => print(CliStrings.logoArt.cIndianRed.bold());
 
-  static printUsageError(String message) {
+  static Never printUsageError(String message) {
     write(app.errorAppDescription);
     finishWithError(
       'Usage Error',
@@ -21,7 +21,7 @@ abstract class Printer {
       exitCode: ExitCode.usage.code,
       stackTrace: StackTrace.current,
     );
-    exit(ExitCode.usage.code);
+    return exit(ExitCode.usage.code);
   }
 
   static String mainUsageFooter() {

@@ -23,9 +23,13 @@ class TaskManager {
   List<Task> get pendingTasks => List.unmodifiable(_taskQueue);
 
   Task? getTask(String id) => _taskQueue.firstWhereOrNull((t) => t.id == id);
+
   TaskStatus getStatus(String id) => getTask(id)?.status ?? TaskStatus.idle;
+
   bool isRunning(String id) => getStatus(id) == TaskStatus.running;
+
   bool isCancelled(String id) => getStatus(id) == TaskStatus.cancelled;
+
   bool isCompleted(String id) => getStatus(id) == TaskStatus.completed;
 
   void enqueue(Task task) {
@@ -57,7 +61,7 @@ class TaskManager {
         .onError((e, s) => _handleError(e, s, task));
   }
 
-  _handleError(e, s, Task task) {
+  void _handleError(Object? e, StackTrace s, Task task) {
     if (!task.isErrorOfType(e.runtimeType)) {
       log(
         'Error',
