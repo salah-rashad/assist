@@ -9,23 +9,7 @@ updates:
   # Flutter/Dart dependencies
   # ================================
   - package-ecosystem: "pub"
-    directory: "/packages/core"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "salah-rashad"
-
-  - package-ecosystem: "pub"
-    directory: "/packages/cli"
-    schedule:
-      interval: "weekly"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "salah-rashad"
-
-  - package-ecosystem: "pub"
-    directory: "/packages/gui"
+    directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
