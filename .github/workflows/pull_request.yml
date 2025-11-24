@@ -20,7 +20,7 @@ jobs:
     outputs:
       success: ${{ steps.check.outputs.success }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
