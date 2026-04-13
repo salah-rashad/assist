@@ -43,7 +43,7 @@ jobs:
           tar -czf dist/assist_gui-linux-${{ github.ref_name }}.tar.gz -C build/linux/x64/release/bundle .
 
       - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: packages/gui/dist/*
         env:
@@ -79,7 +79,7 @@ jobs:
           7z a dist/assist_gui-windows-${{ github.ref_name }}.zip ./build/windows/x64/runner/Release/*
 
       - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: packages/gui/dist/*
         env:
@@ -116,7 +116,7 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent "$app_bundle" dist/assist_gui-macos-${{ github.ref_name }}.zip
 
       - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: packages/gui/dist/*
         env:
